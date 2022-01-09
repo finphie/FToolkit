@@ -38,31 +38,31 @@ MIT
 
 ### ライブラリ
 
-- CommunityToolkit.Diagnostics
-<https://github.com/CommunityToolkit/dotnet>
+- CommunityToolkit.Diagnostics  
+<https://github.com/CommunityToolkit/dotnet>  
 (c) .NET Foundation and Contributors. All rights reserved.
-- Microsoft.Extensions.Logging.Abstractions
-<https://www.nuget.org/packages/Microsoft.Extensions.Logging.Abstractions/>
+- Microsoft.Extensions.Logging.Abstractions  
+<https://www.nuget.org/packages/Microsoft.Extensions.Logging.Abstractions/>  
 © Microsoft Corporation. All rights reserved.
-- ProcessX
-<https://github.com/Cysharp/ProcessX>
+- ProcessX  
+<https://github.com/Cysharp/ProcessX>  
 © Cysharp, Inc.
 
 ### テスト
 
-- FluentAssertions
-<https://fluentassertions.com/>
+- FluentAssertions  
+<https://fluentassertions.com/>  
 Copyright Dennis Doomen 2010-2020
-- xUnit.net
-<https://github.com/xunit/xunit>
+- xUnit.net  
+<https://github.com/xunit/xunit>  
 Copyright (c) .NET Foundation and Contributors. All Rights Reserved.
 
 ### アナライザー
 
 - Microsoft.CodeAnalysis.NetAnalyzers (SDK組み込み)
-- Microsoft.VisualStudio.Threading.Analyzers
-<https://github.com/Microsoft/vs-threading>
+- Microsoft.VisualStudio.Threading.Analyzers  
+<https://github.com/Microsoft/vs-threading>  
 © Microsoft Corporation. All rights reserved.
-- StyleCop.Analyzers
-<https://github.com/DotNetAnalyzers/StyleCopAnalyzers>
+- StyleCop.Analyzers  
+<https://github.com/DotNetAnalyzers/StyleCopAnalyzers>  
 Copyright 2015 Tunnel Vision Laboratories, LLC
