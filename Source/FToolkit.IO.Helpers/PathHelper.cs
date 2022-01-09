@@ -1,7 +1,7 @@
 ﻿using System.Buffers;
 using CommunityToolkit.Diagnostics;
 
-namespace FToolkit.IO;
+namespace FToolkit.IO.Helpers;
 
 /// <summary>
 /// パス関連のヘルパークラスです。
