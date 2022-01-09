@@ -38,7 +38,7 @@ MIT
 
 ## クレジット
 
-このプロジェクトでは、下記のライブラリ等を使用しています。
+このプロジェクトでは、下記のプロジェクトを使用しています。
 
 ### ライブラリ
 
@@ -70,3 +70,9 @@ Copyright (c) .NET Foundation and Contributors. All Rights Reserved.
 - StyleCop.Analyzers  
 <https://github.com/DotNetAnalyzers/StyleCopAnalyzers>  
 Copyright 2015 Tunnel Vision Laboratories, LLC
+
+### その他
+
+- Microsoft.SourceLink.GitHub  
+<https://github.com/dotnet/sourcelink>  
+© Microsoft Corporation. All rights reserved.
