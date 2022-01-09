@@ -38,23 +38,23 @@ MIT
 
 ### ライブラリ
 
-- CommunityToolkit.Diagnostics
-<https://github.com/CommunityToolkit/dotnet>
+- CommunityToolkit.Diagnostics  
+<https://github.com/CommunityToolkit/dotnet>  
 (c) .NET Foundation and Contributors. All rights reserved.
-- Microsoft.Extensions.Logging.Abstractions
-<https://www.nuget.org/packages/Microsoft.Extensions.Logging.Abstractions/>
+- Microsoft.Extensions.Logging.Abstractions  
+<https://www.nuget.org/packages/Microsoft.Extensions.Logging.Abstractions/>  
 © Microsoft Corporation. All rights reserved.
-- ProcessX
-<https://github.com/Cysharp/ProcessX>
+- ProcessX  
+<https://github.com/Cysharp/ProcessX>  
 © Cysharp, Inc.
 
 ### テスト
 
-- FluentAssertions
-<https://fluentassertions.com/>
+- FluentAssertions  
+<https://fluentassertions.com/>  
 Copyright Dennis Doomen 2010-2020
-- xUnit.net
-<https://github.com/xunit/xunit>
+- xUnit.net  
+<https://github.com/xunit/xunit>  
 Copyright (c) .NET Foundation and Contributors. All Rights Reserved.
 
 ### アナライザー
