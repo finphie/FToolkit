@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Source\FToolkit\FToolkit.csproj" />
+    <ProjectReference Include="..\..\Source\FToolkit.IO.Helpers\FToolkit.IO.Helpers.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,8 +1,7 @@
 ﻿using FluentAssertions;
-using FToolkit.IO;
 using Xunit;
 
-namespace FToolkit.Tests.IO;
+namespace FToolkit.IO.Helpers.Tests;
 
 public sealed class PathHelperGetTempFileNameTest
 {
