@@ -1,0 +1,46 @@
+<Project>
+  <Import Project="$([MSBuild]::GetPathOfFileAbove('Directory.Build.props', '$(MSBuildThisFileDirectory)..\'))" />
+
+  <PropertyGroup>
+    <IsBenchmark>$(MSBuildProjectName.Contains('Benchmark'))</IsBenchmark>
+    <IsGenerator>$(MSBuildProjectName.EndsWith('Generator'))</IsGenerator>
+    <IsInternal>$(MSBuildProjectName.Contains('Internal'))</IsInternal>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="$(MSBuildProjectName.EndsWith('Abstractions'))">
+    <RootNamespace>$(MSBuildProjectName.Substring(0, $(MSBuildProjectName.LastIndexOf('.'))))</RootNamespace>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(SelfContained)' != 'true' and '$(IsBenchmark)' == 'false' and '$(IsGenerator)' == 'false' and '$(IsInternal)' == 'false'">
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(UsingMicrosoftNETSdkBlazorWebAssembly)' == 'true'">
+    <RunAOTCompilation>true</RunAOTCompilation>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)\$(SolutionName).Shared\**\*.cs" LinkBase="Shared" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(IsBenchmark)' == 'true'">
+    <PackageReference Include="BenchmarkDotNet" Version="*" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(IsGenerator)' == 'true'">
+    <None Include="$(OutputPath)\$(AssemblyName).dll" Pack="true" PackagePath="analyzers/dotnet/cs" Visible="false" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <MyPubXmlFiles Include="$(MSBuildThisFileDirectory)\Common\**\*.pubxml" />
+  </ItemGroup>
+
+  <Target Name="CopyFiles" Condition="'$(IsPublishable)' == 'true'" BeforeTargets="BeforeResolveReferences">
+    <Copy SourceFiles="@(MyPubXmlFiles)" DestinationFiles="@(MyPubXmlFiles->'$(MSBuildProjectDirectory)\%(RecursiveDir)%(Filename)%(Extension)')" />
+  </Target>
+
+  <Target Name="MakeZipPackage" Condition="'$(IsPublishable)' == 'true'" AfterTargets="Publish">
+    <ZipDirectory SourceDirectory="$(PublishDir)" DestinationFile="$(AssemblyName)-v$(Version)-$(RuntimeIdentifier).zip" Overwrite="true" />
+  </Target>
+
+</Project>

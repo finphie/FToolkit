@@ -1,0 +1,54 @@
+name: Build(.NET)
+
+on:
+  pull_request:
+    paths:
+      - '**/*.cs'
+      - '**/*.xaml'
+      - '**/*.razor'
+      - '**/*.cshtml'
+      - '**/*.csproj'
+      - '**/*.sln'
+      - '**/Directory.Build.props'
+      - '**/Directory.Build.targets'
+      - '**/.editorconfig'
+      - '**/.globalconfig'
+      - .github/workflows/build-dotnet.yml
+
+env:
+  DOTNET_NOLOGO: true
+  DOTNET_CLI_TELEMETRY_OPTOUT: true
+  dotnet-version: '6.0'
+
+jobs:
+  test:
+    name: Test
+    if: github.event.repository.name != 'dotfiles'
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [windows-latest, ubuntu-latest, macOS-latest]
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Check file
+        id: check
+        shell: pwsh
+        run: Write-Output "::set-output name=dotnet::$(Test-Path *.sln)"
+
+      - name: Setup .NET
+        if: steps.check.outputs.dotnet == 'True'
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: ${{ env.dotnet-version }}
+
+      - name: .NET Build
+        if: steps.check.outputs.dotnet == 'True'
+        run: dotnet build --configuration Release -warnAsError
+
+      - name: .NET Test
+        if: steps.check.outputs.dotnet == 'True'
+        run: dotnet test --configuration Release --no-build
