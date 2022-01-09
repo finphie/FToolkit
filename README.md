@@ -1,5 +1,9 @@
 # FToolkit
 
+[![Build(.NET)](https://github.com/finphie/FToolkit/actions/workflows/build-dotnet.yml/badge.svg)](https://github.com/finphie/FToolkit/actions/workflows/build-dotnet.yml)
+[![NuGet](https://img.shields.io/nuget/v/FToolkit?color=0078d4&label=NuGet)](https://www.nuget.org/packages/FToolkit/)
+[![FToolkit package in DotNet feed in Azure Artifacts](https://feeds.dev.azure.com/finphie/7af9aa4d-c550-43af-87a5-01539b2d9934/_apis/public/Packaging/Feeds/18cbb017-6f1d-41eb-b9a5-a6dbf411e3f7/Packages/13a33d25-881a-49e3-88a2-3775a2667a9d/Badge)](https://dev.azure.com/finphie/Main/_packaging?_a=package&feed=18cbb017-6f1d-41eb-b9a5-a6dbf411e3f7&package=13a33d25-881a-49e3-88a2-3775a2667a9d&preferRelease=true)
+
 各種処理を詰め合わせたライブラリです。
 
 ## 説明
