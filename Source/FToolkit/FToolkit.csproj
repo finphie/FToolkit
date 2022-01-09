@@ -2,6 +2,13 @@
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
+    <IsPackable>true</IsPackable>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <Description>各種処理を詰め合わせたライブラリです。</Description>
+    <PackageTags>toolkit</PackageTags>
   </PropertyGroup>
 
   <ItemGroup>
