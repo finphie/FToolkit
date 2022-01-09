@@ -6,35 +6,35 @@
 public interface IFileOperations
 {
     /// <summary>
-    /// 指定されたデータをファイルに保存します。
+    /// ファイルを新規作成します。
     /// </summary>
     /// <param name="filePath">ファイルパス</param>
     /// <param name="bytes">データ</param>
     void Create(string filePath, ReadOnlySpan<byte> bytes);
 
     /// <summary>
-    /// 指定されたデータをファイルに保存します。
+    /// ファイルを新規作成します。
     /// </summary>
     /// <param name="filePath">ファイルパス</param>
     /// <param name="bytes">データ</param>
     void Create(string filePath, ReadOnlyMemory<byte> bytes);
 
     /// <summary>
-    /// 指定されたデータをファイルに保存します。
+    /// ファイルに上書き保存します。
     /// </summary>
     /// <param name="filePath">ファイルパス</param>
     /// <param name="bytes">データ</param>
     void Save(string filePath, ReadOnlySpan<byte> bytes);
 
     /// <summary>
-    /// 指定されたデータをファイルに保存します。
+    /// ファイルに上書き保存します。
     /// </summary>
     /// <param name="filePath">ファイルパス</param>
     /// <param name="bytes">データ</param>
     void Save(string filePath, ReadOnlyMemory<byte> bytes);
 
     /// <summary>
-    /// 指定されたファイルを削除します。
+    /// ファイルを削除します。
     /// </summary>
     /// <param name="filePath">ファイルパス</param>
     void Delete(string filePath);
