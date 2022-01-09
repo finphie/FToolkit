@@ -60,9 +60,9 @@ Copyright (c) .NET Foundation and Contributors. All Rights Reserved.
 ### アナライザー
 
 - Microsoft.CodeAnalysis.NetAnalyzers (SDK組み込み)
-- Microsoft.VisualStudio.Threading.Analyzers
-<https://github.com/Microsoft/vs-threading>
+- Microsoft.VisualStudio.Threading.Analyzers  
+<https://github.com/Microsoft/vs-threading>  
 © Microsoft Corporation. All rights reserved.
-- StyleCop.Analyzers
-<https://github.com/DotNetAnalyzers/StyleCopAnalyzers>
+- StyleCop.Analyzers  
+<https://github.com/DotNetAnalyzers/StyleCopAnalyzers>  
 Copyright 2015 Tunnel Vision Laboratories, LLC
