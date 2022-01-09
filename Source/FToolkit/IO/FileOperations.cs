@@ -87,21 +87,21 @@ public sealed partial class FileOperations : IFileOperations
         RandomAccess.Write(handle, bytes, 0);
     }
 
-    [LoggerMessage(Level = LogLevel.Information, Message = "Creating file: {filePath}")]
+    [LoggerMessage(EventId = 1, Level = LogLevel.Information, Message = "Creating file: {filePath}")]
     partial void Creating(string filePath);
 
-    [LoggerMessage(Level = LogLevel.Information, Message = "Saving file: {filePath}")]
+    [LoggerMessage(EventId = 2, Level = LogLevel.Information, Message = "Saving file: {filePath}")]
     partial void Saving(string filePath);
 
-    [LoggerMessage(Level = LogLevel.Information, Message = "Deleting file: {filePath}")]
+    [LoggerMessage(EventId = 3, Level = LogLevel.Information, Message = "Deleting file: {filePath}")]
     partial void Deleting(string filePath);
 
-    [LoggerMessage(Level = LogLevel.Warning, Message = "Could not create file: {filePath}")]
+    [LoggerMessage(EventId = 5001, Level = LogLevel.Warning, Message = "Could not create file: {filePath}")]
     partial void CouldNotCreateFile(string filePath, Exception ex);
 
-    [LoggerMessage(Level = LogLevel.Warning, Message = "Could not save file: {filePath}")]
+    [LoggerMessage(EventId = 5002, Level = LogLevel.Warning, Message = "Could not save file: {filePath}")]
     partial void CouldNotSaveFile(string filePath, Exception ex);
 
-    [LoggerMessage(Level = LogLevel.Warning, Message = "Could not delete file: {filePath}")]
+    [LoggerMessage(EventId = 5003, Level = LogLevel.Warning, Message = "Could not delete file: {filePath}")]
     partial void CouldNotDeleteFile(string filePath, Exception ex);
 }
