@@ -38,41 +38,26 @@ MIT
 
 ## クレジット
 
-このプロジェクトでは、下記のプロジェクトを使用しています。
+このプロジェクトでは、次のライブラリ等を使用しています。
 
 ### ライブラリ
 
-- CommunityToolkit.Diagnostics  
-<https://github.com/CommunityToolkit/dotnet>  
-(c) .NET Foundation and Contributors. All rights reserved.
-- Microsoft.Extensions.Logging.Abstractions  
-<https://www.nuget.org/packages/Microsoft.Extensions.Logging.Abstractions/>  
-© Microsoft Corporation. All rights reserved.
-- ProcessX  
-<https://github.com/Cysharp/ProcessX>  
-© Cysharp, Inc.
+- [CommunityToolkit.HighPerformance](https://github.com/CommunityToolkit/dotnet)
+- [Microsoft.Extensions.Logging.Abstractions](https://www.nuget.org/packages/Microsoft.Extensions.Logging.Abstractions/)  
+- [ProcessX](https://github.com/Cysharp/ProcessX)
 
 ### テスト
 
-- FluentAssertions  
-<https://fluentassertions.com/>  
-Copyright Dennis Doomen 2010-2020
-- xUnit.net  
-<https://github.com/xunit/xunit>  
-Copyright (c) .NET Foundation and Contributors. All Rights Reserved.
+- [FluentAssertions](https://fluentassertions.com/)
+- [Microsoft.NET.Test.Sdk](https://github.com/microsoft/vstest/)
+- [xunit](https://github.com/xunit/xunit)
 
 ### アナライザー
 
 - Microsoft.CodeAnalysis.NetAnalyzers (SDK組み込み)
-- Microsoft.VisualStudio.Threading.Analyzers  
-<https://github.com/Microsoft/vs-threading>  
-© Microsoft Corporation. All rights reserved.
-- StyleCop.Analyzers  
-<https://github.com/DotNetAnalyzers/StyleCopAnalyzers>  
-Copyright 2015 Tunnel Vision Laboratories, LLC
+- [Microsoft.VisualStudio.Threading.Analyzers](https://github.com/Microsoft/vs-threading)
+- [StyleCop.Analyzers](https://github.com/DotNetAnalyzers/StyleCopAnalyzers)
 
 ### その他
 
-- Microsoft.SourceLink.GitHub  
-<https://github.com/dotnet/sourcelink>  
-© Microsoft Corporation. All rights reserved.
+- [Microsoft.SourceLink.GitHub](https://github.com/dotnet/sourcelink)
