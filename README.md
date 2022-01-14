@@ -43,14 +43,17 @@ MIT
 ### ライブラリ
 
 - [CommunityToolkit.HighPerformance](https://github.com/CommunityToolkit/dotnet)
-- [Microsoft.Extensions.Logging.Abstractions](https://www.nuget.org/packages/Microsoft.Extensions.Logging.Abstractions/)  
+- [Microsoft.Extensions.Logging.Abstractions](https://github.com/dotnet/runtime)  
 - [ProcessX](https://github.com/Cysharp/ProcessX)
 
 ### テスト
 
 - [FluentAssertions](https://fluentassertions.com/)
 - [Microsoft.NET.Test.Sdk](https://github.com/microsoft/vstest/)
+- [Newtonsoft.Json](https://github.com/JamesNK/Newtonsoft.Json)
+- [NuGet.Frameworks](https://github.com/NuGet/NuGet.Client)
 - [xunit](https://github.com/xunit/xunit)
+- [xunit.runner.visualstudio](https://github.com/xunit/visualstudio.xunit)
 
 ### アナライザー
 
