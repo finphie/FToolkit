@@ -7,18 +7,16 @@
 
   <PropertyGroup>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <Description>各種処理を詰め合わせたライブラリです。</Description>
-    <PackageTags>toolkit</PackageTags>
+    <Description>IO関連処理の詰め合わせです。</Description>
+    <PackageTags>Toolkit;IO</PackageTags>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="CommunityToolkit.Diagnostics" Version="7.1.2" />
     <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="6.0.0" />
-    <PackageReference Include="ProcessX" Version="1.5.4" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\FToolkit.Abstractions\FToolkit.Abstractions.csproj" />
+    <ProjectReference Include="..\FToolkit.IO.Abstractions\FToolkit.IO.Abstractions.csproj" />
   </ItemGroup>
 
 </Project>

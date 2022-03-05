@@ -1,19 +1,18 @@
-﻿
-Microsoft Visual Studio Solution File, Format Version 12.00
+﻿Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.1.31911.260
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Source", "Source", "{9E8DA52C-B48A-4493-B0C6-B77FDF27E567}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FToolkit", "Source\FToolkit\FToolkit.csproj", "{59721E63-47A9-46D4-9CBA-287C2220652D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FToolkit.IO", "Source\FToolkit.IO\FToolkit.IO.csproj", "{59721E63-47A9-46D4-9CBA-287C2220652D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FToolkit.Abstractions", "Source\FToolkit.Abstractions\FToolkit.Abstractions.csproj", "{FC968420-A997-4747-AC93-BE94B0A57CAA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FToolkit.IO.Abstractions", "Source\FToolkit.IO.Abstractions\FToolkit.IO.Abstractions.csproj", "{FC968420-A997-4747-AC93-BE94B0A57CAA}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{3658193F-A8DB-4DB1-8595-0A66689AEF3C}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FToolkit.IO.Helpers.Tests", "Tests\FToolkit.IO.Helpers.Tests\FToolkit.IO.Helpers.Tests.csproj", "{368A38AB-0436-4BEC-B84C-F51C1162DDE7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FToolkit.Diagnostics", "Source\FToolkit.Diagnostics\FToolkit.Diagnostics.csproj", "{6D6091AD-9E74-41C5-B55A-ADB334846E33}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FToolkit.IO.Helpers", "Source\FToolkit.IO.Helpers\FToolkit.IO.Helpers.csproj", "{63C947B4-2D75-429C-B243-93D0CC34E6E1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FToolkit.Diagnostics.Abstractions", "Source\FToolkit.Diagnostics.Abstractions\FToolkit.Diagnostics.Abstractions.csproj", "{8A1F8A56-58DA-4E82-92DA-CBA321EDDE09}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,14 +28,14 @@ Global
 		{FC968420-A997-4747-AC93-BE94B0A57CAA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FC968420-A997-4747-AC93-BE94B0A57CAA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FC968420-A997-4747-AC93-BE94B0A57CAA}.Release|Any CPU.Build.0 = Release|Any CPU
-		{368A38AB-0436-4BEC-B84C-F51C1162DDE7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{368A38AB-0436-4BEC-B84C-F51C1162DDE7}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{368A38AB-0436-4BEC-B84C-F51C1162DDE7}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{368A38AB-0436-4BEC-B84C-F51C1162DDE7}.Release|Any CPU.Build.0 = Release|Any CPU
-		{63C947B4-2D75-429C-B243-93D0CC34E6E1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{63C947B4-2D75-429C-B243-93D0CC34E6E1}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{63C947B4-2D75-429C-B243-93D0CC34E6E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{63C947B4-2D75-429C-B243-93D0CC34E6E1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6D6091AD-9E74-41C5-B55A-ADB334846E33}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6D6091AD-9E74-41C5-B55A-ADB334846E33}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6D6091AD-9E74-41C5-B55A-ADB334846E33}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6D6091AD-9E74-41C5-B55A-ADB334846E33}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8A1F8A56-58DA-4E82-92DA-CBA321EDDE09}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8A1F8A56-58DA-4E82-92DA-CBA321EDDE09}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8A1F8A56-58DA-4E82-92DA-CBA321EDDE09}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8A1F8A56-58DA-4E82-92DA-CBA321EDDE09}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -44,8 +43,8 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{59721E63-47A9-46D4-9CBA-287C2220652D} = {9E8DA52C-B48A-4493-B0C6-B77FDF27E567}
 		{FC968420-A997-4747-AC93-BE94B0A57CAA} = {9E8DA52C-B48A-4493-B0C6-B77FDF27E567}
-		{368A38AB-0436-4BEC-B84C-F51C1162DDE7} = {3658193F-A8DB-4DB1-8595-0A66689AEF3C}
-		{63C947B4-2D75-429C-B243-93D0CC34E6E1} = {9E8DA52C-B48A-4493-B0C6-B77FDF27E567}
+		{6D6091AD-9E74-41C5-B55A-ADB334846E33} = {9E8DA52C-B48A-4493-B0C6-B77FDF27E567}
+		{8A1F8A56-58DA-4E82-92DA-CBA321EDDE09} = {9E8DA52C-B48A-4493-B0C6-B77FDF27E567}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {488858CD-6ADC-4360-9E98-96B6AD572790}
