@@ -5,10 +5,10 @@
     <IsPackable>true</IsPackable>
   </PropertyGroup>
 
- <PropertyGroup>
+  <PropertyGroup>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <Description>FToolkitの抽象化。</Description>
-    <PackageTags>toolkit</PackageTags>
+    <Description>FToolkit.Diagnosticsの抽象化。</Description>
+    <PackageTags>Toolkit;Diagnostics</PackageTags>
   </PropertyGroup>
 
 </Project>
