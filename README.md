@@ -1,6 +1,8 @@
 # FToolkit
 
 [![Build(.NET)](https://github.com/finphie/FToolkit/actions/workflows/build-dotnet.yml/badge.svg)](https://github.com/finphie/FToolkit/actions/workflows/build-dotnet.yml)
+[![NuGet](https://img.shields.io/nuget/v/FToolkit.Diagnostics?color=0078d4&label=NuGet)](https://www.nuget.org/packages/FToolkit.Diagnostics/)
+[![Azure Artifacts](https://feeds.dev.azure.com/finphie/7af9aa4d-c550-43af-87a5-01539b2d9934/_apis/public/Packaging/Feeds/18cbb017-6f1d-41eb-b9a5-a6dbf411e3f7/Packages/8efc9e09-0a75-488d-8cd4-22e8d17a8092/Badge)](https://dev.azure.com/finphie/Main/_packaging?_a=package&feed=18cbb017-6f1d-41eb-b9a5-a6dbf411e3f7&package=8efc9e09-0a75-488d-8cd4-22e8d17a8092&preferRelease=true)
 
 各種処理を詰め合わせたライブラリです。
 
@@ -10,12 +12,12 @@ FToolkitは、システムやファイル操作などの各種処理を詰め合
 
 ## インストール
 
-ライブラリ名|NuGet|Azure Artifacts|説明
--|-|-|-
-FToolkit.Diagnostics.Abstractions|[![NuGet](https://img.shields.io/nuget/v/FToolkit.Diagnostics.Abstractions?color=0078d4&label=NuGet)](https://www.nuget.org/packages/FToolkit.Diagnostics.Abstractions/)|[![Azure Artifacts](https://feeds.dev.azure.com/finphie/7af9aa4d-c550-43af-87a5-01539b2d9934/_apis/public/Packaging/Feeds/18cbb017-6f1d-41eb-b9a5-a6dbf411e3f7/Packages/cada7c86-a601-44df-b92c-78e81eac481c/Badge)](https://dev.azure.com/finphie/Main/_packaging?_a=package&feed=18cbb017-6f1d-41eb-b9a5-a6dbf411e3f7&package=cada7c86-a601-44df-b92c-78e81eac481c&preferRelease=true)|FToolkit.Diagnosticsの抽象化です。
-FToolkit.Diagnostics|[![NuGet](https://img.shields.io/nuget/v/FToolkit.Diagnostics?color=0078d4&label=NuGet)](https://www.nuget.org/packages/FToolkit.Diagnostics/)|[![Azure Artifacts](https://feeds.dev.azure.com/finphie/7af9aa4d-c550-43af-87a5-01539b2d9934/_apis/public/Packaging/Feeds/18cbb017-6f1d-41eb-b9a5-a6dbf411e3f7/Packages/8efc9e09-0a75-488d-8cd4-22e8d17a8092/Badge)](https://dev.azure.com/finphie/Main/_packaging?_a=package&feed=18cbb017-6f1d-41eb-b9a5-a6dbf411e3f7&package=8efc9e09-0a75-488d-8cd4-22e8d17a8092&preferRelease=true)|システム関連処理の詰め合わせです。
-FToolkit.IO.Abstractions|[![NuGet](https://img.shields.io/nuget/v/FToolkit.IO.Abstractions?color=0078d4&label=NuGet)](https://www.nuget.org/packages/FToolkit.IO.Abstractions/)|[![Azure Artifacts](https://feeds.dev.azure.com/finphie/7af9aa4d-c550-43af-87a5-01539b2d9934/_apis/public/Packaging/Feeds/18cbb017-6f1d-41eb-b9a5-a6dbf411e3f7/Packages/e4ab5317-d6ad-49ef-a6eb-654c0c166c2e/Badge)](https://dev.azure.com/finphie/Main/_packaging?_a=package&feed=18cbb017-6f1d-41eb-b9a5-a6dbf411e3f7&package=e4ab5317-d6ad-49ef-a6eb-654c0c166c2e&preferRelease=true)|FToolkit.IOの抽象化です。
-FToolkit.IO|[![NuGet](https://img.shields.io/nuget/v/FToolkit.IO?color=0078d4&label=NuGet)](https://www.nuget.org/packages/FToolkit.IO/)|[![Azure Artifacts](https://feeds.dev.azure.com/finphie/7af9aa4d-c550-43af-87a5-01539b2d9934/_apis/public/Packaging/Feeds/18cbb017-6f1d-41eb-b9a5-a6dbf411e3f7/Packages/ca91d183-9e94-4295-ba1f-4fef31731cc3/Badge)](https://dev.azure.com/finphie/Main/_packaging?_a=package&feed=18cbb017-6f1d-41eb-b9a5-a6dbf411e3f7&package=ca91d183-9e94-4295-ba1f-4fef31731cc3&preferRelease=true)|IO関連処理の詰め合わせです。
+ライブラリ名|説明
+-|-
+[FToolkit.Diagnostics.Abstractions](https://www.nuget.org/packages/FToolkit.Diagnostics.Abstractions/)|FToolkit.Diagnosticsの抽象化です。
+[FToolkit.Diagnostics](https://www.nuget.org/packages/FToolkit.Diagnostics/)|システム関連処理の詰め合わせです。
+[FToolkit.IO.Abstractions](https://www.nuget.org/packages/FToolkit.IO.Abstractions/)|FToolkit.IOの抽象化です。
+[FToolkit.IO](https://www.nuget.org/packages/FToolkit.IO/)|IO関連処理の詰め合わせです。
 
 ### NuGet（正式リリース版）
 
