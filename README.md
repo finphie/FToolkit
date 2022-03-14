@@ -51,7 +51,7 @@ MIT
 
 ### ライブラリ
 
-- [Microsoft.Extensions.Logging.Abstractions](https://github.com/dotnet/runtime)  
+- [Microsoft.Extensions.Logging.Abstractions](https://github.com/dotnet/runtime)
 - [ProcessX](https://github.com/Cysharp/ProcessX)
 
 ### テスト
