@@ -15,11 +15,8 @@ public sealed partial class FileOperations : IFileOperations
     /// </summary>
     /// <param name="logger">ロガー</param>
     /// <exception cref="ArgumentNullException"><paramref name="logger"/>がnullです。</exception>
-    public FileOperations(ILogger<FileOperations> logger)
-    {
-        ArgumentNullException.ThrowIfNull(logger);
-        _logger = logger;
-    }
+    public FileOperations(ILogger<FileOperations> logger!!)
+        => _logger = logger;
 
     /// <inheritdoc/>
     /// <exception cref="ArgumentNullException"><paramref name="filePath"/>がnullです。</exception>
@@ -30,9 +27,8 @@ public sealed partial class FileOperations : IFileOperations
     /// <exception cref="DirectoryNotFoundException"><paramref name="filePath"/>が無効です。</exception>
     /// <exception cref="UnauthorizedAccessException">オペレーティングシステムによってアクセスが拒否されました。</exception>
     /// <exception cref="PathTooLongException"><paramref name="filePath"/>がシステム定義の最大長を超えています。</exception>
-    public void Create(string filePath, ReadOnlySpan<byte> bytes)
+    public void Create(string filePath!!, ReadOnlySpan<byte> bytes)
     {
-        ArgumentNullException.ThrowIfNull(filePath);
         Creating(filePath);
 
         try
@@ -55,9 +51,8 @@ public sealed partial class FileOperations : IFileOperations
     /// <exception cref="DirectoryNotFoundException"><paramref name="filePath"/>が無効です。</exception>
     /// <exception cref="UnauthorizedAccessException">オペレーティングシステムによってアクセスが拒否されました。</exception>
     /// <exception cref="PathTooLongException"><paramref name="filePath"/>がシステム定義の最大長を超えています。</exception>
-    public void Save(string filePath, ReadOnlySpan<byte> bytes)
+    public void Save(string filePath!!, ReadOnlySpan<byte> bytes)
     {
-        ArgumentNullException.ThrowIfNull(filePath);
         Saving(filePath);
 
         try
@@ -80,9 +75,8 @@ public sealed partial class FileOperations : IFileOperations
     /// <exception cref="DirectoryNotFoundException"><paramref name="filePath"/>が無効です。</exception>
     /// <exception cref="UnauthorizedAccessException">オペレーティングシステムによってアクセスが拒否されました。</exception>
     /// <exception cref="PathTooLongException"><paramref name="filePath"/>がシステム定義の最大長を超えています。</exception>
-    public void Delete(string filePath)
+    public void Delete(string filePath!!)
     {
-        ArgumentNullException.ThrowIfNull(filePath);
         Deleting(filePath);
 
         if (File.Exists(filePath))
