@@ -1,6 +1,7 @@
 ﻿using System.Buffers;
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
+using System.Text;
 using Cysharp.Diagnostics;
 using Microsoft.Extensions.Logging;
 
@@ -18,17 +19,13 @@ public sealed partial class SystemOperations : ISystemOperations
     /// </summary>
     /// <param name="logger">ロガー</param>
     /// <exception cref="ArgumentNullException"><paramref name="logger"/>がnullです。</exception>
-    public SystemOperations(ILogger<SystemOperations> logger)
-    {
-        ArgumentNullException.ThrowIfNull(logger);
-        _logger = logger;
-    }
+    public SystemOperations(ILogger<SystemOperations> logger!!)
+        => _logger = logger;
 
     /// <inheritdoc/>
     /// <exception cref="ArgumentNullException"><paramref name="url"/>がnullです。</exception>
-    public void OpenInWebBrowser(string url)
+    public void OpenInWebBrowser(string url!!)
     {
-        ArgumentNullException.ThrowIfNull(url);
         OpeningLink(url);
 
         Process.Start(new ProcessStartInfo()
@@ -39,19 +36,58 @@ public sealed partial class SystemOperations : ISystemOperations
     }
 
     /// <inheritdoc/>
+    /// <exception cref="ArgumentNullException"><paramref name="bufferWriter"/>または<paramref name="command"/>がnullです。</exception>
+    /// <exception cref="ProcessErrorException">終了コードが0以外または標準エラーに出力があります。</exception>
+    /// <exception cref="InvalidOperationException">コマンドを実行できません。</exception>
+    public async ValueTask<bool> TryStartCommandAsync(
+        IBufferWriter<char> bufferWriter!!,
+        string command!!,
+        string? workingDirectory = null,
+        IDictionary<string, string>? environmentVariable = null,
+        Encoding? encoding = null,
+        CancellationToken cancellationToken = default)
+    {
+        StartingCommand(command);
+
+        try
+        {
+            await foreach (var item in ProcessX.StartAsync(command, workingDirectory, environmentVariable, encoding)
+                .WithCancellation(cancellationToken)
+                .ConfigureAwait(false))
+            {
+                WriteLine(bufferWriter, item);
+            }
+
+            return true;
+        }
+        catch (ProcessErrorException ex)
+        {
+            CouldNotStartCommand(command, ex);
+        }
+
+        return false;
+    }
+
+    /// <inheritdoc/>
     /// <exception cref="ArgumentNullException"><paramref name="bufferWriter"/>または<paramref name="fileName"/>がnullです。</exception>
     /// <exception cref="ProcessErrorException">終了コードが0以外または標準エラーに出力があります。</exception>
-    /// <exception cref="InvalidOperationException">プロセスが起動できません。</exception>
-    public async ValueTask<bool> TryStartProcessAsync(IBufferWriter<char> bufferWriter, string fileName, string? arguments = null, IDictionary<string, string>? environmentVariable = null)
+    /// <exception cref="InvalidOperationException">プロセスを起動できません。</exception>
+    public async ValueTask<bool> TryStartProcessAsync(
+        IBufferWriter<char> bufferWriter!!,
+        string fileName!!,
+        string? arguments = null,
+        string? workingDirectory = null,
+        IDictionary<string, string>? environmentVariable = null,
+        Encoding? encoding = null,
+        CancellationToken cancellationToken = default)
     {
-        ArgumentNullException.ThrowIfNull(bufferWriter);
-        ArgumentNullException.ThrowIfNull(fileName);
-
         StartingProcess(fileName);
 
         try
         {
-            await foreach (var item in ProcessX.StartAsync(fileName, arguments: arguments, environmentVariable: environmentVariable).ConfigureAwait(false))
+            await foreach (var item in ProcessX.StartAsync(fileName, arguments, workingDirectory, environmentVariable, encoding)
+                .WithCancellation(cancellationToken)
+                .ConfigureAwait(false))
             {
                 WriteLine(bufferWriter, item);
             }
@@ -64,21 +100,78 @@ public sealed partial class SystemOperations : ISystemOperations
         }
 
         return false;
+    }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        static void WriteLine(IBufferWriter<char> bufferWriter, string value)
+    /// <inheritdoc/>
+    /// <exception cref="ArgumentNullException"><paramref name="command"/>がnullです。</exception>
+    /// <exception cref="ProcessErrorException">終了コードが0以外または標準エラーに出力があります。</exception>
+    /// <exception cref="InvalidOperationException">コマンドを起動できません。</exception>
+    public async ValueTask TryWaitCommandAsync(
+        string command!!,
+        string? workingDirectory = null,
+        IDictionary<string, string>? environmentVariable = null,
+        Encoding? encoding = null,
+        CancellationToken cancellationToken = default)
+    {
+        StartingCommand(command);
+
+        try
         {
-            bufferWriter.Write(value);
-            bufferWriter.Write("\n");
+            await ProcessX.StartAsync(command, workingDirectory, environmentVariable, encoding)
+                .WaitAsync(cancellationToken)
+                .ConfigureAwait(false);
         }
+        catch (ProcessErrorException ex)
+        {
+            CouldNotStartCommand(command, ex);
+        }
+    }
+
+    /// <inheritdoc/>
+    /// <exception cref="ArgumentNullException"><paramref name="fileName"/>がnullです。</exception>
+    /// <exception cref="ProcessErrorException">終了コードが0以外または標準エラーに出力があります。</exception>
+    /// <exception cref="InvalidOperationException">プロセスを起動できません。</exception>
+    public async ValueTask TryWaitProcessAsync(
+        string fileName!!,
+        string? arguments = null,
+        string? workingDirectory = null,
+        IDictionary<string, string>? environmentVariable = null,
+        Encoding? encoding = null,
+        CancellationToken cancellationToken = default)
+    {
+        StartingProcess(fileName);
+
+        try
+        {
+            await ProcessX.StartAsync(fileName, arguments, workingDirectory, environmentVariable, encoding)
+                .WaitAsync(cancellationToken)
+                .ConfigureAwait(false);
+        }
+        catch (ProcessErrorException ex)
+        {
+            CouldNotStartProcess(fileName, ex);
+        }
+    }
+
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    static void WriteLine(IBufferWriter<char> bufferWriter, string value)
+    {
+        bufferWriter.Write(value);
+        bufferWriter.Write("\n");
     }
 
     [LoggerMessage(EventId = 1, Level = LogLevel.Information, Message = "Opening link: {url}")]
     partial void OpeningLink(string url);
 
-    [LoggerMessage(EventId = 2, Level = LogLevel.Information, Message = "Starting process: {fileName}")]
+    [LoggerMessage(EventId = 100, Level = LogLevel.Information, Message = "Starting command: {command}")]
+    partial void StartingCommand(string command);
+
+    [LoggerMessage(EventId = 101, Level = LogLevel.Information, Message = "Starting process: {fileName}")]
     partial void StartingProcess(string fileName);
 
-    [LoggerMessage(EventId = 5001, Level = LogLevel.Warning, Message = "Could not start process: {fileName}")]
+    [LoggerMessage(EventId = 10000, Level = LogLevel.Warning, Message = "Could not start command: {command}")]
+    partial void CouldNotStartCommand(string command, Exception ex);
+
+    [LoggerMessage(EventId = 10001, Level = LogLevel.Warning, Message = "Could not start process: {fileName}")]
     partial void CouldNotStartProcess(string fileName, Exception ex);
 }
