@@ -14,7 +14,7 @@ public sealed partial class FileOperations : IFileOperations
     /// <see cref="FileOperations"/>クラスの新しいインスタンスを初期化します。
     /// </summary>
     /// <param name="logger">ロガー</param>
-    /// <exception cref="ArgumentNullException">ロガーがnullです。</exception>
+    /// <exception cref="ArgumentNullException"><paramref name="logger"/>がnullです。</exception>
     public FileOperations(ILogger<FileOperations> logger)
     {
         ArgumentNullException.ThrowIfNull(logger);
@@ -22,14 +22,14 @@ public sealed partial class FileOperations : IFileOperations
     }
 
     /// <inheritdoc/>
-    /// <exception cref="ArgumentNullException">パスがnullです。</exception>
-    /// <exception cref="ArgumentException">パスが空文字か空白です。</exception>
-    /// <exception cref="NotSupportedException">パスがファイル以外のデバイスを参照しています。</exception>
+    /// <exception cref="ArgumentNullException"><paramref name="filePath"/>がnullです。</exception>
+    /// <exception cref="ArgumentException"><paramref name="filePath"/>が空文字か空白です。</exception>
+    /// <exception cref="NotSupportedException"><paramref name="filePath"/>がファイル以外のデバイスを参照しています。</exception>
     /// <exception cref="IOException">I/Oエラーが発生しました。</exception>
     /// <exception cref="SecurityException">アクセス許可がありません。</exception>
-    /// <exception cref="DirectoryNotFoundException">パスが無効です。</exception>
+    /// <exception cref="DirectoryNotFoundException"><paramref name="filePath"/>が無効です。</exception>
     /// <exception cref="UnauthorizedAccessException">オペレーティングシステムによってアクセスが拒否されました。</exception>
-    /// <exception cref="PathTooLongException">パスまたはファイル名がシステム定義の最大長を超えています。</exception>
+    /// <exception cref="PathTooLongException"><paramref name="filePath"/>がシステム定義の最大長を超えています。</exception>
     public void Create(string filePath, ReadOnlySpan<byte> bytes)
     {
         ArgumentNullException.ThrowIfNull(filePath);
@@ -47,14 +47,14 @@ public sealed partial class FileOperations : IFileOperations
     }
 
     /// <inheritdoc/>
-    /// <exception cref="ArgumentNullException">パスがnullです。</exception>
-    /// <exception cref="ArgumentException">パスが空文字か空白です。</exception>
-    /// <exception cref="NotSupportedException">パスがファイル以外のデバイスを参照しています。</exception>
+    /// <exception cref="ArgumentNullException"><paramref name="filePath"/>がnullです。</exception>
+    /// <exception cref="ArgumentException"><paramref name="filePath"/>が空文字か空白です。</exception>
+    /// <exception cref="NotSupportedException"><paramref name="filePath"/>がファイル以外のデバイスを参照しています。</exception>
     /// <exception cref="IOException">I/Oエラーが発生しました。</exception>
     /// <exception cref="SecurityException">アクセス許可がありません。</exception>
-    /// <exception cref="DirectoryNotFoundException">パスが無効です。</exception>
+    /// <exception cref="DirectoryNotFoundException"><paramref name="filePath"/>が無効です。</exception>
     /// <exception cref="UnauthorizedAccessException">オペレーティングシステムによってアクセスが拒否されました。</exception>
-    /// <exception cref="PathTooLongException">パスまたはファイル名がシステム定義の最大長を超えています。</exception>
+    /// <exception cref="PathTooLongException"><paramref name="filePath"/>がシステム定義の最大長を超えています。</exception>
     public void Save(string filePath, ReadOnlySpan<byte> bytes)
     {
         ArgumentNullException.ThrowIfNull(filePath);
@@ -72,14 +72,14 @@ public sealed partial class FileOperations : IFileOperations
     }
 
     /// <inheritdoc/>
-    /// <exception cref="ArgumentNullException">パスがnullです。</exception>
-    /// <exception cref="ArgumentException">パスが空文字か空白です。</exception>
-    /// <exception cref="NotSupportedException">パスがファイル以外のデバイスを参照しています。</exception>
+    /// <exception cref="ArgumentNullException"><paramref name="filePath"/>がnullです。</exception>
+    /// <exception cref="ArgumentException"><paramref name="filePath"/>が空文字か空白です。</exception>
+    /// <exception cref="NotSupportedException"><paramref name="filePath"/>がファイル以外のデバイスを参照しています。</exception>
     /// <exception cref="IOException">I/Oエラーが発生しました。</exception>
     /// <exception cref="SecurityException">アクセス許可がありません。</exception>
-    /// <exception cref="DirectoryNotFoundException">パスが無効です。</exception>
+    /// <exception cref="DirectoryNotFoundException"><paramref name="filePath"/>が無効です。</exception>
     /// <exception cref="UnauthorizedAccessException">オペレーティングシステムによってアクセスが拒否されました。</exception>
-    /// <exception cref="PathTooLongException">パスまたはファイル名がシステム定義の最大長を超えています。</exception>
+    /// <exception cref="PathTooLongException"><paramref name="filePath"/>がシステム定義の最大長を超えています。</exception>
     public void Delete(string filePath)
     {
         ArgumentNullException.ThrowIfNull(filePath);
