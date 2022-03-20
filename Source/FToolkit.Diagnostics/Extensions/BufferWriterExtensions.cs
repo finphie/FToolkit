@@ -14,7 +14,7 @@ static class BufferWriterExtensions
     /// <param name="bufferWriter"><see cref="char"/>データを書き込むことができる出力シンク</param>
     /// <param name="value"><paramref name="value"/>に書き込む値</param>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static void WriteLine(this IBufferWriter<char> bufferWriter, string value)
+    public static void WriteLine(this IBufferWriter<char> bufferWriter, ReadOnlySpan<char> value)
     {
         bufferWriter.Write(value);
         bufferWriter.Write("\n");
