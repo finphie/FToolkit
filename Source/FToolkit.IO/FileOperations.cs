@@ -55,18 +55,6 @@ public sealed partial class FileOperations : IFileOperations
     /// <exception cref="DirectoryNotFoundException">パスが無効です。</exception>
     /// <exception cref="UnauthorizedAccessException">オペレーティングシステムによってアクセスが拒否されました。</exception>
     /// <exception cref="PathTooLongException">パスまたはファイル名がシステム定義の最大長を超えています。</exception>
-    public void Create(string filePath, ReadOnlyMemory<byte> bytes)
-        => Create(filePath, bytes.Span);
-
-    /// <inheritdoc/>
-    /// <exception cref="ArgumentNullException">パスがnullです。</exception>
-    /// <exception cref="ArgumentException">パスが空文字か空白です。</exception>
-    /// <exception cref="NotSupportedException">パスがファイル以外のデバイスを参照しています。</exception>
-    /// <exception cref="IOException">I/Oエラーが発生しました。</exception>
-    /// <exception cref="SecurityException">アクセス許可がありません。</exception>
-    /// <exception cref="DirectoryNotFoundException">パスが無効です。</exception>
-    /// <exception cref="UnauthorizedAccessException">オペレーティングシステムによってアクセスが拒否されました。</exception>
-    /// <exception cref="PathTooLongException">パスまたはファイル名がシステム定義の最大長を超えています。</exception>
     public void Save(string filePath, ReadOnlySpan<byte> bytes)
     {
         ArgumentNullException.ThrowIfNull(filePath);
@@ -82,18 +70,6 @@ public sealed partial class FileOperations : IFileOperations
             throw;
         }
     }
-
-    /// <inheritdoc/>
-    /// <exception cref="ArgumentNullException">パスがnullです。</exception>
-    /// <exception cref="ArgumentException">パスが空文字か空白です。</exception>
-    /// <exception cref="NotSupportedException">パスがファイル以外のデバイスを参照しています。</exception>
-    /// <exception cref="IOException">I/Oエラーが発生しました。</exception>
-    /// <exception cref="SecurityException">アクセス許可がありません。</exception>
-    /// <exception cref="DirectoryNotFoundException">パスが無効です。</exception>
-    /// <exception cref="UnauthorizedAccessException">オペレーティングシステムによってアクセスが拒否されました。</exception>
-    /// <exception cref="PathTooLongException">パスまたはファイル名がシステム定義の最大長を超えています。</exception>
-    public void Save(string filePath, ReadOnlyMemory<byte> bytes)
-        => Save(filePath, bytes.Span);
 
     /// <inheritdoc/>
     /// <exception cref="ArgumentNullException">パスがnullです。</exception>
