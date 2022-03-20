@@ -1,8 +1,8 @@
 ﻿using System.Buffers;
 using System.Diagnostics;
-using System.Runtime.CompilerServices;
 using System.Text;
 using Cysharp.Diagnostics;
+using FToolkit.Diagnostics.Extensions;
 using Microsoft.Extensions.Logging;
 
 namespace FToolkit.Diagnostics;
@@ -55,7 +55,7 @@ public sealed partial class SystemOperations : ISystemOperations
                 .WithCancellation(cancellationToken)
                 .ConfigureAwait(false))
             {
-                WriteLine(bufferWriter, item);
+                bufferWriter.WriteLine(item);
             }
 
             return true;
@@ -89,7 +89,7 @@ public sealed partial class SystemOperations : ISystemOperations
                 .WithCancellation(cancellationToken)
                 .ConfigureAwait(false))
             {
-                WriteLine(bufferWriter, item);
+                bufferWriter.WriteLine(item);
             }
 
             return true;
@@ -151,13 +151,6 @@ public sealed partial class SystemOperations : ISystemOperations
         {
             CouldNotStartProcess(fileName, ex);
         }
-    }
-
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    static void WriteLine(IBufferWriter<char> bufferWriter, string value)
-    {
-        bufferWriter.Write(value);
-        bufferWriter.Write("\n");
     }
 
     [LoggerMessage(EventId = 1, Level = LogLevel.Information, Message = "Opening link: {url}")]
