@@ -16,7 +16,7 @@ public interface ISystemOperations
     /// <summary>
     /// 指定されたファイルを実行します。
     /// </summary>
-    /// <param name="bufferWriter">バッファーライター</param>
+    /// <param name="bufferWriter"><see cref="char"/>データを書き込むことができる出力シンク</param>
     /// <param name="fileName">ファイル名</param>
     /// <param name="arguments">引数</param>
     /// <param name="environmentVariable">環境変数</param>
