@@ -16,13 +16,13 @@ public interface ISystemOperations
     /// <summary>
     /// 指定されたファイルを実行します。
     /// </summary>
-    /// <param name="bufferWriter">バッファーライター</param>
+    /// <param name="bufferWriter"><see cref="char"/>データを書き込むことができる出力シンク</param>
     /// <param name="fileName">ファイル名</param>
     /// <param name="arguments">引数</param>
     /// <param name="environmentVariable">環境変数</param>
     /// <returns>
-    /// ファイルの実行がに成功した場合は<see langword="true"/>、
-    /// それ以外の場合は<see langword="false"/>。
+    /// このメソッドが完了すると、ファイルの実行が成功した場合に<see langword="true"/>を返します。
+    /// 失敗した場合は<see langword="false"/>を返します。
     /// </returns>
     ValueTask<bool> TryStartProcessAsync(IBufferWriter<char> bufferWriter, string fileName, string? arguments = null, IDictionary<string, string>? environmentVariable = null);
 }

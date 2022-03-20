@@ -17,7 +17,7 @@ public sealed partial class SystemOperations : ISystemOperations
     /// <see cref="SystemOperations"/>クラスの新しいインスタンスを初期化します。
     /// </summary>
     /// <param name="logger">ロガー</param>
-    /// <exception cref="ArgumentNullException">ロガーがnullです。</exception>
+    /// <exception cref="ArgumentNullException"><paramref name="logger"/>がnullです。</exception>
     public SystemOperations(ILogger<SystemOperations> logger)
     {
         ArgumentNullException.ThrowIfNull(logger);
@@ -25,7 +25,7 @@ public sealed partial class SystemOperations : ISystemOperations
     }
 
     /// <inheritdoc/>
-    /// <exception cref="ArgumentNullException">URLがnullです。</exception>
+    /// <exception cref="ArgumentNullException"><paramref name="url"/>がnullです。</exception>
     public void OpenInWebBrowser(string url)
     {
         ArgumentNullException.ThrowIfNull(url);
@@ -39,7 +39,7 @@ public sealed partial class SystemOperations : ISystemOperations
     }
 
     /// <inheritdoc/>
-    /// <exception cref="ArgumentNullException">バッファーライターまたはファイル名がnullです。</exception>
+    /// <exception cref="ArgumentNullException"><paramref name="bufferWriter"/>または<paramref name="fileName"/>がnullです。</exception>
     /// <exception cref="ProcessErrorException">終了コードが0以外または標準エラーに出力があります。</exception>
     /// <exception cref="InvalidOperationException">プロセスが起動できません。</exception>
     public async ValueTask<bool> TryStartProcessAsync(IBufferWriter<char> bufferWriter, string fileName, string? arguments = null, IDictionary<string, string>? environmentVariable = null)
