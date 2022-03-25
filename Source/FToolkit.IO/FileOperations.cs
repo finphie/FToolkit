@@ -1,5 +1,4 @@
-﻿using System.Security;
-using Microsoft.Extensions.Logging;
+﻿using Microsoft.Extensions.Logging;
 
 namespace FToolkit.IO;
 
@@ -19,14 +18,6 @@ public sealed partial class FileOperations : IFileOperations
         => _logger = logger;
 
     /// <inheritdoc/>
-    /// <exception cref="ArgumentNullException"><paramref name="filePath"/>がnullです。</exception>
-    /// <exception cref="ArgumentException"><paramref name="filePath"/>が空文字か空白です。</exception>
-    /// <exception cref="NotSupportedException"><paramref name="filePath"/>がファイル以外のデバイスを参照しています。</exception>
-    /// <exception cref="IOException">I/Oエラーが発生しました。</exception>
-    /// <exception cref="SecurityException">アクセス許可がありません。</exception>
-    /// <exception cref="DirectoryNotFoundException"><paramref name="filePath"/>が無効です。</exception>
-    /// <exception cref="UnauthorizedAccessException">オペレーティングシステムによってアクセスが拒否されました。</exception>
-    /// <exception cref="PathTooLongException"><paramref name="filePath"/>がシステム定義の最大長を超えています。</exception>
     public void Create(string filePath!!, ReadOnlySpan<byte> bytes)
     {
         Creating(filePath);
@@ -43,14 +34,6 @@ public sealed partial class FileOperations : IFileOperations
     }
 
     /// <inheritdoc/>
-    /// <exception cref="ArgumentNullException"><paramref name="filePath"/>がnullです。</exception>
-    /// <exception cref="ArgumentException"><paramref name="filePath"/>が空文字か空白です。</exception>
-    /// <exception cref="NotSupportedException"><paramref name="filePath"/>がファイル以外のデバイスを参照しています。</exception>
-    /// <exception cref="IOException">I/Oエラーが発生しました。</exception>
-    /// <exception cref="SecurityException">アクセス許可がありません。</exception>
-    /// <exception cref="DirectoryNotFoundException"><paramref name="filePath"/>が無効です。</exception>
-    /// <exception cref="UnauthorizedAccessException">オペレーティングシステムによってアクセスが拒否されました。</exception>
-    /// <exception cref="PathTooLongException"><paramref name="filePath"/>がシステム定義の最大長を超えています。</exception>
     public void Save(string filePath!!, ReadOnlySpan<byte> bytes)
     {
         Saving(filePath);
@@ -67,14 +50,6 @@ public sealed partial class FileOperations : IFileOperations
     }
 
     /// <inheritdoc/>
-    /// <exception cref="ArgumentNullException"><paramref name="filePath"/>がnullです。</exception>
-    /// <exception cref="ArgumentException"><paramref name="filePath"/>が空文字か空白です。</exception>
-    /// <exception cref="NotSupportedException"><paramref name="filePath"/>がファイル以外のデバイスを参照しています。</exception>
-    /// <exception cref="IOException">I/Oエラーが発生しました。</exception>
-    /// <exception cref="SecurityException">アクセス許可がありません。</exception>
-    /// <exception cref="DirectoryNotFoundException"><paramref name="filePath"/>が無効です。</exception>
-    /// <exception cref="UnauthorizedAccessException">オペレーティングシステムによってアクセスが拒否されました。</exception>
-    /// <exception cref="PathTooLongException"><paramref name="filePath"/>がシステム定義の最大長を超えています。</exception>
     public void Delete(string filePath!!)
     {
         Deleting(filePath);
