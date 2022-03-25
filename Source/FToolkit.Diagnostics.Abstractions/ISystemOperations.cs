@@ -12,6 +12,7 @@ public interface ISystemOperations
     /// 指定されたURLを開きます。
     /// </summary>
     /// <param name="url">URL</param>
+    /// <exception cref="ArgumentNullException"><paramref name="url"/>がnullです。</exception>
     void OpenInWebBrowser(string url);
 
     /// <summary>
@@ -24,11 +25,31 @@ public interface ISystemOperations
     /// <param name="encoding">エンコーディング</param>
     /// <param name="cancellationToken">キャンセル要求を行うためのトークン</param>
     /// <returns>
-    /// このメソッドが完了すると、コマンドの実行が成功した場合に<see langword="true"/>を返します。
-    /// 失敗した場合は<see langword="false"/>を返します。
+    /// このメソッドが完了すると、コマンドの実行が成功した場合に0を返します。
+    /// 失敗した場合は0以外の終了コードを返します。
     /// </returns>
-    ValueTask<bool> TryStartCommandAsync(
+    /// <exception cref="ArgumentNullException"><paramref name="bufferWriter"/>または<paramref name="command"/>がnullです。</exception>
+    /// <exception cref="InvalidOperationException">コマンドを実行できません。</exception>
+    ValueTask<int> WaitCommandAsync(
         IBufferWriter<char> bufferWriter,
+        string command,
+        string? workingDirectory = null,
+        IDictionary<string, string>? environmentVariable = null,
+        Encoding? encoding = null,
+        CancellationToken cancellationToken = default);
+
+    /// <summary>
+    /// 指定されたコマンドを実行します。
+    /// </summary>
+    /// <param name="command">コマンド</param>
+    /// <param name="workingDirectory">ワーキングディレクトリ</param>
+    /// <param name="environmentVariable">環境変数</param>
+    /// <param name="encoding">エンコーディング</param>
+    /// <param name="cancellationToken">キャンセル要求を行うためのトークン</param>
+    /// <inheritdoc cref="WaitCommandAsync(IBufferWriter{char}, string, string?, IDictionary{string, string}?, Encoding?, CancellationToken)" path="/returns"/>
+    /// <exception cref="ArgumentNullException"><paramref name="command"/>がnullです。</exception>
+    /// <exception cref="InvalidOperationException">コマンドを実行できません。</exception>
+    ValueTask<int> WaitCommandAsync(
         string command,
         string? workingDirectory = null,
         IDictionary<string, string>? environmentVariable = null,
@@ -46,31 +67,15 @@ public interface ISystemOperations
     /// <param name="encoding">エンコーディング</param>
     /// <param name="cancellationToken">キャンセル要求を行うためのトークン</param>
     /// <returns>
-    /// このメソッドが完了すると、ファイルの実行が成功した場合に<see langword="true"/>を返します。
-    /// 失敗した場合は<see langword="false"/>を返します。
+    /// このメソッドが完了すると、プロセスの実行が成功した場合に0を返します。
+    /// 失敗した場合は0以外の終了コードを返します。
     /// </returns>
-    ValueTask<bool> TryStartProcessAsync(
+    /// <exception cref="ArgumentNullException"><paramref name="bufferWriter"/>または<paramref name="fileName"/>がnullです。</exception>
+    /// <exception cref="InvalidOperationException">ファイルを実行できません。</exception>
+    ValueTask<int> WaitProcessAsync(
         IBufferWriter<char> bufferWriter,
         string fileName,
         string? arguments = null,
-        string? workingDirectory = null,
-        IDictionary<string, string>? environmentVariable = null,
-        Encoding? encoding = null,
-        CancellationToken cancellationToken = default);
-
-    /// <summary>
-    /// 指定されたコマンドを実行します。
-    /// </summary>
-    /// <param name="command">コマンド</param>
-    /// <param name="workingDirectory">ワーキングディレクトリ</param>
-    /// <param name="environmentVariable">環境変数</param>
-    /// <param name="encoding">エンコーディング</param>
-    /// <param name="cancellationToken">キャンセル要求を行うためのトークン</param>
-    /// <returns>
-    /// このメソッドが完了すると、値は返されません。
-    /// </returns>
-    ValueTask TryWaitCommandAsync(
-        string command,
         string? workingDirectory = null,
         IDictionary<string, string>? environmentVariable = null,
         Encoding? encoding = null,
@@ -85,10 +90,10 @@ public interface ISystemOperations
     /// <param name="environmentVariable">環境変数</param>
     /// <param name="encoding">エンコーディング</param>
     /// <param name="cancellationToken">キャンセル要求を行うためのトークン</param>
-    /// <returns>
-    /// このメソッドが完了すると、値は返されません。
-    /// </returns>
-    ValueTask TryWaitProcessAsync(
+    /// <inheritdoc cref="WaitProcessAsync(IBufferWriter{char}, string, string?, string?, IDictionary{string, string}?, Encoding?, CancellationToken)" path="/returns"/>
+    /// <exception cref="ArgumentNullException"><paramref name="fileName"/>がnullです。</exception>
+    /// <exception cref="InvalidOperationException">ファイルを実行できません。</exception>
+    ValueTask<int> WaitProcessAsync(
         string fileName,
         string? arguments = null,
         string? workingDirectory = null,
