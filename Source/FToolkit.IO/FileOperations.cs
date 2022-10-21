@@ -14,12 +14,17 @@ public sealed partial class FileOperations : IFileOperations
     /// </summary>
     /// <param name="logger">ロガー</param>
     /// <exception cref="ArgumentNullException"><paramref name="logger"/>がnullです。</exception>
-    public FileOperations(ILogger<FileOperations> logger!!)
-        => _logger = logger;
+    public FileOperations(ILogger<FileOperations> logger)
+    {
+        ArgumentNullException.ThrowIfNull(logger);
+        _logger = logger;
+    }
 
     /// <inheritdoc/>
-    public void Create(string filePath!!, ReadOnlySpan<byte> bytes)
+    public void Create(string filePath, ReadOnlySpan<byte> bytes)
     {
+        ArgumentNullException.ThrowIfNull(filePath);
+
         Creating(filePath);
 
         try
@@ -34,8 +39,10 @@ public sealed partial class FileOperations : IFileOperations
     }
 
     /// <inheritdoc/>
-    public void Save(string filePath!!, ReadOnlySpan<byte> bytes)
+    public void Save(string filePath, ReadOnlySpan<byte> bytes)
     {
+        ArgumentNullException.ThrowIfNull(filePath);
+
         Saving(filePath);
 
         try
@@ -50,8 +57,10 @@ public sealed partial class FileOperations : IFileOperations
     }
 
     /// <inheritdoc/>
-    public void Delete(string filePath!!)
+    public void Delete(string filePath)
     {
+        ArgumentNullException.ThrowIfNull(filePath);
+
         Deleting(filePath);
 
         if (File.Exists(filePath))
