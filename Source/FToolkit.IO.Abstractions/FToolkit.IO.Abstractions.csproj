@@ -6,8 +6,8 @@
   </PropertyGroup>
 
   <PropertyGroup>
-    <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <Description>FToolkit.IOの抽象化です。</Description>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageTags>Toolkit;IO</PackageTags>
   </PropertyGroup>
 
