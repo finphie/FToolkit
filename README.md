@@ -35,6 +35,7 @@ dotnet add package FToolkit.IO -s https://pkgs.dev.azure.com/finphie/Main/_packa
 
 ## サポートフレームワーク
 
+- .NET 7
 - .NET 6
 
 ## 作者
