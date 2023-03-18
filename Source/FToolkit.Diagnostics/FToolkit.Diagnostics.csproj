@@ -6,8 +6,8 @@
   </PropertyGroup>
 
   <PropertyGroup>
-    <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <Description>システム関連処理の詰め合わせです。</Description>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageTags>Toolkit;Diagnostics</PackageTags>
   </PropertyGroup>
 

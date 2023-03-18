@@ -6,8 +6,8 @@
   </PropertyGroup>
 
   <PropertyGroup>
-    <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <Description>IO関連処理の詰め合わせです。</Description>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageTags>Toolkit;IO</PackageTags>
   </PropertyGroup>
 
