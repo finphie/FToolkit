@@ -21,14 +21,14 @@ FToolkitは、システムやファイル操作などの各種処理を詰め合
 
 ### NuGet（正式リリース版）
 
-```console
+```shell
 dotnet add package FToolkit.Diagnostics
 dotnet add package FToolkit.IO
 ```
 
 ### Azure Artifacts（開発用ビルド）
 
-```console
+```shell
 dotnet add package FToolkit.Diagnostics -s https://pkgs.dev.azure.com/finphie/Main/_packaging/DotNet/nuget/v3/index.json
 dotnet add package FToolkit.IO -s https://pkgs.dev.azure.com/finphie/Main/_packaging/DotNet/nuget/v3/index.json
 ```
@@ -51,7 +51,7 @@ MIT
 
 ### ライブラリ
 
-- [Microsoft.Extensions.Logging.Abstractions](https://github.com/dotnet/runtime)
+- Microsoft.Extensions.Logging.Abstractions
 - [ProcessX](https://github.com/Cysharp/ProcessX)
 
 ### テスト
