@@ -5,6 +5,12 @@
     <IsPackable>true</IsPackable>
   </PropertyGroup>
 
+  <PropertyGroup>
+    <Description>C#コード関連処理の詰め合わせです。</Description>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageTags>Toolkit</PackageTags>
+  </PropertyGroup>
+
   <ItemGroup>
     <PackageReference Include="CommunityToolkit.HighPerformance" Version="8.1.0" />
     <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Features" Version="4.5.0" />
