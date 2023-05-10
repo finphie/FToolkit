@@ -17,8 +17,8 @@ namespace FToolkit.CodeAnalysis.CSharp;
 /// </summary>
 public sealed partial class CompilationService : ICompilationService
 {
-    const string GeneratedAssemblyName = "SharpNoteGenerated.dll";
-    const string GeneratedPdbName = "SharpNoteGenerated.pdb";
+    const string GeneratedAssemblyName = "FToolkit.CodeAnalysis.CSharp.Generated.dll";
+    const string GeneratedPdbName = "FToolkit.CodeAnalysis.CSharp.Generated.pdb";
 
     static readonly Assembly ObjectAssembly = typeof(object).Assembly;
 
@@ -90,9 +90,6 @@ public sealed partial class CompilationService : ICompilationService
             .WithPlatform(compilationPlatform);
 
         var syntaxTree = CSharpSyntaxTree.ParseText(sourceText, parseOptions, sourceCodePath, cancellationToken: cancellationToken);
-
-        // TODO: 構文エラー表示
-        // syntaxTree.GetDiagnostics()
         var compilation = CSharpCompilation.Create(GeneratedAssemblyName, new[] { syntaxTree }, MetadataReferences, compilationOptions);
 
         return compilation;
