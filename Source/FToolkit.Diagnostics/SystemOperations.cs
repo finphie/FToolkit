@@ -184,15 +184,15 @@ public sealed partial class SystemOperations : ISystemOperations
     [LoggerMessage(EventId = 1, Level = LogLevel.Information, Message = "Opening link: {url}")]
     partial void OpeningLink(string url);
 
-    [LoggerMessage(EventId = 100, Level = LogLevel.Information, Message = "Starting command: {command}")]
+    [LoggerMessage(EventId = 2, Level = LogLevel.Information, Message = "Starting command: {command}")]
     partial void StartingCommand(string command);
 
-    [LoggerMessage(EventId = 101, Level = LogLevel.Information, Message = "Starting process: {fileName}")]
+    [LoggerMessage(EventId = 3, Level = LogLevel.Information, Message = "Starting process: {fileName}")]
     partial void StartingProcess(string fileName);
 
-    [LoggerMessage(EventId = 10000, Level = LogLevel.Warning, Message = "Could not start command: {command}")]
+    [LoggerMessage(EventId = 8001, Level = LogLevel.Warning, Message = "Could not start command: {command}")]
     partial void CouldNotStartCommand(string command, Exception ex);
 
-    [LoggerMessage(EventId = 10001, Level = LogLevel.Warning, Message = "Could not start process: {fileName}")]
+    [LoggerMessage(EventId = 8002, Level = LogLevel.Warning, Message = "Could not start process: {fileName}")]
     partial void CouldNotStartProcess(string fileName, Exception ex);
 }
