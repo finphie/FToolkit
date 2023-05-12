@@ -92,12 +92,12 @@ public sealed partial class FileOperations : IFileOperations
     [LoggerMessage(EventId = 3, Level = LogLevel.Information, Message = "Deleting file: {filePath}")]
     partial void Deleting(string filePath);
 
-    [LoggerMessage(EventId = 5001, Level = LogLevel.Warning, Message = "Could not create file: {filePath}")]
+    [LoggerMessage(EventId = 8001, Level = LogLevel.Warning, Message = "Could not create file: {filePath}")]
     partial void CouldNotCreateFile(string filePath, Exception ex);
 
-    [LoggerMessage(EventId = 5002, Level = LogLevel.Warning, Message = "Could not save file: {filePath}")]
+    [LoggerMessage(EventId = 8002, Level = LogLevel.Warning, Message = "Could not save file: {filePath}")]
     partial void CouldNotSaveFile(string filePath, Exception ex);
 
-    [LoggerMessage(EventId = 5003, Level = LogLevel.Warning, Message = "Could not delete file: {filePath}")]
+    [LoggerMessage(EventId = 8003, Level = LogLevel.Warning, Message = "Could not delete file: {filePath}")]
     partial void CouldNotDeleteFile(string filePath, Exception ex);
 }
