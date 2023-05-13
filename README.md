@@ -54,6 +54,8 @@ MIT
 
 ### ライブラリ
 
+- [CommunityToolkit.HighPerformance](https://github.com/CommunityToolkit/dotnet)
+- [Microsoft.CodeAnalysis.CSharp](https://github.com/dotnet/roslyn)
 - Microsoft.Extensions.Logging.Abstractions
 - [ProcessX](https://github.com/Cysharp/ProcessX)
 
