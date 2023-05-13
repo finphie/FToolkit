@@ -7,7 +7,7 @@ namespace FToolkit.IO;
 /// </summary>
 public sealed partial class FileOperations : IFileOperations
 {
-    readonly ILogger _logger;
+    readonly ILogger<FileOperations> _logger;
 
     /// <summary>
     /// <see cref="FileOperations"/>クラスの新しいインスタンスを初期化します。

@@ -14,7 +14,7 @@ public sealed partial class SystemOperations : ISystemOperations
 {
     const int SuccessExitCode = 0;
 
-    readonly ILogger _logger;
+    readonly ILogger<SystemOperations> _logger;
 
     /// <summary>
     /// <see cref="SystemOperations"/>クラスの新しいインスタンスを初期化します。
