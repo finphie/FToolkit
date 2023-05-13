@@ -1,8 +1,6 @@
 # FToolkit
 
 [![Build(.NET)](https://github.com/finphie/FToolkit/actions/workflows/build-dotnet.yml/badge.svg)](https://github.com/finphie/FToolkit/actions/workflows/build-dotnet.yml)
-[![NuGet](https://img.shields.io/nuget/v/FToolkit.Diagnostics?color=0078d4&label=NuGet)](https://www.nuget.org/packages/FToolkit.Diagnostics/)
-[![Azure Artifacts](https://feeds.dev.azure.com/finphie/7af9aa4d-c550-43af-87a5-01539b2d9934/_apis/public/Packaging/Feeds/18cbb017-6f1d-41eb-b9a5-a6dbf411e3f7/Packages/8efc9e09-0a75-488d-8cd4-22e8d17a8092/Badge)](https://dev.azure.com/finphie/Main/_packaging?_a=package&feed=18cbb017-6f1d-41eb-b9a5-a6dbf411e3f7&package=8efc9e09-0a75-488d-8cd4-22e8d17a8092&preferRelease=true)
 
 各種処理を詰め合わせたライブラリです。
 
@@ -12,16 +10,19 @@ FToolkitは、システムやファイル操作などの各種処理を詰め合
 
 ## インストール
 
-ライブラリ名|説明
--|-
-[FToolkit.Diagnostics.Abstractions](https://www.nuget.org/packages/FToolkit.Diagnostics.Abstractions/)|FToolkit.Diagnosticsの抽象化です。
-[FToolkit.Diagnostics](https://www.nuget.org/packages/FToolkit.Diagnostics/)|システム関連処理の詰め合わせです。
-[FToolkit.IO.Abstractions](https://www.nuget.org/packages/FToolkit.IO.Abstractions/)|FToolkit.IOの抽象化です。
-[FToolkit.IO](https://www.nuget.org/packages/FToolkit.IO/)|IO関連処理の詰め合わせです。
+ライブラリ名|正式リリース|開発用ビルド|説明
+-|-|-|-
+FToolkit.CodeAnalysis.CSharp||[![Azure Artifacts](https://feeds.dev.azure.com/finphie/7af9aa4d-c550-43af-87a5-01539b2d9934/_apis/public/Packaging/Feeds/DotNet/Packages/d0b79bb1-23d8-42ec-9ff2-05b53918e247/Badge)](https://dev.azure.com/finphie/Main/_artifacts/feed/DotNet/NuGet/FToolkit.CodeAnalysis.CSharp?preferRelease=true)|C#コード関連処理の詰め合わせです。
+FToolkit.CodeAnalysis.CSharp.Abstractions||[![Azure Artifacts](https://feeds.dev.azure.com/finphie/7af9aa4d-c550-43af-87a5-01539b2d9934/_apis/public/Packaging/Feeds/DotNet/Packages/eac3836c-6ff5-42db-8d7b-dbd72915021a/Badge)](https://dev.azure.com/finphie/Main/_artifacts/feed/DotNet/NuGet/FToolkit.CodeAnalysis.CSharp.Abstractions?preferRelease=true)|FToolkit.CodeAnalysis.CSharpの抽象化です。
+FToolkit.Diagnostics|[![NuGet](https://img.shields.io/nuget/v/FToolkit.Diagnostics?color=0078d4&label=NuGet)](https://www.nuget.org/packages/FToolkit.Diagnostics/)|[![Azure Artifacts](https://feeds.dev.azure.com/finphie/7af9aa4d-c550-43af-87a5-01539b2d9934/_apis/public/Packaging/Feeds/18cbb017-6f1d-41eb-b9a5-a6dbf411e3f7/Packages/8efc9e09-0a75-488d-8cd4-22e8d17a8092/Badge)](https://dev.azure.com/finphie/Main/_packaging?_a=package&feed=18cbb017-6f1d-41eb-b9a5-a6dbf411e3f7&package=8efc9e09-0a75-488d-8cd4-22e8d17a8092&preferRelease=true)|システム関連処理の詰め合わせです。
+FToolkit.Diagnostics.Abstractions|[![NuGet](https://img.shields.io/nuget/v/FToolkit.Diagnostics.Abstractions?color=0078d4&label=NuGet)](https://www.nuget.org/packages/FToolkit.Diagnostics.Abstractions/)|[![Azure Artifacts](https://feeds.dev.azure.com/finphie/7af9aa4d-c550-43af-87a5-01539b2d9934/_apis/public/Packaging/Feeds/DotNet/Packages/cada7c86-a601-44df-b92c-78e81eac481c/Badge)](https://dev.azure.com/finphie/Main/_artifacts/feed/DotNet/NuGet/FToolkit.Diagnostics.Abstractions?preferRelease=true)|FToolkit.Diagnosticsの抽象化です。
+FToolkit.IO|[![NuGet](https://img.shields.io/nuget/v/FToolkit.IO?color=0078d4&label=NuGet)](https://www.nuget.org/packages/FToolkit.IO/)|[![Azure Artifacts](https://feeds.dev.azure.com/finphie/7af9aa4d-c550-43af-87a5-01539b2d9934/_apis/public/Packaging/Feeds/DotNet/Packages/ca91d183-9e94-4295-ba1f-4fef31731cc3/Badge)](https://dev.azure.com/finphie/Main/_artifacts/feed/DotNet/NuGet/FToolkit.IO?preferRelease=true)|IO関連処理の詰め合わせです。
+FToolkit.IO.Abstractions|[![NuGet](https://img.shields.io/nuget/v/FToolkit.IO.Abstractions?color=0078d4&label=NuGet)](https://www.nuget.org/packages/FToolkit.IO.Abstractions/)|[![Azure Artifacts](https://feeds.dev.azure.com/finphie/7af9aa4d-c550-43af-87a5-01539b2d9934/_apis/public/Packaging/Feeds/DotNet/Packages/e4ab5317-d6ad-49ef-a6eb-654c0c166c2e/Badge)](https://dev.azure.com/finphie/Main/_artifacts/feed/DotNet/NuGet/FToolkit.IO.Abstractions?preferRelease=true)|FToolkit.IOの抽象化です。
 
 ### NuGet（正式リリース版）
 
 ```shell
+dotnet add package FToolkit.CodeAnalysis.CSharp
 dotnet add package FToolkit.Diagnostics
 dotnet add package FToolkit.IO
 ```
@@ -29,6 +30,7 @@ dotnet add package FToolkit.IO
 ### Azure Artifacts（開発用ビルド）
 
 ```shell
+dotnet add package FToolkit.CodeAnalysis.CSharp -s https://pkgs.dev.azure.com/finphie/Main/_packaging/DotNet/nuget/v3/index.json
 dotnet add package FToolkit.Diagnostics -s https://pkgs.dev.azure.com/finphie/Main/_packaging/DotNet/nuget/v3/index.json
 dotnet add package FToolkit.IO -s https://pkgs.dev.azure.com/finphie/Main/_packaging/DotNet/nuget/v3/index.json
 ```
@@ -52,6 +54,8 @@ MIT
 
 ### ライブラリ
 
+- [CommunityToolkit.HighPerformance](https://github.com/CommunityToolkit/dotnet)
+- [Microsoft.CodeAnalysis.CSharp](https://github.com/dotnet/roslyn)
 - Microsoft.Extensions.Logging.Abstractions
 - [ProcessX](https://github.com/Cysharp/ProcessX)
 
