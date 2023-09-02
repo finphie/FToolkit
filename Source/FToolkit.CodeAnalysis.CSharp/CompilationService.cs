@@ -1,6 +1,6 @@
 ﻿using System.Globalization;
-using System.Reflection;
 using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
 using System.Text;
 using CommunityToolkit.HighPerformance;
 using CommunityToolkit.HighPerformance.Buffers;
@@ -19,8 +19,6 @@ public sealed partial class CompilationService : ICompilationService
 {
     const string GeneratedAssemblyName = "FToolkit.CodeAnalysis.CSharp.Generated.dll";
     const string GeneratedPdbName = "FToolkit.CodeAnalysis.CSharp.Generated.pdb";
-
-    static readonly Assembly ObjectAssembly = typeof(object).Assembly;
 
     static readonly MetadataReference[] MetadataReferences = GetMetadataReferences().ToArray();
 
@@ -115,8 +113,7 @@ public sealed partial class CompilationService : ICompilationService
 
     static IEnumerable<MetadataReference> GetMetadataReferences()
     {
-        var assemblyPath = Path.GetDirectoryName(ObjectAssembly.Location)!;
-        var files = Directory.EnumerateFiles(assemblyPath, "*.dll");
+        var files = Directory.EnumerateFiles(RuntimeEnvironment.GetRuntimeDirectory(), "*.dll");
 
         foreach (var file in files)
         {
