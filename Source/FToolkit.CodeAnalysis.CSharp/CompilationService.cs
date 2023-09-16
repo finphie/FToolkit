@@ -160,9 +160,9 @@ public sealed partial class CompilationService : ICompilationService
         };
     }
 
-    [LoggerMessage(EventId = 1, Level = LogLevel.Debug, Message = $"{nameof(CompilationService)} is starting.")]
+    [LoggerMessage(Level = LogLevel.Debug, Message = $"{nameof(CompilationService)} is starting.")]
     partial void Starting();
 
-    [LoggerMessage(EventId = 2, Level = LogLevel.Trace, Message = "Path: {sourceCodePath}, Platform: {platform}")]
+    [LoggerMessage(Level = LogLevel.Trace, Message = "Path: {sourceCodePath}, Platform: {platform}")]
     partial void Parameters(string sourceCodePath, PlatformOptions platform);
 }
