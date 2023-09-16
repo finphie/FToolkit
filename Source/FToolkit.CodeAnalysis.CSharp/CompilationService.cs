@@ -71,7 +71,9 @@ public sealed partial class CompilationService : ICompilationService
         }
         else
         {
-            rawAssembly = Array.Empty<byte>();
+#pragma warning disable SA1010 // Opening square brackets should be spaced correctly
+            rawAssembly = [];
+#pragma warning restore SA1010 // Opening square brackets should be spaced correctly
         }
 
         var messages = GetCompilerMessages(result.Diagnostics);
