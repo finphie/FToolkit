@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <PropertyGroup>
-    <Description>FToolkit.Net.GitHubの抽象化です。</Description>
+    <Description>FToolkit.Net.GitHub.Repositoriesの抽象化です。</Description>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageTags>Toolkit;GitHub</PackageTags>
   </PropertyGroup>
