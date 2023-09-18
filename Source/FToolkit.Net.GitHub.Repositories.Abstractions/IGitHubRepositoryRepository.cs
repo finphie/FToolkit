@@ -1,7 +1,7 @@
-﻿using FToolkit.Net.GitHub.Entities;
+﻿using FToolkit.Net.GitHub.Repositories.Entities;
 using FToolkit.Repositories;
 
-namespace FToolkit.Net.GitHub;
+namespace FToolkit.Net.GitHub.Repositories;
 
 /// <summary>
 /// GitHubリポジトリ設定に関する操作を定義するインターフェイスです。

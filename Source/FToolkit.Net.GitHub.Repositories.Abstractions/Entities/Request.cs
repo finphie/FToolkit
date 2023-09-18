@@ -1,7 +1,7 @@
 ﻿using FToolkit.Net.GitHub.Client.Entities;
 using FToolkit.Repositories;
 
-namespace FToolkit.Net.GitHub.Entities;
+namespace FToolkit.Net.GitHub.Repositories.Entities;
 
 /// <summary>
 /// リクエスト情報を表すクラスです。

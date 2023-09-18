@@ -1,9 +1,8 @@
-﻿using FToolkit.Net.GitHub;
-using FToolkit.Net.GitHub.Client;
-using FToolkit.Net.GitHub.Entities;
+﻿using FToolkit.Net.GitHub.Client;
+using FToolkit.Net.GitHub.Repositories.Entities;
 using Microsoft.Extensions.Logging;
 
-namespace GitHubSettingsSync.Repositories;
+namespace FToolkit.Net.GitHub.Repositories;
 
 /// <summary>
 /// GitHubブランチ保護設定に関する操作を行うクラスです。
