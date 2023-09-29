@@ -1,5 +1,4 @@
-﻿using FToolkit.Net.GitHub.Client.Entities;
-using FToolkit.Repositories;
+﻿using FToolkit.Repositories;
 
 namespace FToolkit.Net.GitHub.Repositories.Entities;
 
@@ -10,4 +9,4 @@ namespace FToolkit.Net.GitHub.Repositories.Entities;
 /// <param name="Name">リポジトリ名</param>
 /// <param name="Branch">ブランチ名</param>
 /// <param name="Settings">設定</param>
-public sealed record BranchRequest(string Owner, string Name, string Branch, GitHubBranchProtection? Settings = null) : IAggregateRoot;
+public sealed record BranchRequest(string Owner, string Name, string Branch, BranchProtectionSettings? Settings = null) : IAggregateRoot;
