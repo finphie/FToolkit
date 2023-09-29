@@ -15,8 +15,8 @@ public sealed partial class GitHubRepositoryRepository : IGitHubRepositoryReposi
     /// <summary>
     /// <see cref="GitHubRepositoryRepository"/>クラスの新しいインスタンスを初期化します。
     /// </summary>
-    /// <param name="logger">ロガー。</param>
-    /// <param name="gitHubClient">GitHubクライアント。</param>
+    /// <param name="logger">ロガー</param>
+    /// <param name="gitHubClient">GitHubクライアント</param>
     /// <exception cref="ArgumentNullException"><paramref name="logger"/>または<paramref name="gitHubClient"/>がnullです。</exception>
     public GitHubRepositoryRepository(ILogger<GitHubRepositoryRepository> logger, IGitHubClient gitHubClient)
     {

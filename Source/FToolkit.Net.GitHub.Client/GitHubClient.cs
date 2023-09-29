@@ -16,8 +16,8 @@ public sealed partial class GitHubClient : IGitHubClient
     /// <summary>
     /// <see cref="GitHubClient"/>クラスの新しいインスタンスを初期化します。
     /// </summary>
-    /// <param name="logger">ロガー。</param>
-    /// <param name="client">HTTPクライアント。</param>
+    /// <param name="logger">ロガー</param>
+    /// <param name="client">HTTPクライアント</param>
     /// <exception cref="ArgumentNullException"><paramref name="logger"/>または<paramref name="client"/>がnullです。</exception>
     public GitHubClient(ILogger<GitHubClient> logger, HttpClient client)
     {
