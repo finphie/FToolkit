@@ -5,6 +5,4 @@
 /// </summary>
 /// <typeparam name="T">集約ルートの型。</typeparam>
 public interface IRepository<T>
-    where T : notnull, IAggregateRoot
-{
-}
+    where T : notnull, IAggregateRoot;

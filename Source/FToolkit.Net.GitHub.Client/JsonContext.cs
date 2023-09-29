@@ -7,6 +7,4 @@ namespace FToolkit.Net.GitHub.Client;
 [JsonSourceGenerationOptions(DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull, PropertyNamingPolicy = JsonKnownNamingPolicy.SnakeCaseLower, GenerationMode = JsonSourceGenerationMode.Metadata)]
 [JsonSerializable(typeof(GitHubRepository))]
 [JsonSerializable(typeof(GitHubBranchProtection))]
-sealed partial class JsonContext : JsonSerializerContext
-{
-}
+sealed partial class JsonContext : JsonSerializerContext;
