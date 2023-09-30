@@ -15,7 +15,7 @@ public interface IGitHubClient
     /// <param name="entity">GitHubリポジトリに関する設定</param>
     /// <param name="cancellationToken">キャンセル要求を行うためのトークン</param>
     /// <remarks>
-    /// 詳しくは、<a href="https://docs.github.com/rest/repos/repos">APIドキュメント</a>を参照してください。
+    /// 詳しくは、<a href="https://docs.github.com/ja/rest/repos/repos?apiVersion=2022-11-28#update-a-repository">APIドキュメント</a>を参照してください。
     /// </remarks>
     /// <returns>このメソッドが完了すると、オブジェクトまたは値は返されません。</returns>
     /// <exception cref="ArgumentNullException"><paramref name="owner"/>または<paramref name="name"/>、<paramref name="entity"/>がnullです。</exception>
@@ -32,7 +32,7 @@ public interface IGitHubClient
     /// <param name="entity">GitHubブランチ保護に関する設定</param>
     /// <param name="cancellationToken">キャンセル要求を行うためのトークン</param>
     /// <remarks>
-    /// 詳しくは、<a href="https://docs.github.com/rest/branches/branches">APIドキュメント</a>を参照してください。
+    /// 詳しくは、<a href="https://docs.github.com/ja/rest/branches/branch-protection?apiVersion=2022-11-28#update-branch-protection">APIドキュメント</a>を参照してください。
     /// </remarks>
     /// <returns>このメソッドが完了すると、オブジェクトまたは値は返されません。</returns>
     /// <exception cref="ArgumentNullException"><paramref name="owner"/>または<paramref name="name"/>、<paramref name="branch"/>、<paramref name="entity"/>がnullです。</exception>
@@ -48,7 +48,7 @@ public interface IGitHubClient
     /// <param name="branch">ブランチ名</param>
     /// <param name="cancellationToken">キャンセル要求を行うためのトークン</param>
     /// <remarks>
-    /// 詳しくは、<a href="https://docs.github.com/rest/branches/branches">APIドキュメント</a>を参照してください。
+    /// 詳しくは、<a href="https://docs.github.com/ja/rest/branches/branch-protection?apiVersion=2022-11-28#delete-branch-protection">APIドキュメント</a>を参照してください。
     /// </remarks>
     /// <returns>このメソッドが完了すると、オブジェクトまたは値は返されません。</returns>
     /// <exception cref="ArgumentNullException"><paramref name="owner"/>または<paramref name="name"/>、<paramref name="branch"/>がnullです。</exception>
