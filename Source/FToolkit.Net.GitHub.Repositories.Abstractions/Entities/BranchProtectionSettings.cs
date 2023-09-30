@@ -24,11 +24,8 @@ public sealed record BranchProtectionSettings(
     /// GitHub APIリクエスト時に必要となるクラスのインスタンスを取得します。
     /// </summary>
     /// <returns>ブランチ保護に関する設定を表すクラスのインスタンスを返します。</returns>
-    /// <exception cref="ArgumentNullException">インスタンスがnullです。</exception>
     public GitHubBranchProtection ToEntity()
     {
-        ArgumentNullException.ThrowIfNull(this);
-
         return new(
             EnforceAdmins: EnforceAdmins,
             RequiredLinearHistory: RequiredLinearHistory.ToBoolean(),

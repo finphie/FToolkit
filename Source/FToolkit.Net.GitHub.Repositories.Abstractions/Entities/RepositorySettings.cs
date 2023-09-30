@@ -32,11 +32,8 @@ public sealed record RepositorySettings(
     /// GitHub APIリクエスト時に必要となるクラスのインスタンスを取得します。
     /// </summary>
     /// <returns>リポジトリに関する設定を表すクラスのインスタンスを返します。</returns>
-    /// <exception cref="ArgumentNullException">インスタンスがnullです。</exception>
     public GitHubRepository ToEntity()
     {
-        ArgumentNullException.ThrowIfNull(this);
-
         var entity = new GitHubRepository(
             HasIssues: HasIssues.ToBoolean(),
             HasProjects: HasProjects.ToBoolean(),

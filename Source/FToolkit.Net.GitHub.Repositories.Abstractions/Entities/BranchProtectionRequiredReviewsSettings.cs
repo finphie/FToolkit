@@ -17,11 +17,8 @@ public sealed record BranchProtectionRequiredReviewsSettings(
     /// GitHub APIリクエスト時に必要となるクラスのインスタンスを取得します。
     /// </summary>
     /// <returns>ブランチ保護に関する設定を表すクラスのインスタンスを返します。</returns>
-    /// <exception cref="ArgumentNullException">インスタンスがnullです。</exception>
     internal GitHubBranchProtectionRequiredReviews ToEntity()
     {
-        ArgumentNullException.ThrowIfNull(this);
-
         return new(
             DismissStaleReviews: DismissStaleReviews,
             RequireCodeOwnerReviews: RequireCodeOwnerReviews,
