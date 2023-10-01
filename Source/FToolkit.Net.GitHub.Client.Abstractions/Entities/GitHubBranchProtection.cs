@@ -1,4 +1,5 @@
-﻿using System.Text.Json.Serialization;
+﻿using System.ComponentModel;
+using System.Text.Json.Serialization;
 
 namespace FToolkit.Net.GitHub.Client.Entities;
 
@@ -21,4 +22,4 @@ public sealed record GitHubBranchProtection(
     bool? RequiredConversationResolution = null,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.Never)] GitHubBranchProtectionRequiredStatusChecks? RequiredStatusChecks = null,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.Never)] GitHubBranchProtectionRequiredReviews? RequiredPullRequestReviews = null,
-    [property: JsonIgnore(Condition = JsonIgnoreCondition.Never), Obsolete("このプロパティは使用できません。", true)] object? Restrictions = null);
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.Never), EditorBrowsable(EditorBrowsableState.Never)] object? Restrictions = null);
