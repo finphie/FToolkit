@@ -8,7 +8,7 @@
 
 FToolkitは、システムやファイル操作などの各種処理を詰め合わせたライブラリです。
 
-## インストール
+## 一覧
 
 ライブラリ名|正式リリース|開発用ビルド|説明
 -|-|-|-
@@ -18,28 +18,11 @@ FToolkit.Diagnostics|[![NuGet](https://img.shields.io/nuget/v/FToolkit.Diagnosti
 FToolkit.Diagnostics.Abstractions|[![NuGet](https://img.shields.io/nuget/v/FToolkit.Diagnostics.Abstractions?color=0078d4&label=NuGet)](https://www.nuget.org/packages/FToolkit.Diagnostics.Abstractions/)|[![Azure Artifacts](https://feeds.dev.azure.com/finphie/7af9aa4d-c550-43af-87a5-01539b2d9934/_apis/public/Packaging/Feeds/DotNet/Packages/cada7c86-a601-44df-b92c-78e81eac481c/Badge)](https://dev.azure.com/finphie/Main/_artifacts/feed/DotNet/NuGet/FToolkit.Diagnostics.Abstractions?preferRelease=true)|FToolkit.Diagnosticsの抽象化です。
 FToolkit.IO|[![NuGet](https://img.shields.io/nuget/v/FToolkit.IO?color=0078d4&label=NuGet)](https://www.nuget.org/packages/FToolkit.IO/)|[![Azure Artifacts](https://feeds.dev.azure.com/finphie/7af9aa4d-c550-43af-87a5-01539b2d9934/_apis/public/Packaging/Feeds/DotNet/Packages/ca91d183-9e94-4295-ba1f-4fef31731cc3/Badge)](https://dev.azure.com/finphie/Main/_artifacts/feed/DotNet/NuGet/FToolkit.IO?preferRelease=true)|IO関連処理の詰め合わせです。
 FToolkit.IO.Abstractions|[![NuGet](https://img.shields.io/nuget/v/FToolkit.IO.Abstractions?color=0078d4&label=NuGet)](https://www.nuget.org/packages/FToolkit.IO.Abstractions/)|[![Azure Artifacts](https://feeds.dev.azure.com/finphie/7af9aa4d-c550-43af-87a5-01539b2d9934/_apis/public/Packaging/Feeds/DotNet/Packages/e4ab5317-d6ad-49ef-a6eb-654c0c166c2e/Badge)](https://dev.azure.com/finphie/Main/_artifacts/feed/DotNet/NuGet/FToolkit.IO.Abstractions?preferRelease=true)|FToolkit.IOの抽象化です。
-
-### NuGet（正式リリース版）
-
-```shell
-dotnet add package FToolkit.CodeAnalysis.CSharp
-dotnet add package FToolkit.Diagnostics
-dotnet add package FToolkit.IO
-```
-
-### Azure Artifacts（開発用ビルド）
-
-```shell
-dotnet add package FToolkit.CodeAnalysis.CSharp -s https://pkgs.dev.azure.com/finphie/Main/_packaging/DotNet/nuget/v3/index.json
-dotnet add package FToolkit.Diagnostics -s https://pkgs.dev.azure.com/finphie/Main/_packaging/DotNet/nuget/v3/index.json
-dotnet add package FToolkit.IO -s https://pkgs.dev.azure.com/finphie/Main/_packaging/DotNet/nuget/v3/index.json
-```
-
-## サポートフレームワーク
-
-- .NET 8
-- .NET 7
-- .NET 6
+FToolkit.Net.GitHub.Client|||GitHub APIクライアントです。
+FToolkit.Net.GitHub.Client.Abstractions|||FToolkit.Net.GitHub.Clientの抽象化です。
+FToolkit.Net.GitHub.Repositories|||GitHub APIを利用して各種処理を行います。
+FToolkit.Net.GitHub.Repositories.Abstractions|||FToolkit.Net.GitHub.Repositoriesの抽象化です。
+FToolkit.Repositories.Abstractions|||FToolkit Repositoryの抽象化です。
 
 ## 作者
 
@@ -66,6 +49,7 @@ MIT
 - [Microsoft.NET.Test.Sdk](https://github.com/microsoft/vstest)
 - [Newtonsoft.Json](https://github.com/JamesNK/Newtonsoft.Json)
 - [NuGet.Frameworks](https://github.com/NuGet/NuGet.Client)
+- [RichardSzalay.MockHttp](https://github.com/richardszalay/mockhttp)
 - [xunit](https://github.com/xunit/xunit)
 - [xunit.runner.visualstudio](https://github.com/xunit/visualstudio.xunit)
 
