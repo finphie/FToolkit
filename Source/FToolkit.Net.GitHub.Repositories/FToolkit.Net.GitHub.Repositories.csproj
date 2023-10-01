@@ -17,7 +17,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\FToolkit.Net.GitHub.Repositories.Abstractions\FToolkit.Net.GitHub.Repositories.Abstractions.csproj" />
-    <ProjectReference Include="..\FToolkit.Net.GitHub.Client.Abstractions\FToolkit.Net.GitHub.Client.Abstractions.csproj" />
   </ItemGroup>
 
 </Project>
