@@ -37,6 +37,6 @@ public sealed partial class GitHubRepositoryRepository : IGitHubRepositoryReposi
         return _gitHubClient.UpdateRepositoryAsync(request.Owner, request.Name, request.Settings.ToEntity(), cancellationToken);
     }
 
-    [LoggerMessage(Level = LogLevel.Debug, Message = "Starting, Update repository settings.")]
+    [LoggerMessage(Level = LogLevel.Debug, Message = "Updating repository settings.")]
     partial void Updating();
 }

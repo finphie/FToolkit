@@ -48,9 +48,9 @@ public sealed partial class GitHubRepositoryBranchProtectionRepository : IGitHub
         return _gitHubClient.DeleteBranchProtectionAsync(request.Owner, request.Name, request.Branch, cancellationToken);
     }
 
-    [LoggerMessage(Level = LogLevel.Debug, Message = "Starting, Update branch protection settings.")]
+    [LoggerMessage(Level = LogLevel.Debug, Message = "Updating branch protection settings.")]
     partial void Updating();
 
-    [LoggerMessage(Level = LogLevel.Debug, Message = "Deleting, Delete branch protection settings.")]
+    [LoggerMessage(Level = LogLevel.Debug, Message = "Deleting branch protection settings.")]
     partial void Deleting();
 }
