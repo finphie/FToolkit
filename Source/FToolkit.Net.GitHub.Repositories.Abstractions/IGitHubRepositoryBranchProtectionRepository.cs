@@ -24,5 +24,5 @@ public interface IGitHubRepositoryBranchProtectionRepository : IRepository<Branc
     /// <param name="cancellationToken">キャンセル要求を行うためのトークン</param>
     /// <returns>このメソッドが完了すると、オブジェクトまたは値は返されません。</returns>
     /// <exception cref="ArgumentNullException"><paramref name="request"/>がnullです。</exception>
-    Task DeleteAsync(BranchRequest request, CancellationToken cancellationToken = default);
+    Task DeleteAsync(BranchIdentifierRequest request, CancellationToken cancellationToken = default);
 }

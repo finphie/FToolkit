@@ -31,7 +31,6 @@ public sealed partial class GitHubRepositoryBranchProtectionRepository : IGitHub
     public Task UpdateAsync(BranchRequest request, CancellationToken cancellationToken = default)
     {
         ArgumentNullException.ThrowIfNull(request);
-        ArgumentNullException.ThrowIfNull(request.Settings);
 
         Updating();
 
@@ -39,7 +38,7 @@ public sealed partial class GitHubRepositoryBranchProtectionRepository : IGitHub
     }
 
     /// <inheritdoc/>
-    public Task DeleteAsync(BranchRequest request, CancellationToken cancellationToken = default)
+    public Task DeleteAsync(BranchIdentifierRequest request, CancellationToken cancellationToken = default)
     {
         ArgumentNullException.ThrowIfNull(request);
 
