@@ -34,7 +34,7 @@ public sealed partial class GitHubRepositoryBranchProtectionRepository : IGitHub
 
         Updating();
 
-        return _gitHubClient.UpdateBranchProtectionAsync(request.Owner, request.Name, request.Branch, request.Settings.ToEntity(), cancellationToken);
+        return _gitHubClient.UpdateBranchProtectionAsync(request.Owner, request.Name, request.Branch, request.Entity.ToGitHubBranchProtection(), cancellationToken);
     }
 
     /// <inheritdoc/>

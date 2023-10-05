@@ -12,19 +12,19 @@ namespace FToolkit.Net.GitHub.Repositories.Entities;
 /// <param name="AllowDeletions">プッシュアクセス権を持つユーザーが、保護されたブランチを削除できるようにするかどうか。</param>
 /// <param name="RequiredConversationResolution">マージ前にコメントの解決を必須にするかどうか。</param>
 /// <param name="RequiredPullRequestReviews">レビューに関するブランチ保護の設定。</param>
-public sealed record BranchProtectionSettings(
+public sealed record BranchProtection(
     bool EnforceAdmins = false,
     Status RequiredLinearHistory = Status.Unchanged,
     Status AllowForcePushes = Status.Unchanged,
     Status AllowDeletions = Status.Unchanged,
     Status RequiredConversationResolution = Status.Unchanged,
-    BranchProtectionRequiredReviewsSettings? RequiredPullRequestReviews = null)
+    BranchProtectionRequiredReviews? RequiredPullRequestReviews = null)
 {
     /// <summary>
     /// GitHub APIリクエスト時に必要となるクラスのインスタンスを取得します。
     /// </summary>
     /// <returns>ブランチ保護に関する設定を表すクラスのインスタンスを返します。</returns>
-    public GitHubBranchProtection ToEntity()
+    public GitHubBranchProtection ToGitHubBranchProtection()
     {
         return new(
             EnforceAdmins: EnforceAdmins,
@@ -33,6 +33,6 @@ public sealed record BranchProtectionSettings(
             AllowDeletions: AllowDeletions.ToBoolean(),
             RequiredConversationResolution: RequiredConversationResolution.ToBoolean(),
             RequiredStatusChecks: null,
-            RequiredPullRequestReviews: RequiredPullRequestReviews?.ToEntity());
+            RequiredPullRequestReviews: RequiredPullRequestReviews?.ToGitHubBranchProtectionRequiredReviews());
     }
 }

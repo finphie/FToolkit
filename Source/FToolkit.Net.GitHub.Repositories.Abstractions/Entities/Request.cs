@@ -7,5 +7,5 @@ namespace FToolkit.Net.GitHub.Repositories.Entities;
 /// </summary>
 /// <param name="Owner">オーナー名</param>
 /// <param name="Name">リポジトリ名</param>
-/// <param name="Settings">設定</param>
-public sealed record Request(string Owner, string Name, RepositorySettings Settings) : IAggregateRoot;
+/// <param name="Entity">設定</param>
+public sealed record Request(string Owner, string Name, Repository Entity) : IAggregateRoot;

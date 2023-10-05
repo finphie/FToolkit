@@ -16,7 +16,7 @@ namespace FToolkit.Net.GitHub.Repositories.Entities;
 /// <param name="AllowAutoMerge">自動マージ機能を有効にするかどうか。</param>
 /// <param name="DeleteBranchOnMerge">プルリクエストマージ時に、ブランチを自動的に削除するかどうか。</param>
 /// <param name="AllowUpdateBranch">「Update branch」を有効にするかどうか。</param>
-public sealed record RepositorySettings(
+public sealed record Repository(
     Status HasIssues = Status.Unchanged,
     Status HasProjects = Status.Unchanged,
     Status HasWiki = Status.Unchanged,
@@ -32,7 +32,7 @@ public sealed record RepositorySettings(
     /// GitHub APIリクエスト時に必要となるクラスのインスタンスを取得します。
     /// </summary>
     /// <returns>リポジトリに関する設定を表すクラスのインスタンスを返します。</returns>
-    public GitHubRepository ToEntity()
+    public GitHubRepository ToGitHubRepository()
     {
         var entity = new GitHubRepository(
             HasIssues: HasIssues.ToBoolean(),
