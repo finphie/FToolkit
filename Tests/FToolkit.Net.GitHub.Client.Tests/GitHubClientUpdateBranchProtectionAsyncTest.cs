@@ -61,8 +61,7 @@ public sealed class GitHubClientUpdateBranchProtectionAsyncTest
                 DismissStaleReviews = true,
                 RequireCodeOwnerReviews = true,
                 RequiredApprovingReviewCount = 1
-            },
-            Restrictions = null
+            }
         });
 
         await client.UpdateBranchProtectionAsync(Owner, Name, Branch, new());

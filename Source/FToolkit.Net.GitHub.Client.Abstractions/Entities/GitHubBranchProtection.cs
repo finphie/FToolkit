@@ -13,7 +13,6 @@ namespace FToolkit.Net.GitHub.Client.Entities;
 /// <param name="RequiredConversationResolution">マージ前にコメントの解決を必須にするかどうか。</param>
 /// <param name="RequiredStatusChecks">ステータスチェックに関するブランチ保護の設定。</param>
 /// <param name="RequiredPullRequestReviews">レビューに関するブランチ保護の設定。</param>
-/// <param name="Restrictions">保護されたブランチにプッシュできる人のリスト。このプロパティは使用していませんが、GitHub APIリクエストの際に必要です。</param>
 public sealed record GitHubBranchProtection(
     bool EnforceAdmins = false,
     bool? RequiredLinearHistory = null,
@@ -21,5 +20,15 @@ public sealed record GitHubBranchProtection(
     bool? AllowDeletions = null,
     bool? RequiredConversationResolution = null,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.Never)] GitHubBranchProtectionRequiredStatusChecks? RequiredStatusChecks = null,
-    [property: JsonIgnore(Condition = JsonIgnoreCondition.Never)] GitHubBranchProtectionRequiredReviews? RequiredPullRequestReviews = null,
-    [property: JsonIgnore(Condition = JsonIgnoreCondition.Never), EditorBrowsable(EditorBrowsableState.Never)] object? Restrictions = null);
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.Never)] GitHubBranchProtectionRequiredReviews? RequiredPullRequestReviews = null)
+{
+    /// <summary>
+    /// 保護されたブランチにプッシュできる人のリスト。
+    /// </summary>
+    /// <remarks>
+    /// このプロパティは使用していませんが、GitHub APIリクエストの際に必要です。
+    /// </remarks>
+    [JsonInclude]
+    [JsonIgnore(Condition = JsonIgnoreCondition.Never)]
+    internal object? Restrictions { get; } = null;
+}
