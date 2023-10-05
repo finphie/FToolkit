@@ -30,5 +30,5 @@ public sealed record GitHubBranchProtection(
     /// </remarks>
     [JsonInclude]
     [JsonIgnore(Condition = JsonIgnoreCondition.Never)]
-    internal object? Restrictions { get; } = null;
+    internal object? Restrictions { get; }
 }
