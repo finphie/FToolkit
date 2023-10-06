@@ -1,7 +1,7 @@
 ﻿using FToolkit.Net.GitHub.Client.Entities;
-using FToolkit.Net.GitHub.Repositories.Extensions;
+using FToolkit.Net.GitHub.Services.Extensions;
 
-namespace FToolkit.Net.GitHub.Repositories.Entities;
+namespace FToolkit.Net.GitHub.Services.Settings;
 
 /// <summary>
 /// GitHubリポジトリに関する設定を表すクラスです。
@@ -16,7 +16,7 @@ namespace FToolkit.Net.GitHub.Repositories.Entities;
 /// <param name="AllowAutoMerge">自動マージ機能を有効にするかどうか。</param>
 /// <param name="DeleteBranchOnMerge">プルリクエストマージ時に、ブランチを自動的に削除するかどうか。</param>
 /// <param name="AllowUpdateBranch">「Update branch」を有効にするかどうか。</param>
-public sealed record Repository(
+public sealed record RepositorySettings(
     Status HasIssues = Status.Unchanged,
     Status HasProjects = Status.Unchanged,
     Status HasWiki = Status.Unchanged,

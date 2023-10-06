@@ -1,7 +1,7 @@
 ﻿using FToolkit.Net.GitHub.Client.Entities;
-using FToolkit.Net.GitHub.Repositories.Extensions;
+using FToolkit.Net.GitHub.Services.Extensions;
 
-namespace FToolkit.Net.GitHub.Repositories.Entities;
+namespace FToolkit.Net.GitHub.Services.Settings;
 
 /// <summary>
 /// GitHubブランチ保護に関する設定を表すクラスです。
@@ -12,7 +12,7 @@ namespace FToolkit.Net.GitHub.Repositories.Entities;
 /// <param name="AllowDeletions">プッシュアクセス権を持つユーザーが、保護されたブランチを削除できるようにするかどうか。</param>
 /// <param name="RequiredConversationResolution">マージ前にコメントの解決を必須にするかどうか。</param>
 /// <param name="RequiredPullRequestReviews">レビューに関するブランチ保護の設定。</param>
-public sealed record BranchProtection(
+public sealed record BranchProtectionSettings(
     bool EnforceAdmins = false,
     Status RequiredLinearHistory = Status.Unchanged,
     Status AllowForcePushes = Status.Unchanged,

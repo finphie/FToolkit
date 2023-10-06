@@ -1,6 +1,6 @@
 ﻿using FToolkit.Net.GitHub.Client.Entities;
 
-namespace FToolkit.Net.GitHub.Repositories.Entities;
+namespace FToolkit.Net.GitHub.Services.Settings;
 
 /// <summary>
 /// レビューに関するGitHubブランチ保護の設定を表すクラスです。

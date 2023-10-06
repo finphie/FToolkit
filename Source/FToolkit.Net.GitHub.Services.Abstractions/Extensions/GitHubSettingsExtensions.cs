@@ -1,6 +1,6 @@
-﻿using FToolkit.Net.GitHub.Repositories.Entities;
+﻿using FToolkit.Net.GitHub.Services.Settings;
 
-namespace FToolkit.Net.GitHub.Repositories.Extensions;
+namespace FToolkit.Net.GitHub.Services.Extensions;
 
 /// <summary>
 /// GitHub設定関連の拡張メソッドです。

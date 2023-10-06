@@ -1,4 +1,6 @@
-﻿namespace FToolkit.Net.GitHub.Repositories.Entities;
+﻿using FToolkit.Net.GitHub.Client.Entities;
+
+namespace FToolkit.Net.GitHub.Repositories.Entities;
 
 /// <summary>
 /// ブランチ情報を表すクラスです。
@@ -7,4 +9,4 @@
 /// <param name="Name">リポジトリ名</param>
 /// <param name="Branch">ブランチ名</param>
 /// <param name="Entity">設定</param>
-public sealed record BranchRequest(string Owner, string Name, string Branch, BranchProtection Entity) : BranchIdentifierRequest(Owner, Name, Branch);
+public sealed record BranchRequest(string Owner, string Name, string Branch, GitHubBranchProtection Entity) : BranchIdentifierRequest(Owner, Name, Branch);

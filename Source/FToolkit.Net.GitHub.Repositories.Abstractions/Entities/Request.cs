@@ -1,4 +1,5 @@
-﻿using FToolkit.Repositories;
+﻿using FToolkit.Net.GitHub.Client.Entities;
+using FToolkit.Repositories;
 
 namespace FToolkit.Net.GitHub.Repositories.Entities;
 
@@ -8,4 +9,4 @@ namespace FToolkit.Net.GitHub.Repositories.Entities;
 /// <param name="Owner">オーナー名</param>
 /// <param name="Name">リポジトリ名</param>
 /// <param name="Entity">設定</param>
-public sealed record Request(string Owner, string Name, Repository Entity) : IAggregateRoot;
+public sealed record Request(string Owner, string Name, GitHubRepository Entity) : IAggregateRoot;

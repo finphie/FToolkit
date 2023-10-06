@@ -1,4 +1,4 @@
-﻿namespace FToolkit.Net.GitHub.Repositories.Entities;
+﻿namespace FToolkit.Net.GitHub.Services.Settings;
 
 /// <summary>
 /// マージにおけるコミットタイトル・メッセージの種類。
