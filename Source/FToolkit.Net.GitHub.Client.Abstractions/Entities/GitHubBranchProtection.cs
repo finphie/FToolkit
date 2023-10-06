@@ -20,7 +20,7 @@ public sealed record GitHubBranchProtection(
     bool? AllowDeletions = null,
     bool? RequiredConversationResolution = null,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.Never)] GitHubBranchProtectionRequiredStatusChecks? RequiredStatusChecks = null,
-    [property: JsonIgnore(Condition = JsonIgnoreCondition.Never)] GitHubBranchProtectionRequiredReviews? RequiredPullRequestReviews = null)
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.Never)] GitHubBranchProtectionRequiredPullRequestReviews? RequiredPullRequestReviews = null)
 {
     /// <summary>
     /// 保護されたブランチにプッシュできる人のリスト。

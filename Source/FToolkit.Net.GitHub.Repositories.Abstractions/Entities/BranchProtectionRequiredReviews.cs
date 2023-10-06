@@ -17,7 +17,7 @@ public sealed record BranchProtectionRequiredReviews(
     /// GitHub APIリクエスト時に必要となるクラスのインスタンスを取得します。
     /// </summary>
     /// <returns>ブランチ保護に関する設定を表すクラスのインスタンスを返します。</returns>
-    internal GitHubBranchProtectionRequiredReviews ToGitHubBranchProtectionRequiredReviews()
+    internal GitHubBranchProtectionRequiredPullRequestReviews ToGitHubBranchProtectionRequiredPullRequestReviews()
     {
         return new(
             DismissStaleReviews: DismissStaleReviews,

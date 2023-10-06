@@ -33,6 +33,6 @@ public sealed record BranchProtection(
             AllowDeletions: AllowDeletions.ToBoolean(),
             RequiredConversationResolution: RequiredConversationResolution.ToBoolean(),
             RequiredStatusChecks: null,
-            RequiredPullRequestReviews: RequiredPullRequestReviews?.ToGitHubBranchProtectionRequiredReviews());
+            RequiredPullRequestReviews: RequiredPullRequestReviews?.ToGitHubBranchProtectionRequiredPullRequestReviews());
     }
 }
