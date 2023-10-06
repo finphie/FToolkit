@@ -22,6 +22,8 @@ FToolkit.Net.GitHub.Client|||GitHub APIクライアントです。
 FToolkit.Net.GitHub.Client.Abstractions|||FToolkit.Net.GitHub.Clientの抽象化です。
 FToolkit.Net.GitHub.Repositories|||GitHub APIを利用して各種処理を行います。
 FToolkit.Net.GitHub.Repositories.Abstractions|||FToolkit.Net.GitHub.Repositoriesの抽象化です。
+FToolkit.Net.GitHub.Services|||GitHub設定の更新処理を行います。
+FToolkit.Net.GitHub.Services.Abstractions|||FToolkit.Net.GitHub.Servicesの抽象化です。
 FToolkit.Repositories.Abstractions|||FToolkit Repositoryの抽象化です。
 
 ## 作者
