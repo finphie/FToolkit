@@ -3,7 +3,7 @@
 /// <summary>
 /// GitHubリポジトリ関連のヘルパークラスです。
 /// </summary>
-static class GitHubRepositoryHelper
+public static class GitHubRepositoryHelper
 {
     /// <summary>
     /// オーナー名とリポジトリ名を取得します。

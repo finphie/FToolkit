@@ -3,7 +3,7 @@
 /// <summary>
 /// GitHub Actions関連のコマンドです。
 /// </summary>
-static class GitHubActionsCommand
+public static class GitHubActionsCommand
 {
     /// <summary>
     /// 指定されたタイトルのグループを開始します。
