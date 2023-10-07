@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <IsPackable>true</IsPackable>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <Description>FToolkit.Net.GitHub.Servicesの抽象化です。</Description>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageTags>Toolkit;GitHub</PackageTags>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\FToolkit.Net.GitHub.Repositories.Abstractions\FToolkit.Net.GitHub.Repositories.Abstractions.csproj" />
+  </ItemGroup>
+
+</Project>
