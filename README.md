@@ -57,7 +57,7 @@ MIT
 
 ### アナライザー
 
-- Microsoft.CodeAnalysis.NetAnalyzers (SDK組み込み)
+- Microsoft.CodeAnalysis.NetAnalyzers
 - [Microsoft.VisualStudio.Threading.Analyzers](https://github.com/Microsoft/vs-threading)
 - [StyleCop.Analyzers](https://github.com/DotNetAnalyzers/StyleCopAnalyzers)
 
