@@ -1,4 +1,6 @@
-﻿namespace FToolkit.Helpers.GitHub;
+﻿using System.Diagnostics.CodeAnalysis;
+
+namespace FToolkit.Helpers.GitHub;
 
 /// <summary>
 /// GitHub Actions関連のコマンドです。
@@ -20,5 +22,6 @@ public static class GitHubActionsCommand
     /// <summary>
     /// グループを終了します。
     /// </summary>
+    [SuppressMessage("Globalization", "CA1303:ローカライズされるパラメーターとしてリテラルを渡さない", Justification = "ローカライズ対象の文字列ではないため。")]
     public static void GroupEnd() => Console.WriteLine("::endgroup::");
 }
