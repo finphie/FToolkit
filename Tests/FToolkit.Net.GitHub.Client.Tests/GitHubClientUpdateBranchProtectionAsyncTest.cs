@@ -27,7 +27,7 @@ public sealed class GitHubClientUpdateBranchProtectionAsyncTest
     [Fact]
     public async Task 各種設定を渡す_正常終了()
     {
-        var handler = new MockHttpMessageHandler();
+        using var handler = new MockHttpMessageHandler();
 
         handler.Expect(HttpMethod.Put, Url)
             .With(static message => Matcher(message, Json1))

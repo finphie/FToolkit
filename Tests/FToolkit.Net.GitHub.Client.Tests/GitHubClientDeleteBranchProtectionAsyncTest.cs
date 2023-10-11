@@ -18,7 +18,7 @@ public sealed class GitHubClientDeleteBranchProtectionAsyncTest
     [Fact]
     public async Task 存在するブランチ名_正常終了()
     {
-        var handler = new MockHttpMessageHandler();
+        using var handler = new MockHttpMessageHandler();
 
         handler.Expect(HttpMethod.Delete, Url)
             .Respond(HttpStatusCode.OK);
@@ -34,7 +34,7 @@ public sealed class GitHubClientDeleteBranchProtectionAsyncTest
     [Fact]
     public async Task 存在しないブランチ保護_正常終了()
     {
-        var handler = new MockHttpMessageHandler();
+        using var handler = new MockHttpMessageHandler();
 
         handler.Expect(HttpMethod.Delete, Url)
             .Respond(HttpStatusCode.NotFound);
