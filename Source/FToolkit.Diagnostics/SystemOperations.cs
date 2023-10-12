@@ -42,6 +42,13 @@ public sealed partial class SystemOperations : ISystemOperations
     }
 
     /// <inheritdoc/>
+    public void OpenInWebBrowser(Uri url)
+    {
+        ArgumentNullException.ThrowIfNull(url);
+        OpenInWebBrowser(url.AbsolutePath);
+    }
+
+    /// <inheritdoc/>
     public async ValueTask<int> WaitCommandAsync(
         IBufferWriter<char> bufferWriter,
         string command,

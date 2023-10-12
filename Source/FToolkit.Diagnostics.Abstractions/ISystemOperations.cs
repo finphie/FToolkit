@@ -16,6 +16,13 @@ public interface ISystemOperations
     void OpenInWebBrowser(string url);
 
     /// <summary>
+    /// 指定されたURLを開きます。
+    /// </summary>
+    /// <param name="url">URL</param>
+    /// <exception cref="ArgumentNullException"><paramref name="url"/>がnullです。</exception>
+    void OpenInWebBrowser(Uri url);
+
+    /// <summary>
     /// 指定されたコマンドを実行します。
     /// </summary>
     /// <param name="bufferWriter"><see cref="char"/>データを書き込むことができる出力シンク</param>
