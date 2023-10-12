@@ -37,7 +37,7 @@ public sealed partial class GitHubClient : IGitHubClient
 
         UpdatingRepositorySettings(entity);
 
-        var response = await _client.PatchAsJsonAsync($"/repos/{owner}/{name}", entity, JsonContext.Default.GitHubRepository, cancellationToken)
+        var response = await _client.PatchAsJsonAsync(new Uri($"/repos/{owner}/{name}", UriKind.Relative), entity, JsonContext.Default.GitHubRepository, cancellationToken)
             .ConfigureAwait(false);
         response.EnsureSuccessStatusCode();
     }
@@ -52,7 +52,7 @@ public sealed partial class GitHubClient : IGitHubClient
 
         UpdatingBranchProtectionSettings(entity);
 
-        var response = await _client.PutAsJsonAsync($"/repos/{owner}/{name}/branches/{branch}/protection", entity, JsonContext.Default.GitHubBranchProtection, cancellationToken)
+        var response = await _client.PutAsJsonAsync(new Uri($"/repos/{owner}/{name}/branches/{branch}/protection", UriKind.Relative), entity, JsonContext.Default.GitHubBranchProtection, cancellationToken)
             .ConfigureAwait(false);
         response.EnsureSuccessStatusCode();
     }
@@ -66,7 +66,7 @@ public sealed partial class GitHubClient : IGitHubClient
 
         DeletingBranchProtectionSettings();
 
-        var response = await _client.DeleteAsync($"/repos/{owner}/{name}/branches/{branch}/protection", cancellationToken)
+        var response = await _client.DeleteAsync(new Uri($"/repos/{owner}/{name}/branches/{branch}/protection", UriKind.Relative), cancellationToken)
             .ConfigureAwait(false);
 
         if (response.StatusCode == HttpStatusCode.NoContent)
