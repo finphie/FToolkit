@@ -25,7 +25,7 @@ public sealed record GitHubBranchProtection(
     /// 保護されたブランチにプッシュできる人のリスト。
     /// </summary>
     /// <remarks>
-    /// このプロパティは使用していませんが、GitHub APIリクエストの際に必要です。
+    /// <para>このプロパティは使用していませんが、GitHub APIリクエストの際に必要です。</para>
     /// </remarks>
     [JsonInclude]
     [JsonIgnore(Condition = JsonIgnoreCondition.Never)]
