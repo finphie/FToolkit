@@ -1,5 +1,6 @@
 ﻿using System.Buffers;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.Text;
 using Cysharp.Diagnostics;
 using FToolkit.Diagnostics.Extensions;
@@ -28,6 +29,7 @@ public sealed partial class SystemOperations : ISystemOperations
     }
 
     /// <inheritdoc/>
+    [SuppressMessage("IDisposableAnalyzers.Correctness", "IDISP004:Don't ignore created IDisposable", Justification = "URL")]
     public void OpenInWebBrowser(string url)
     {
         ArgumentNullException.ThrowIfNull(url);
