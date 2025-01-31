@@ -36,7 +36,7 @@ public sealed partial class SystemOperations : ISystemOperations
 
         OpeningLink(url);
 
-        Process.Start(new ProcessStartInfo()
+        Process.Start(new ProcessStartInfo
         {
             FileName = url,
             UseShellExecute = true
