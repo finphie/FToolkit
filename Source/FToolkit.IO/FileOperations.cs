@@ -63,17 +63,19 @@ public sealed partial class FileOperations : IFileOperations
 
         Deleting(filePath);
 
-        if (File.Exists(filePath))
+        if (!File.Exists(filePath))
         {
-            try
-            {
-                File.Delete(filePath);
-            }
-            catch (Exception ex)
-            {
-                CouldNotDeleteFile(filePath, ex);
-                throw;
-            }
+            return;
+        }
+
+        try
+        {
+            File.Delete(filePath);
+        }
+        catch (Exception ex)
+        {
+            CouldNotDeleteFile(filePath, ex);
+            throw;
         }
     }
 
