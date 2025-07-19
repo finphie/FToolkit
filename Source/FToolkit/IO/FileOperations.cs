@@ -25,7 +25,7 @@ public sealed partial class FileOperations : IFileOperations
     {
         ArgumentNullException.ThrowIfNull(filePath);
 
-        Creating(filePath);
+        LogCreating(filePath);
 
         try
         {
@@ -33,7 +33,7 @@ public sealed partial class FileOperations : IFileOperations
         }
         catch (Exception ex)
         {
-            CouldNotCreateFile(filePath, ex);
+            LogCouldNotCreateFile(filePath, ex);
             throw;
         }
     }
@@ -43,7 +43,7 @@ public sealed partial class FileOperations : IFileOperations
     {
         ArgumentNullException.ThrowIfNull(filePath);
 
-        Saving(filePath);
+        LogSaving(filePath);
 
         try
         {
@@ -51,7 +51,7 @@ public sealed partial class FileOperations : IFileOperations
         }
         catch (Exception ex)
         {
-            CouldNotSaveFile(filePath, ex);
+            LogCouldNotSaveFile(filePath, ex);
             throw;
         }
     }
@@ -61,7 +61,7 @@ public sealed partial class FileOperations : IFileOperations
     {
         ArgumentNullException.ThrowIfNull(filePath);
 
-        Deleting(filePath);
+        LogDeleting(filePath);
 
         if (!File.Exists(filePath))
         {
@@ -74,7 +74,7 @@ public sealed partial class FileOperations : IFileOperations
         }
         catch (Exception ex)
         {
-            CouldNotDeleteFile(filePath, ex);
+            LogCouldNotDeleteFile(filePath, ex);
             throw;
         }
     }
@@ -86,20 +86,20 @@ public sealed partial class FileOperations : IFileOperations
     }
 
     [LoggerMessage(Level = LogLevel.Information, Message = "Creating file: {filePath}")]
-    partial void Creating(string filePath);
+    partial void LogCreating(string filePath);
 
     [LoggerMessage(Level = LogLevel.Information, Message = "Saving file: {filePath}")]
-    partial void Saving(string filePath);
+    partial void LogSaving(string filePath);
 
     [LoggerMessage(Level = LogLevel.Information, Message = "Deleting file: {filePath}")]
-    partial void Deleting(string filePath);
+    partial void LogDeleting(string filePath);
 
     [LoggerMessage(Level = LogLevel.Warning, Message = "Could not create file: {filePath}")]
-    partial void CouldNotCreateFile(string filePath, Exception ex);
+    partial void LogCouldNotCreateFile(string filePath, Exception ex);
 
     [LoggerMessage(Level = LogLevel.Warning, Message = "Could not save file: {filePath}")]
-    partial void CouldNotSaveFile(string filePath, Exception ex);
+    partial void LogCouldNotSaveFile(string filePath, Exception ex);
 
     [LoggerMessage(Level = LogLevel.Warning, Message = "Could not delete file: {filePath}")]
-    partial void CouldNotDeleteFile(string filePath, Exception ex);
+    partial void LogCouldNotDeleteFile(string filePath, Exception ex);
 }
