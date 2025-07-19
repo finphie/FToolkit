@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFrameworks>net10.0;net9.0</TargetFrameworks>
@@ -6,9 +6,9 @@
   </PropertyGroup>
 
   <PropertyGroup>
-    <Description>FToolkit Repositoryの抽象化です。</Description>
+    <Description>FToolkitの抽象化です。</Description>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <PackageTags>Toolkit;Repository</PackageTags>
+    <PackageTags>Toolkit</PackageTags>
   </PropertyGroup>
 
 </Project>
