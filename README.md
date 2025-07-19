@@ -38,7 +38,7 @@ MIT
 ### ライブラリ
 
 - Microsoft.Extensions.Logging.Abstractions
-- Microsoft.Extensions.Telemetry.Abstractions
+- UnitGenerator
 
 ### アナライザー
 

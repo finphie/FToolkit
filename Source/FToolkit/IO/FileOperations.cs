@@ -39,6 +39,10 @@ public sealed partial class FileOperations : IFileOperations
     }
 
     /// <inheritdoc/>
+    public void Create(FilePath filePath, ReadOnlySpan<byte> bytes)
+        => Create(filePath.AsPrimitive(), bytes);
+
+    /// <inheritdoc/>
     public void Save(string filePath, ReadOnlySpan<byte> bytes)
     {
         ArgumentNullException.ThrowIfNull(filePath);
@@ -55,6 +59,10 @@ public sealed partial class FileOperations : IFileOperations
             throw;
         }
     }
+
+    /// <inheritdoc/>
+    public void Save(FilePath filePath, ReadOnlySpan<byte> bytes)
+        => Save(filePath.AsPrimitive(), bytes);
 
     /// <inheritdoc/>
     public void Delete(string filePath)
@@ -78,6 +86,10 @@ public sealed partial class FileOperations : IFileOperations
             throw;
         }
     }
+
+    /// <inheritdoc/>
+    public void Delete(FilePath filePath)
+        => Delete(filePath.AsPrimitive());
 
     static void Write(string filePath, ReadOnlySpan<byte> bytes, FileMode mode)
     {

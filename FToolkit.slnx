@@ -1,5 +1,6 @@
 <Solution>
   <Folder Name="/Source/">
+    <File Path="Source/Directory.Packages.props" />
     <Project Path="Source/FToolkit.Abstractions/FToolkit.Abstractions.csproj" />
     <Project Path="Source/FToolkit.Repositories.Abstractions/FToolkit.Repositories.Abstractions.csproj" />
     <Project Path="Source/FToolkit/FToolkit.csproj" />
