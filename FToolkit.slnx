@@ -3,11 +3,11 @@
     <File Path="Source/Directory.Packages.props" />
     <Project Path="Source/FToolkit.Abstractions/FToolkit.Abstractions.csproj" />
     <Project Path="Source/FToolkit.Repositories.Abstractions/FToolkit.Repositories.Abstractions.csproj" />
-    <Project Path="Source/FToolkit.Utilities/FToolkit.Utilities.csproj" Id="83cc3421-442c-469b-936a-ea30216f0cc5" />
+    <Project Path="Source/FToolkit.Utilities/FToolkit.Utilities.csproj" />
     <Project Path="Source/FToolkit/FToolkit.csproj" />
   </Folder>
   <Folder Name="/Tests/">
-    <Project Path="Tests/FToolkit.Tests/FToolkit.Tests.csproj" Id="aa6fe2cd-62c5-4325-8513-f4538a5cdfd2" />
-    <Project Path="Tests/FToolkit.Utilities.Tests/FToolkit.Utilities.Tests.csproj" Id="16b0aa4f-fe7c-40dd-af72-85a98f63e7bf" />
+    <Project Path="Tests/FToolkit.Tests/FToolkit.Tests.csproj" />
+    <Project Path="Tests/FToolkit.Utilities.Tests/FToolkit.Utilities.Tests.csproj" />
   </Folder>
 </Solution>
