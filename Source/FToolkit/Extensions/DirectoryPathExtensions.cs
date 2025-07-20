@@ -17,9 +17,5 @@ public static class DirectoryPathExtensions
         /// <returns>現在のパスから抽出したディレクトリ名を表す<see cref="DirectoryName"/>オブジェクト。</returns>
         public DirectoryName GetDirectoryName()
             => new(Path.GetDirectoryName(directoryPath.AsPrimitive()));
-
-        /// <inheritdoc cref="Directory.Exists(string?)"/>
-        public bool Exists()
-            => Directory.Exists(directoryPath.AsPrimitive());
     }
 }
