@@ -89,12 +89,12 @@ public sealed partial class FileOperations : IFileOperations
     /// <inheritdoc/>
     public void Delete(FilePath filePath)
     {
-        LogDeleting(filePath);
-
         if (!Exists(filePath))
         {
             return;
         }
+
+        LogDeleting(filePath);
 
         try
         {
