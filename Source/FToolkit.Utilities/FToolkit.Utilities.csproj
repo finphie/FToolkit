@@ -3,21 +3,18 @@
   <PropertyGroup>
     <TargetFrameworks>net10.0;net9.0</TargetFrameworks>
     <IsPackable>true</IsPackable>
+    <RootNamespace>$(SolutionName)</RootNamespace>
   </PropertyGroup>
 
   <PropertyGroup>
-    <Description>共通ライブラリです。</Description>
+    <Description>ユーティリティライブラリです。</Description>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageTags>Toolkit</PackageTags>
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="CommunityToolkit.Diagnostics" />
     <PackageReference Include="CommunityToolkit.HighPerformance" />
-    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\FToolkit.Abstractions\FToolkit.Abstractions.csproj" />
   </ItemGroup>
 
 </Project>

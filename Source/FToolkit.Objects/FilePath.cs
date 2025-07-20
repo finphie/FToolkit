@@ -1,6 +1,6 @@
 ﻿using UnitGenerator;
 
-namespace FToolkit.IO;
+namespace FToolkit.Objects;
 
 /// <summary>
 /// ファイルパスを表す構造体です。

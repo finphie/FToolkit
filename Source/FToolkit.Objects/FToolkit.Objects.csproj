@@ -6,18 +6,16 @@
   </PropertyGroup>
 
   <PropertyGroup>
-    <Description>共通ライブラリです。</Description>
+    <Description>FToolkitのオブジェクトです。</Description>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageTags>Toolkit</PackageTags>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="CommunityToolkit.HighPerformance" />
-    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\FToolkit.Abstractions\FToolkit.Abstractions.csproj" />
+    <PackageReference Include="UnitGenerator">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
   </ItemGroup>
 
 </Project>
