@@ -1,8 +1,8 @@
-﻿using FToolkit.Extensions;
+﻿using FToolkit.IO.Extensions;
 using Shouldly;
 using Xunit;
 
-namespace FToolkit.Tests;
+namespace FToolkit.Tests.IO;
 
 public sealed class PathGetTempFilePathTest
 {

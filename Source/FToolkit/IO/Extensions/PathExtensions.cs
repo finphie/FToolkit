@@ -4,7 +4,7 @@
 using CommunityToolkit.Diagnostics;
 using CommunityToolkit.HighPerformance.Buffers;
 
-namespace FToolkit.Extensions;
+namespace FToolkit.IO.Extensions;
 
 /// <summary>
 /// <see cref="Path"/>クラス関連の拡張メソッドです。
