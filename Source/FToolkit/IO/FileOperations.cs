@@ -1,6 +1,5 @@
 ﻿using System.Text;
 using CommunityToolkit.HighPerformance.Buffers;
-using FToolkit.Extensions;
 using FToolkit.Objects;
 using Microsoft.Extensions.Logging;
 
