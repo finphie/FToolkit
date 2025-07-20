@@ -4,10 +4,9 @@
     <Project Path="Source/FToolkit.Abstractions/FToolkit.Abstractions.csproj" />
     <Project Path="Source/FToolkit.Objects/FToolkit.Objects.csproj" />
     <Project Path="Source/FToolkit.Repositories.Abstractions/FToolkit.Repositories.Abstractions.csproj" />
-    <Project Path="Source/FToolkit.Utilities/FToolkit.Utilities.csproj" />
     <Project Path="Source/FToolkit/FToolkit.csproj" />
   </Folder>
   <Folder Name="/Tests/">
-    <Project Path="Tests/FToolkit.Utilities.Tests/FToolkit.Utilities.Tests.csproj" />
+    <Project Path="Tests/FToolkit.Tests/FToolkit.Tests.csproj" />
   </Folder>
 </Solution>

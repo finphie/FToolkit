@@ -1,4 +1,4 @@
-﻿using FToolkit.IO.Extensions;
+﻿using FToolkit.IO;
 using Shouldly;
 using Xunit;
 
@@ -10,7 +10,7 @@ public sealed class PathGetTempFilePathTest
     public void 拡張子指定なし_ファイルパスを返す()
     {
         const string Extension = ".tmp";
-        var filePath = Path.GetTempFilePath();
+        var filePath = Path.GetTempFilePath().AsPrimitive();
 
         filePath.ShouldEndWith(Extension);
         Path.IsPathFullyQualified(filePath).ShouldBeTrue();
@@ -21,7 +21,7 @@ public sealed class PathGetTempFilePathTest
     [InlineData(".abc")]
     public void 有効な拡張子_ファイルパスを返す(string extension)
     {
-        var filePath = Path.GetTempFilePath(extension);
+        var filePath = Path.GetTempFilePath(extension).AsPrimitive();
 
         filePath.ShouldEndWith(extension);
         Path.IsPathFullyQualified(filePath).ShouldBeTrue();
@@ -36,7 +36,7 @@ public sealed class PathGetTempFilePathTest
     [InlineData(@"a\b\c", ".a")]
     public void 有効な親ディレクトリ名と拡張子_ファイルパスを返す(string parentDirectoryPath, string extension)
     {
-        var filePath = Path.GetTempFilePath(parentDirectoryPath, extension);
+        var filePath = Path.GetTempFilePath(parentDirectoryPath, extension).AsPrimitive();
 
         filePath.ShouldEndWith(extension);
         Path.IsPathFullyQualified(filePath).ShouldBeTrue();

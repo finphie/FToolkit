@@ -24,9 +24,15 @@ public sealed partial class FileOperations : IFileOperations
     }
 
     /// <inheritdoc/>
-    public void Create(string filePath, ReadOnlySpan<byte> bytes)
+    public bool Exists(FilePath filePath)
     {
-        ArgumentNullException.ThrowIfNull(filePath);
+        LogCheckingExists(filePath);
+        return File.Exists(filePath.AsPrimitive());
+    }
+
+    /// <inheritdoc/>
+    public void Create(FilePath filePath, ReadOnlySpan<byte> bytes)
+    {
         LogCreating(filePath);
 
         try
@@ -41,7 +47,7 @@ public sealed partial class FileOperations : IFileOperations
     }
 
     /// <inheritdoc/>
-    public void Create(string filePath, ReadOnlySpan<char> chars)
+    public void Create(FilePath filePath, ReadOnlySpan<char> chars)
     {
         var byteCount = Encoding.UTF8.GetMaxByteCount(chars.Length);
         using var buffer = SpanOwner<byte>.Allocate(byteCount);
@@ -53,17 +59,8 @@ public sealed partial class FileOperations : IFileOperations
     }
 
     /// <inheritdoc/>
-    public void Create(FilePath filePath, ReadOnlySpan<byte> bytes)
-        => Create(filePath.AsPrimitive(), bytes);
-
-    /// <inheritdoc/>
-    public void Create(FilePath filePath, ReadOnlySpan<char> chars)
-        => Create(filePath.AsPrimitive(), chars);
-
-    /// <inheritdoc/>
-    public void Save(string filePath, ReadOnlySpan<byte> bytes)
+    public void Save(FilePath filePath, ReadOnlySpan<byte> bytes)
     {
-        ArgumentNullException.ThrowIfNull(filePath);
         LogSaving(filePath);
 
         try
@@ -78,7 +75,7 @@ public sealed partial class FileOperations : IFileOperations
     }
 
     /// <inheritdoc/>
-    public void Save(string filePath, ReadOnlySpan<char> chars)
+    public void Save(FilePath filePath, ReadOnlySpan<char> chars)
     {
         var byteCount = Encoding.UTF8.GetMaxByteCount(chars.Length);
         using var buffer = SpanOwner<byte>.Allocate(byteCount);
@@ -90,27 +87,18 @@ public sealed partial class FileOperations : IFileOperations
     }
 
     /// <inheritdoc/>
-    public void Save(FilePath filePath, ReadOnlySpan<byte> bytes)
-        => Save(filePath.AsPrimitive(), bytes);
-
-    /// <inheritdoc/>
-    public void Save(FilePath filePath, ReadOnlySpan<char> chars)
-        => Save(filePath.AsPrimitive(), chars);
-
-    /// <inheritdoc/>
-    public void Delete(string filePath)
+    public void Delete(FilePath filePath)
     {
-        ArgumentNullException.ThrowIfNull(filePath);
-        LogDeleting(filePath);
-
-        if (!File.Exists(filePath))
+        if (!Exists(filePath))
         {
             return;
         }
 
+        LogDeleting(filePath);
+
         try
         {
-            File.Delete(filePath);
+            File.Delete(filePath.AsPrimitive());
         }
         catch (Exception ex)
         {
@@ -119,31 +107,30 @@ public sealed partial class FileOperations : IFileOperations
         }
     }
 
-    /// <inheritdoc/>
-    public void Delete(FilePath filePath)
-        => Delete(filePath.AsPrimitive());
-
-    static void Write(string filePath, ReadOnlySpan<byte> bytes, FileMode mode)
+    static void Write(FilePath filePath, ReadOnlySpan<byte> bytes, FileMode mode)
     {
-        using var handle = File.OpenHandle(filePath, mode, FileAccess.Write);
+        using var handle = File.OpenHandle(filePath.AsPrimitive(), mode, FileAccess.Write);
         RandomAccess.Write(handle, bytes, 0);
     }
 
+    [LoggerMessage(Level = LogLevel.Information, Message = "Checking if file exists: {filePath}")]
+    partial void LogCheckingExists(FilePath filePath);
+
     [LoggerMessage(Level = LogLevel.Information, Message = "Creating file: {filePath}")]
-    partial void LogCreating(string filePath);
+    partial void LogCreating(FilePath filePath);
 
     [LoggerMessage(Level = LogLevel.Information, Message = "Saving file: {filePath}")]
-    partial void LogSaving(string filePath);
+    partial void LogSaving(FilePath filePath);
 
     [LoggerMessage(Level = LogLevel.Information, Message = "Deleting file: {filePath}")]
-    partial void LogDeleting(string filePath);
+    partial void LogDeleting(FilePath filePath);
 
     [LoggerMessage(Level = LogLevel.Warning, Message = "Could not create file: {filePath}")]
-    partial void LogCouldNotCreateFile(string filePath, Exception ex);
+    partial void LogCouldNotCreateFile(FilePath filePath, Exception ex);
 
     [LoggerMessage(Level = LogLevel.Warning, Message = "Could not save file: {filePath}")]
-    partial void LogCouldNotSaveFile(string filePath, Exception ex);
+    partial void LogCouldNotSaveFile(FilePath filePath, Exception ex);
 
     [LoggerMessage(Level = LogLevel.Warning, Message = "Could not delete file: {filePath}")]
-    partial void LogCouldNotDeleteFile(string filePath, Exception ex);
+    partial void LogCouldNotDeleteFile(FilePath filePath, Exception ex);
 }

@@ -1,4 +1,4 @@
-﻿using FToolkit.IO.Extensions;
+﻿using FToolkit.IO;
 using Shouldly;
 using Xunit;
 
@@ -10,7 +10,7 @@ public sealed class PathGetUniqueTempFileNameTest
     public void 拡張子指定なし_ファイル名を返す()
     {
         const string Extension = ".tmp";
-        var fileName = Path.GetUniqueTempFileName();
+        var fileName = Path.GetUniqueTempFileName().AsPrimitive();
 
         fileName.ShouldEndWith(Extension);
         Guid.TryParse(fileName[..^Extension.Length], out _).ShouldBeTrue();
@@ -21,7 +21,7 @@ public sealed class PathGetUniqueTempFileNameTest
     [InlineData(".abc")]
     public void 有効な拡張子_ファイル名を返す(string extension)
     {
-        var fileName = Path.GetUniqueTempFileName(extension);
+        var fileName = Path.GetUniqueTempFileName(extension).AsPrimitive();
 
         fileName.ShouldEndWith(extension);
         Guid.TryParse(fileName[..^extension.Length], out _).ShouldBeTrue();
