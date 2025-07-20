@@ -66,6 +66,33 @@ public static class PathExtensions
 
             return GetTempFilePathInternal(extension);
         }
+
+        /// <summary>
+        /// 指定されたディレクトリを親とする、指定された拡張子の一時ファイルを取得します。
+        /// </summary>
+        /// <param name="parentDirectoryPath">親ディレクトリのパス</param>
+        /// <param name="extension">拡張子</param>
+        /// <returns>指定された拡張子の一時ファイルパスを返します。</returns>
+        /// <exception cref="ArgumentException">
+        /// 親ディレクトリのパスが空文字です。
+        /// または、拡張子が空文字または先頭の文字が"."ではありません。
+        /// </exception>
+        /// <exception cref="ArgumentOutOfRangeException">
+        /// 親ディレクトリパスの長さが1未満です。
+        /// または、"."を含む拡張子の長さが1以下です。
+        /// </exception>
+        public static string GetTempFilePath(ReadOnlySpan<char> parentDirectoryPath, ReadOnlySpan<char> extension)
+        {
+            Guard.IsNotEmpty(parentDirectoryPath);
+            Guard.IsInRangeFor(1, extension);
+            Guard.IsEqualTo(extension[0], '.');
+
+            using var buffer = SpanOwner<char>.Allocate(GuidLength + extension.Length);
+            var destination = buffer.Span;
+
+            GenerateTempFileNameInternal(destination, extension);
+            return Path.Join(Path.GetTempPath(), parentDirectoryPath, destination);
+        }
     }
 
     static string GetTempFileNameInternal(ReadOnlySpan<char> extension)
