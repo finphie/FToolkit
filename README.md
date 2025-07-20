@@ -37,6 +37,7 @@ MIT
 
 ### ライブラリ
 
+- CommunityToolkit.HighPerformance
 - Microsoft.Extensions.Logging.Abstractions
 - UnitGenerator
 
