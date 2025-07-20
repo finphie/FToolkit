@@ -6,13 +6,16 @@
   </PropertyGroup>
 
   <PropertyGroup>
-    <Description>FToolkitの抽象化です。</Description>
+    <Description>FToolkitのオブジェクトです。</Description>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageTags>Toolkit</PackageTags>
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\FToolkit.Objects\FToolkit.Objects.csproj" />
+    <PackageReference Include="UnitGenerator">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
   </ItemGroup>
 
 </Project>
