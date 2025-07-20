@@ -3,6 +3,7 @@
 
 using CommunityToolkit.Diagnostics;
 using CommunityToolkit.HighPerformance.Buffers;
+using FToolkit.Objects;
 
 namespace FToolkit.IO.Extensions;
 
@@ -19,17 +20,37 @@ public static class PathExtensions
 #pragma warning restore CA1034, CS1591
     {
         /// <summary>
+        /// ディレクトリのパスとファイル名を結合して、1つのファイルパスにします。
+        /// </summary>
+        /// <param name="directoryPath">ファイル名を追加するディレクトリパス</param>
+        /// <param name="fileName">ディレクトリパスに追加するファイル名</param>
+        /// <returns>結合されたディレクトリとファイル名を表すファイルパスを返します。</returns>
+        public static FilePath Join(DirectoryPath directoryPath, FileName fileName)
+            => new(Path.Join(directoryPath.AsPrimitive(), fileName.AsPrimitive()));
+
+        /// <summary>
+        /// ディレクトリパス、ディレクトリ名、ファイル名を結合して、1つのファイルパスにします。
+        /// </summary>
+        /// <param name="directoryPath">ディレクトリ名とファイル名を追加するディレクトリパス</param>
+        /// <param name="directoryName">ディレクトリパスに追加するディレクトリ名</param>
+        /// <param name="fileName">結合したディレクトリパスに追加するファイル名</param>
+        /// <returns>結合されたディレクトリ名とファイル名を表すファイルパスを返します。</returns>
+        public static FilePath Join(DirectoryPath directoryPath, DirectoryName directoryName, FileName fileName)
+            => new(Path.Join(directoryPath.AsPrimitive(), directoryName.AsPrimitive(), fileName.AsPrimitive()));
+
+        /// <summary>
         /// 拡張子なしの一時ファイル名を取得します。
         /// </summary>
         /// <returns>拡張子なしの一時ファイル名を返します。</returns>
-        public static string GetUniqueTempFileNameWithoutExtension()
-            => Guid.NewGuid().ToString();
+        public static FileName GetUniqueTempFileNameWithoutExtension()
+            => new(Guid.NewGuid().ToString());
 
         /// <summary>
         /// 一時ファイル名を取得します。
         /// </summary>
         /// <returns>一時ファイル名を返します。</returns>
-        public static string GetUniqueTempFileName() => GetTempFileNameInternal(TempExtension);
+        public static FileName GetUniqueTempFileName()
+            => new(GetTempFileNameInternal(TempExtension));
 
         /// <summary>
         /// 一時ファイル名を取得します。
@@ -38,19 +59,20 @@ public static class PathExtensions
         /// <returns>一時ファイル名を返します。</returns>
         /// <exception cref="ArgumentException">拡張子が空文字または先頭の文字が"."ではありません。</exception>
         /// <exception cref="ArgumentOutOfRangeException">"."を含む拡張子の長さが1以下です。</exception>
-        public static string GetUniqueTempFileName(ReadOnlySpan<char> extension)
+        public static FileName GetUniqueTempFileName(ReadOnlySpan<char> extension)
         {
             Guard.IsInRangeFor(1, extension);
             Guard.IsEqualTo(extension[0], '.');
 
-            return GetTempFileNameInternal(extension);
+            return new(GetTempFileNameInternal(extension));
         }
 
         /// <summary>
         /// .tmp拡張子の一時ファイルパスを取得します。
         /// </summary>
         /// <returns>.tmp拡張子の一時ファイルパスを返します。</returns>
-        public static string GetTempFilePath() => GetTempFilePathInternal(TempExtension);
+        public static FilePath GetTempFilePath()
+            => new(GetTempFilePathInternal(TempExtension));
 
         /// <summary>
         /// 指定された拡張子の一時ファイルパスを取得します。
@@ -59,12 +81,12 @@ public static class PathExtensions
         /// <returns>指定された拡張子の一時ファイルパスを返します。</returns>
         /// <exception cref="ArgumentException">拡張子が空文字または先頭の文字が"."ではありません。</exception>
         /// <exception cref="ArgumentOutOfRangeException">"."を含む拡張子の長さが1以下です。</exception>
-        public static string GetTempFilePath(ReadOnlySpan<char> extension)
+        public static FilePath GetTempFilePath(ReadOnlySpan<char> extension)
         {
             Guard.IsInRangeFor(1, extension);
             Guard.IsEqualTo(extension[0], '.');
 
-            return GetTempFilePathInternal(extension);
+            return new(GetTempFilePathInternal(extension));
         }
 
         /// <summary>
@@ -81,7 +103,7 @@ public static class PathExtensions
         /// 親ディレクトリパスの長さが1未満です。
         /// または、"."を含む拡張子の長さが1以下です。
         /// </exception>
-        public static string GetTempFilePath(ReadOnlySpan<char> parentDirectoryPath, ReadOnlySpan<char> extension)
+        public static FilePath GetTempFilePath(ReadOnlySpan<char> parentDirectoryPath, ReadOnlySpan<char> extension)
         {
             Guard.IsNotEmpty(parentDirectoryPath);
             Guard.IsInRangeFor(1, extension);
@@ -91,7 +113,7 @@ public static class PathExtensions
             var destination = buffer.Span;
 
             GenerateTempFileNameInternal(destination, extension);
-            return Path.Join(Path.GetTempPath(), parentDirectoryPath, destination);
+            return new(Path.Join(Path.GetTempPath(), parentDirectoryPath, destination));
         }
     }
 
