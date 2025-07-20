@@ -13,7 +13,8 @@ public interface ITempFileSaver
     /// <param name="parentDirectoryName">ファイルを保存するディレクトリ名</param>
     /// <param name="fileName">ファイル名</param>
     /// <param name="bytes">書き込むバイト列</param>
-    void Execute(DirectoryName parentDirectoryName, FileName fileName, ReadOnlySpan<byte> bytes);
+    /// <param name="outputFilePath">出力先ファイルパス</param>
+    void Execute(DirectoryName parentDirectoryName, FileName fileName, ReadOnlySpan<byte> bytes, out FilePath outputFilePath);
 
     /// <summary>
     /// 指定されたディレクトリ内にファイルをUTF-8文字列として保存します。
@@ -21,5 +22,6 @@ public interface ITempFileSaver
     /// <param name="parentDirectoryName">ファイルを保存するディレクトリ名</param>
     /// <param name="fileName">ファイル名</param>
     /// <param name="chars">書き込む文字列</param>
-    void Execute(DirectoryName parentDirectoryName, FileName fileName, ReadOnlySpan<char> chars);
+    /// <param name="outputFilePath">出力先ファイルパス</param>
+    void Execute(DirectoryName parentDirectoryName, FileName fileName, ReadOnlySpan<char> chars, out FilePath outputFilePath);
 }
