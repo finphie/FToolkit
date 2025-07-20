@@ -17,5 +17,12 @@ public static class FilePathExtensions
         /// <returns>現在のパスから抽出したファイル名を表す<see cref="FileName"/>オブジェクト。</returns>
         public FileName GetFileName()
             => new(Path.GetFileName(filePath.AsPrimitive()));
+
+        /// <summary>
+        /// ファイルパスに拡張子が含まれているかどうかを判定します。
+        /// </summary>
+        /// <returns>拡張子が含まれている場合は<see langword="true"/>、含まれていない場合は<see langword="false"/>を返します。</returns>
+        public bool HasExtension()
+            => Path.HasExtension(filePath.AsPrimitive());
     }
 }
