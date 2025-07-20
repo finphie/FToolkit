@@ -39,10 +39,10 @@ MIT
 
 ### ライブラリ
 
-- CommunityToolkit.Diagnostics
-- CommunityToolkit.HighPerformance
+- [CommunityToolkit.Diagnostics](https://github.com/CommunityToolkit/dotnet)
+- [CommunityToolkit.HighPerformance](https://github.com/CommunityToolkit/dotnet)
 - Microsoft.Extensions.Logging.Abstractions
-- UnitGenerator
+- [UnitGenerator](https://github.com/Cysharp/UnitGenerator)
 
 ### テスト
 
