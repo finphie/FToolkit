@@ -28,9 +28,10 @@ public sealed class PathGetTempFilePathTest
     }
 
     [Theory]
+    [InlineData(null)]
     [InlineData("")]
     [InlineData(".")]
     [InlineData("a")]
-    public void 不正な拡張子_Error(string extension)
+    public void 不正な拡張子_Error(string? extension)
         => Should.Throw<ArgumentException>(() => Path.GetTempFilePath(extension));
 }
