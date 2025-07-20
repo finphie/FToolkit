@@ -1,4 +1,6 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using System.Text;
+using CommunityToolkit.HighPerformance.Buffers;
+using Microsoft.Extensions.Logging;
 
 namespace FToolkit.IO;
 
@@ -24,7 +26,6 @@ public sealed partial class FileOperations : IFileOperations
     public void Create(string filePath, ReadOnlySpan<byte> bytes)
     {
         ArgumentNullException.ThrowIfNull(filePath);
-
         LogCreating(filePath);
 
         try
@@ -39,10 +40,29 @@ public sealed partial class FileOperations : IFileOperations
     }
 
     /// <inheritdoc/>
+    public void Create(string filePath, ReadOnlySpan<char> chars)
+    {
+        var byteCount = Encoding.UTF8.GetMaxByteCount(chars.Length);
+        using var buffer = SpanOwner<byte>.Allocate(byteCount);
+
+        var destination = buffer.Span;
+        var writtenCount = Encoding.UTF8.GetBytes(chars, destination);
+
+        Create(filePath, destination[..writtenCount]);
+    }
+
+    /// <inheritdoc/>
+    public void Create(FilePath filePath, ReadOnlySpan<byte> bytes)
+        => Create(filePath.AsPrimitive(), bytes);
+
+    /// <inheritdoc/>
+    public void Create(FilePath filePath, ReadOnlySpan<char> chars)
+        => Create(filePath.AsPrimitive(), chars);
+
+    /// <inheritdoc/>
     public void Save(string filePath, ReadOnlySpan<byte> bytes)
     {
         ArgumentNullException.ThrowIfNull(filePath);
-
         LogSaving(filePath);
 
         try
@@ -57,10 +77,29 @@ public sealed partial class FileOperations : IFileOperations
     }
 
     /// <inheritdoc/>
+    public void Save(string filePath, ReadOnlySpan<char> chars)
+    {
+        var byteCount = Encoding.UTF8.GetMaxByteCount(chars.Length);
+        using var buffer = SpanOwner<byte>.Allocate(byteCount);
+
+        var destination = buffer.Span;
+        var writtenCount = Encoding.UTF8.GetBytes(chars, destination);
+
+        Save(filePath, destination[..writtenCount]);
+    }
+
+    /// <inheritdoc/>
+    public void Save(FilePath filePath, ReadOnlySpan<byte> bytes)
+        => Save(filePath.AsPrimitive(), bytes);
+
+    /// <inheritdoc/>
+    public void Save(FilePath filePath, ReadOnlySpan<char> chars)
+        => Save(filePath.AsPrimitive(), chars);
+
+    /// <inheritdoc/>
     public void Delete(string filePath)
     {
         ArgumentNullException.ThrowIfNull(filePath);
-
         LogDeleting(filePath);
 
         if (!File.Exists(filePath))
@@ -78,6 +117,10 @@ public sealed partial class FileOperations : IFileOperations
             throw;
         }
     }
+
+    /// <inheritdoc/>
+    public void Delete(FilePath filePath)
+        => Delete(filePath.AsPrimitive());
 
     static void Write(string filePath, ReadOnlySpan<byte> bytes, FileMode mode)
     {

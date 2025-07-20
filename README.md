@@ -37,8 +37,16 @@ MIT
 
 ### ライブラリ
 
+- CommunityToolkit.Diagnostics
+- CommunityToolkit.HighPerformance
 - Microsoft.Extensions.Logging.Abstractions
-- Microsoft.Extensions.Telemetry.Abstractions
+- UnitGenerator
+
+### テスト
+
+- [Microsoft.Testing.Extensions.CodeCoverage](https://github.com/microsoft/codecoverage)
+- [Shouldly](https://github.com/shouldly/shouldly)
+- [xunit.v3](https://github.com/xunit/xunit)
 
 ### アナライザー
 
