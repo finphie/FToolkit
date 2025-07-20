@@ -1,4 +1,4 @@
-﻿using FToolkit.IO.Extensions;
+﻿using FToolkit.IO;
 using Shouldly;
 using Xunit;
 
