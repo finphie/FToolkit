@@ -29,14 +29,23 @@ public static class PathExtensions
             => new(Path.Join(directoryPath.AsPrimitive(), fileName.AsPrimitive()));
 
         /// <summary>
-        /// ディレクトリパス、ディレクトリ名、ファイル名を結合して、1つのファイルパスにします。
+        /// ディレクトリのパス、ディレクトリ名、ファイル名を結合して、1つのファイルパスにします。
         /// </summary>
-        /// <param name="directoryPath">ディレクトリ名とファイル名を追加するディレクトリパス</param>
+        /// <param name="directoryPath">ディレクトリ名とファイル名を追加するディレクトリのパス</param>
         /// <param name="directoryName">ディレクトリパスに追加するディレクトリ名</param>
         /// <param name="fileName">結合したディレクトリパスに追加するファイル名</param>
         /// <returns>結合されたディレクトリ名とファイル名を表すファイルパスを返します。</returns>
         public static FilePath Join(DirectoryPath directoryPath, DirectoryName directoryName, FileName fileName)
             => new(Path.Join(directoryPath.AsPrimitive(), directoryName.AsPrimitive(), fileName.AsPrimitive()));
+
+        /// <summary>
+        /// ディレクトリのパスとディレクトリ名を結合して、1つのファイルパスにします。
+        /// </summary>
+        /// <param name="directoryPath">ディレクトリ名を追加するディレクトリのパス</param>
+        /// <param name="directoryName">ディレクトリパスに追加するディレクトリ名</param>
+        /// <returns>結合されたディレクトリ名を表すディレクトリのパスを返します。</returns>
+        public static DirectoryPath Join(DirectoryPath directoryPath, DirectoryName directoryName)
+            => new(Path.Join(directoryPath.AsPrimitive(), directoryName.AsPrimitive()));
 
         /// <summary>
         /// 拡張子なしの一時ファイル名を取得します。
@@ -115,6 +124,13 @@ public static class PathExtensions
             GenerateTempFileNameInternal(destination, extension);
             return new(Path.Join(Path.GetTempPath(), parentDirectoryPath, destination));
         }
+
+        /// <summary>
+        /// 一時ディレクトリのパスを取得します。
+        /// </summary>
+        /// <returns>一時ディレクトリのパスを返します。</returns>
+        public static DirectoryPath GetTempDirectoryPath()
+            => new(Path.GetTempPath());
     }
 
     static string GetTempFileNameInternal(ReadOnlySpan<char> extension)
