@@ -9,6 +9,13 @@ namespace FToolkit.IO;
 public interface IFileOperations
 {
     /// <summary>
+    /// 指定されたファイルパスにファイルが存在するかどうかを判定します。
+    /// </summary>
+    /// <param name="filePath">存在確認を行うファイルのパス</param>
+    /// <returns>指定されたパスにファイルが存在する場合は<see langword="true"/>、それ以外の場合は <see langword="false"/>を返します。</returns>
+    bool Exists(FilePath filePath);
+
+    /// <summary>
     /// ファイルを新規作成します。
     /// </summary>
     /// <param name="filePath">ファイルパス</param>

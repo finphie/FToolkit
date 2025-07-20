@@ -25,6 +25,13 @@ public sealed partial class FileOperations : IFileOperations
     }
 
     /// <inheritdoc/>
+    public bool Exists(FilePath filePath)
+    {
+        LogCheckingExists(filePath);
+        return File.Exists(filePath.AsPrimitive());
+    }
+
+    /// <inheritdoc/>
     public void Create(FilePath filePath, ReadOnlySpan<byte> bytes)
     {
         LogCreating(filePath);
@@ -85,7 +92,7 @@ public sealed partial class FileOperations : IFileOperations
     {
         LogDeleting(filePath);
 
-        if (!filePath.Exists())
+        if (!Exists(filePath))
         {
             return;
         }
@@ -106,6 +113,9 @@ public sealed partial class FileOperations : IFileOperations
         using var handle = File.OpenHandle(filePath.AsPrimitive(), mode, FileAccess.Write);
         RandomAccess.Write(handle, bytes, 0);
     }
+
+    [LoggerMessage(Level = LogLevel.Information, Message = "Checking if file exists: {filePath}")]
+    partial void LogCheckingExists(FilePath filePath);
 
     [LoggerMessage(Level = LogLevel.Information, Message = "Creating file: {filePath}")]
     partial void LogCreating(FilePath filePath);

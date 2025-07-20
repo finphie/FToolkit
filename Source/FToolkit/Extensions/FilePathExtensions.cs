@@ -17,9 +17,5 @@ public static class FilePathExtensions
         /// <returns>現在のパスから抽出したファイル名を表す<see cref="FileName"/>オブジェクト。</returns>
         public FileName GetFileName()
             => new(Path.GetFileName(filePath.AsPrimitive()));
-
-        /// <inheritdoc cref="File.Exists(string?)"/>
-        public bool Exists()
-            => File.Exists(filePath.AsPrimitive());
     }
 }
