@@ -37,7 +37,7 @@ public sealed partial class FileOperations : IFileOperations
 
         try
         {
-            Write(filePath, bytes, FileMode.Create);
+            Write(filePath, bytes, FileMode.CreateNew);
         }
         catch (Exception ex)
         {
@@ -65,7 +65,7 @@ public sealed partial class FileOperations : IFileOperations
 
         try
         {
-            Write(filePath, bytes, FileMode.CreateNew);
+            Write(filePath, bytes, FileMode.Create);
         }
         catch (Exception ex)
         {
