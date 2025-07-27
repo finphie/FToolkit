@@ -43,7 +43,7 @@ public sealed partial class WpfWindowService : IWindowService
     {
         LogShowWindow();
 
-        var ownerWindow = GetWindow<TOwnerViewModel>();
+        var ownerWindow = Application.Current.Windows.FindWindowByViewModel(ownerViewModel);
         var window = GetWindow<TViewModel>();
 
         window.Owner = ownerWindow;
@@ -67,7 +67,7 @@ public sealed partial class WpfWindowService : IWindowService
     {
         LogShowDialogWindow();
 
-        var ownerWindow = GetWindow<TOwnerViewModel>();
+        var ownerWindow = Application.Current.Windows.FindWindowByViewModel(ownerViewModel);
         var window = GetWindow<TViewModel>();
 
         window.Owner = ownerWindow;

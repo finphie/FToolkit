@@ -1,6 +1,7 @@
 ﻿using System.Diagnostics;
 using System.Windows;
 using FToolkit.Objects;
+using FToolkit.ViewModels;
 
 namespace FToolkit.Views.Wpf;
 
@@ -37,5 +38,19 @@ static class WpfExtensions
             : (theme == ThemeMode.Dark) ? ApplicationTheme.Dark
             : (theme == ThemeMode.System) ? ApplicationTheme.System
             : throw new UnreachableException();
+    }
+
+    /// <summary>
+    /// 指定したViewModelに対応するWindowを検索して返します。
+    /// </summary>
+    /// <typeparam name="T">ViewModelの型</typeparam>
+    /// <param name="windows">Windowのコレクション</param>
+    /// <param name="viewModel">検索対象のViewModel</param>
+    /// <returns>対応するWindowを返します。</returns>
+    public static Window FindWindowByViewModel<T>(this WindowCollection windows, T viewModel)
+        where T : class, IViewModel
+    {
+        return (Window)windows.OfType<IViewFor<T>>()
+            .Single(x => ReferenceEqualityComparer.Instance.Equals(x.ViewModel, viewModel));
     }
 }
