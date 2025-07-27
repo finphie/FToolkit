@@ -40,6 +40,7 @@ MIT
 
 - [CommunityToolkit.Diagnostics](https://github.com/CommunityToolkit/dotnet)
 - [CommunityToolkit.HighPerformance](https://github.com/CommunityToolkit/dotnet)
+- Microsoft.Extensions.DependencyInjection.Abstractions
 - Microsoft.Extensions.Logging.Abstractions
 - [UnitGenerator](https://github.com/Cysharp/UnitGenerator)
 

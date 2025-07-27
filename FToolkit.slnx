@@ -4,6 +4,8 @@
     <Project Path="Source/FToolkit.Abstractions/FToolkit.Abstractions.csproj" />
     <Project Path="Source/FToolkit.Objects/FToolkit.Objects.csproj" />
     <Project Path="Source/FToolkit.Repositories.Abstractions/FToolkit.Repositories.Abstractions.csproj" />
+    <Project Path="Source/FToolkit.Views.Wpf/FToolkit.Views.Wpf.csproj" />
+    <Project Path="Source/FToolkit.Views/FToolkit.Views.csproj" />
     <Project Path="Source/FToolkit/FToolkit.csproj" />
   </Folder>
   <Folder Name="/Tests/">
