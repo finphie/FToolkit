@@ -9,15 +9,20 @@ namespace FToolkit.Views.Wpf;
 /// </summary>
 public sealed partial class WpfWindowService : IWindowService
 {
+    readonly ILogger<WpfWindowService> _logger;
     readonly IViewLocator _viewLocator;
 
     /// <summary>
     /// <see cref="WpfWindowService"/>クラスの新しいインスタンスを初期化します。
     /// </summary>
+    /// <param name="logger">ロガー</param>
     /// <param name="viewLocator">ViewModelに対応するViewを取得するためのロケーター</param>
-    public WpfWindowService(IViewLocator viewLocator)
+    public WpfWindowService(ILogger<WpfWindowService> logger, IViewLocator viewLocator)
     {
+        ArgumentNullException.ThrowIfNull(logger);
         ArgumentNullException.ThrowIfNull(viewLocator);
+
+        _logger = logger;
         _viewLocator = viewLocator;
     }
 
