@@ -12,13 +12,14 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="CommunityToolkit.Diagnostics" />
     <PackageReference Include="CommunityToolkit.HighPerformance" />
     <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" />
+    <PackageReference Include="ZeroMessenger" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\FToolkit.Abstractions\FToolkit.Abstractions.csproj" />
+    <ProjectReference Include="..\FToolkit.Utilities\FToolkit.Utilities.csproj" />
   </ItemGroup>
 
 </Project>
