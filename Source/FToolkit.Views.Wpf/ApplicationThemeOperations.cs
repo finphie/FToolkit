@@ -36,12 +36,15 @@ public sealed partial class ApplicationThemeOperations : IApplicationThemeOperat
 
         var newTheme = theme.ToWpfApplicationTheme();
 
-        if (Application.Current.ThemeMode == newTheme)
+        foreach (Window window in Application.Current.Windows)
         {
-            return;
-        }
+            if (window.ThemeMode == newTheme)
+            {
+                continue;
+            }
 
-        Application.Current.ThemeMode = newTheme;
+            window.ThemeMode = newTheme;
+        }
     }
 
     [LoggerMessage(Level = LogLevel.Information, Message = "Getting current application theme.")]
