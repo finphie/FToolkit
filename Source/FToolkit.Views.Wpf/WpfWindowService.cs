@@ -15,7 +15,7 @@ public sealed partial class WpfWindowService : IWindowService
     /// <summary>
     /// <see cref="WpfWindowService"/>クラスの新しいインスタンスを初期化します。
     /// </summary>
-    /// <param name="logger">ロガー</param>
+    /// <param name="logger">ログ記録のためのオブジェクト</param>
     /// <param name="viewLocator">ViewModelに対応するViewを取得するためのロケーター</param>
     public WpfWindowService(ILogger<WpfWindowService> logger, IViewLocator viewLocator)
     {

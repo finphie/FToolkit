@@ -5,7 +5,7 @@ using Microsoft.Extensions.Logging;
 namespace FToolkit.Views;
 
 /// <summary>
-/// 指定されたViewModel型に関連付けられたViewを取得するクラスです。
+/// 指定されたViewModelに関連付けられたViewを取得するクラスです。
 /// </summary>
 public sealed partial class ViewLocator : IViewLocator
 {
@@ -15,7 +15,7 @@ public sealed partial class ViewLocator : IViewLocator
     /// <summary>
     /// <see cref="ViewLocator"/>クラスの新しいインスタンスを初期化します。
     /// </summary>
-    /// <param name="logger">ロガー</param>
+    /// <param name="logger">ログ記録のためのオブジェクト</param>
     /// <param name="services">Viewの依存関係解決に使用するサービスプロバイダー</param>
     public ViewLocator(ILogger<ViewLocator> logger, IServiceProvider services)
     {
