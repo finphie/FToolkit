@@ -25,22 +25,22 @@ public sealed class TempFileSaver : ITempFileSaver
     }
 
     /// <inheritdoc/>
-    public void Execute(DirectoryName parentDirectoryName, FileName fileName, ReadOnlySpan<byte> bytes, out FilePath outputFilePath)
+    public ValueTask ExecuteAsync(DirectoryName parentDirectoryName, FileName fileName, ReadOnlyMemory<byte> bytes, out FilePath outputFilePath, CancellationToken cancellationToken = default)
     {
         var tempDirectoryPath = Path.Join(Path.GetTempDirectoryPath(), parentDirectoryName);
         _directoryOperations.Create(tempDirectoryPath);
 
         outputFilePath = Path.Join(tempDirectoryPath, fileName);
-        _fileOperations.Save(outputFilePath, bytes);
+        return _fileOperations.SaveAsync(outputFilePath, bytes, cancellationToken);
     }
 
     /// <inheritdoc/>
-    public void Execute(DirectoryName parentDirectoryName, FileName fileName, ReadOnlySpan<char> chars, out FilePath outputFilePath)
+    public ValueTask ExecuteAsync(DirectoryName parentDirectoryName, FileName fileName, ReadOnlyMemory<char> chars, out FilePath outputFilePath, CancellationToken cancellationToken = default)
     {
         var tempDirectoryPath = Path.Join(Path.GetTempDirectoryPath(), parentDirectoryName);
         _directoryOperations.Create(tempDirectoryPath);
 
         outputFilePath = Path.Join(tempDirectoryPath, fileName);
-        _fileOperations.Save(outputFilePath, chars);
+        return _fileOperations.SaveAsync(outputFilePath, chars, cancellationToken);
     }
 }

@@ -19,37 +19,45 @@ public interface IFileOperations
     /// </summary>
     /// <param name="filePath">ファイルパス</param>
     /// <param name="bytes">データ</param>
+    /// <param name="cancellationToken">キャンセル要求を行うためのトークン</param>
+    /// <returns>このメソッドが完了すると、オブジェクトまたは値は返されません。</returns>
     /// <inheritdoc cref="File.Create(string)" path="/exception"/>
-    void Create(FilePath filePath, ReadOnlySpan<byte> bytes);
+    ValueTask CreateAsync(FilePath filePath, ReadOnlyMemory<byte> bytes, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// ファイルを新規作成します。
     /// </summary>
     /// <param name="filePath">ファイルパス</param>
     /// <param name="chars">データ</param>
-    /// <inheritdoc cref="Create(FilePath, ReadOnlySpan{byte})" path="/exception"/>
-    void Create(FilePath filePath, ReadOnlySpan<char> chars);
+    /// <param name="cancellationToken">キャンセル要求を行うためのトークン</param>
+    /// <returns>このメソッドが完了すると、オブジェクトまたは値は返されません。</returns>
+    /// <inheritdoc cref="CreateAsync(FilePath, ReadOnlyMemory{byte}, CancellationToken)" path="/exception"/>
+    ValueTask CreateAsync(FilePath filePath, ReadOnlyMemory<char> chars, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// ファイルに上書き保存します。
     /// </summary>
     /// <param name="filePath">ファイルパス</param>
     /// <param name="bytes">データ</param>
-    /// <inheritdoc cref="Create(FilePath, ReadOnlySpan{byte})" path="/exception"/>
-    void Save(FilePath filePath, ReadOnlySpan<byte> bytes);
+    /// <param name="cancellationToken">キャンセル要求を行うためのトークン</param>
+    /// <returns>このメソッドが完了すると、オブジェクトまたは値は返されません。</returns>
+    /// <inheritdoc cref="CreateAsync(FilePath, ReadOnlyMemory{byte}, CancellationToken)" path="/exception"/>
+    ValueTask SaveAsync(FilePath filePath, ReadOnlyMemory<byte> bytes, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// ファイルに上書き保存します。
     /// </summary>
     /// <param name="filePath">ファイルパス</param>
     /// <param name="chars">データ</param>
-    /// <inheritdoc cref="Save(FilePath, ReadOnlySpan{byte})" path="/exception"/>
-    void Save(FilePath filePath, ReadOnlySpan<char> chars);
+    /// <param name="cancellationToken">キャンセル要求を行うためのトークン</param>
+    /// <returns>このメソッドが完了すると、オブジェクトまたは値は返されません。</returns>
+    /// <inheritdoc cref="SaveAsync(FilePath, ReadOnlyMemory{byte}, CancellationToken)" path="/exception"/>
+    ValueTask SaveAsync(FilePath filePath, ReadOnlyMemory<char> chars, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// ファイルを削除します。
     /// </summary>
     /// <param name="filePath">ファイルパス</param>
-    /// <inheritdoc cref="Create(FilePath, ReadOnlySpan{byte})" path="/exception"/>
+    /// <inheritdoc cref="File.Delete(string)" path="/exception"/>
     void Delete(FilePath filePath);
 }
