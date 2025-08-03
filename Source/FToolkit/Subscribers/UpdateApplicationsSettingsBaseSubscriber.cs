@@ -15,7 +15,8 @@ public sealed class UpdateApplicationsSettingsBaseSubscriber : IDisposable
     /// <summary>
     /// <see cref="UpdateApplicationsSettingsBaseSubscriber"/>クラスの新しいインスタンスを初期化します。
     /// </summary>
-    /// <param name="themeSubscriber">アプリケーションテーマ変更イベントを受信するためのオブジェクト</param>
+    /// <param name="themeSubscriber">アプリケーションテーマ変更イベントを受信するオブジェクト</param>
+    /// <param name="writableOptions">オプション値を更新するオブジェクト</param>
     public UpdateApplicationsSettingsBaseSubscriber(IMessageSubscriber<ApplicationTheme> themeSubscriber, IWritableOptions<ApplicationSettingsBase> writableOptions)
     {
         ArgumentNullException.ThrowIfNull(themeSubscriber);

@@ -3,7 +3,7 @@
 namespace FToolkit.Views;
 
 /// <summary>
-/// 画面遷移を行うためのインターフェイスです。
+/// 画面遷移を行うインターフェイスです。
 /// </summary>
 public interface INavigationService
 {

@@ -1,7 +1,7 @@
 ﻿namespace FToolkit.Options;
 
 /// <summary>
-/// オプション値を更新するためのインターフェイスです。
+/// オプション値を更新するインターフェイスです。
 /// </summary>
 /// <typeparam name="T">オプションの種類</typeparam>
 public interface IWritableOptions<T>

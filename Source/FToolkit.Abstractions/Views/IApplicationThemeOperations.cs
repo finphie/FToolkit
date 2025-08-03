@@ -3,7 +3,7 @@
 namespace FToolkit.Views;
 
 /// <summary>
-/// アプリケーションテーマを操作するためのインターフェイスです。
+/// アプリケーションテーマを操作するインターフェイスです。
 /// </summary>
 public interface IApplicationThemeOperations
 {

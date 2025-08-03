@@ -3,7 +3,7 @@
 namespace FToolkit.Views;
 
 /// <summary>
-/// 指定されたViewModelに対するViewを取得するためのインターフェイスです。
+/// 指定されたViewModelに対するViewを取得するインターフェイスです。
 /// </summary>
 public interface IViewLocator
 {

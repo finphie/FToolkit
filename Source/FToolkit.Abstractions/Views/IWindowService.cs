@@ -3,7 +3,7 @@
 namespace FToolkit.Views;
 
 /// <summary>
-/// ViewModelに関連付けられたWindowを表示するためのインターフェイスです。
+/// ViewModelに関連付けられたWindowを表示するインターフェイスです。
 /// </summary>
 public interface IWindowService
 {
