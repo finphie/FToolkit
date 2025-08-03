@@ -8,9 +8,8 @@ namespace FToolkit.IO;
 /// <summary>
 /// ファイル操作を行うクラスです。
 /// </summary>
-public sealed partial class FileOperations : IFileOperations, IDisposable
+public sealed partial class FileOperations : IFileOperations
 {
-    readonly SemaphoreSlim _readWriteLock = new(1);
     readonly ILogger<FileOperations> _logger;
 
     /// <summary>
@@ -23,10 +22,6 @@ public sealed partial class FileOperations : IFileOperations, IDisposable
         ArgumentNullException.ThrowIfNull(logger);
         _logger = logger;
     }
-
-    /// <inheritdoc/>
-    public void Dispose()
-        => _readWriteLock.Dispose();
 
     /// <inheritdoc/>
     public bool Exists(FilePath filePath)
@@ -93,7 +88,6 @@ public sealed partial class FileOperations : IFileOperations, IDisposable
     async ValueTask WriteAsync(FilePath filePath, FileMode mode, ReadOnlyMemory<byte> bytes, CancellationToken cancellationToken)
     {
         using var handle = File.OpenHandle(filePath.AsPrimitive(), mode, FileAccess.Write);
-        await _readWriteLock.WaitAsync(cancellationToken).ConfigureAwait(false);
 
         try
         {
@@ -103,10 +97,6 @@ public sealed partial class FileOperations : IFileOperations, IDisposable
         {
             LogCouldNotWriteFile(filePath, ex);
             throw;
-        }
-        finally
-        {
-            _readWriteLock.Release();
         }
     }
 

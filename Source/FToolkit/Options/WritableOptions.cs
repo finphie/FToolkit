@@ -17,9 +17,9 @@ public sealed partial class WritableOptions<T> : IWritableOptions<T>
     where T : class
 {
     readonly ILogger<WritableOptions<T>> _logger;
-    readonly IConfigurationRoot _configurationRoot;
     readonly IOptionsMonitor<T> _options;
     readonly IFileOperations _fileOperations;
+    readonly FileConfigurationProvider[] _fileProviders;
 
     readonly FilePath _filePath;
     readonly JsonTypeInfo<T> _jsonTypeInfo;
@@ -42,9 +42,11 @@ public sealed partial class WritableOptions<T> : IWritableOptions<T>
         ArgumentNullException.ThrowIfNull(jsonTypeInfo);
 
         _logger = logger;
-        _configurationRoot = (IConfigurationRoot)configuration;
         _options = options;
         _fileOperations = fileOperations;
+
+        var configurationRoot = (IConfigurationRoot)configuration;
+        _fileProviders = [.. configurationRoot.Providers.OfType<FileConfigurationProvider>()];
 
         _filePath = filePath;
         _jsonTypeInfo = jsonTypeInfo;
@@ -57,6 +59,12 @@ public sealed partial class WritableOptions<T> : IWritableOptions<T>
 
         var value = applyChanges(_options.CurrentValue);
 
+        if (value == _options.CurrentValue)
+        {
+            LogNoChangesApplied();
+            return;
+        }
+
         using var bufferWriter = new ArrayPoolBufferWriter<byte>();
         var writer = new Utf8JsonWriter(bufferWriter);
 
@@ -65,20 +73,32 @@ public sealed partial class WritableOptions<T> : IWritableOptions<T>
             JsonSerializer.Serialize(writer, value, _jsonTypeInfo);
         }
 
-        await _fileOperations.SaveAsync(_filePath, bufferWriter.WrittenMemory, cancellationToken).ConfigureAwait(false);
+        await WritableOptionsLock.ReadWriteLock.WaitAsync(cancellationToken).ConfigureAwait(false);
 
-        foreach (var provider in _configurationRoot.Providers)
+        try
         {
-            if (provider is not FileConfigurationProvider fileProvider)
-            {
-                continue;
-            }
+            await _fileOperations.SaveAsync(_filePath, bufferWriter.WrittenMemory, cancellationToken).ConfigureAwait(false);
 
-            LogReloadingConfigurationProvider(fileProvider.Source.Path);
-            fileProvider.Load();
+            foreach (var fileProvider in _fileProviders)
+            {
+                LogReloadingConfigurationProvider(fileProvider.Source.Path);
+                fileProvider.Load();
+            }
+        }
+        finally
+        {
+            WritableOptionsLock.ReadWriteLock.Release();
         }
     }
 
+    [LoggerMessage(Level = LogLevel.Debug, Message = "No changes were applied to the options.")]
+    partial void LogNoChangesApplied();
+
     [LoggerMessage(Level = LogLevel.Debug, Message = "Reloading configuration provider: {filePath}")]
     partial void LogReloadingConfigurationProvider(string? filePath);
+
+    static class WritableOptionsLock
+    {
+        internal static readonly SemaphoreSlim ReadWriteLock = new(1);
+    }
 }
