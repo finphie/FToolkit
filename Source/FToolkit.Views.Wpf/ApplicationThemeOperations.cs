@@ -14,7 +14,7 @@ public sealed partial class ApplicationThemeOperations : IApplicationThemeOperat
     /// <summary>
     /// <see cref="ApplicationThemeOperations"/>クラスの新しいインスタンスを初期化します。
     /// </summary>
-    /// <param name="logger">ログ記録のためのオブジェクト</param>
+    /// <param name="logger">ログを記録するオブジェクト</param>
     public ApplicationThemeOperations(ILogger<ApplicationThemeOperations> logger)
     {
         ArgumentNullException.ThrowIfNull(logger);

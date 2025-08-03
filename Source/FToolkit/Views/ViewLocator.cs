@@ -15,7 +15,7 @@ public sealed partial class ViewLocator : IViewLocator
     /// <summary>
     /// <see cref="ViewLocator"/>クラスの新しいインスタンスを初期化します。
     /// </summary>
-    /// <param name="logger">ログ記録のためのオブジェクト</param>
+    /// <param name="logger">ログを記録するオブジェクト</param>
     /// <param name="provider">Viewの依存関係解決に使用するサービスプロバイダー</param>
     public ViewLocator(ILogger<ViewLocator> logger, IServiceProvider provider)
     {

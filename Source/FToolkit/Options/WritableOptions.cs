@@ -27,7 +27,7 @@ public sealed partial class WritableOptions<T> : IWritableOptions<T>
     /// <summary>
     /// <see cref="WritableOptions{T}"/>クラスの新しいインスタンスを初期化します。
     /// </summary>
-    /// <param name="logger">ログ記録のためのオブジェクト</param>
+    /// <param name="logger">ログを記録するオブジェクト</param>
     /// <param name="configuration">構成情報を提供するオブジェクト</param>
     /// <param name="options">オプション値の取得を行うオブジェクト</param>
     /// <param name="fileOperations">ファイル操作を行うオブジェクト</param>

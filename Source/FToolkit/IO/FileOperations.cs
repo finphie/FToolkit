@@ -15,7 +15,7 @@ public sealed partial class FileOperations : IFileOperations
     /// <summary>
     /// <see cref="FileOperations"/>クラスの新しいインスタンスを初期化します。
     /// </summary>
-    /// <param name="logger">ログ記録のためのオブジェクト</param>
+    /// <param name="logger">ログを記録するオブジェクト</param>
     /// <exception cref="ArgumentNullException"><paramref name="logger"/>がnullです。</exception>
     public FileOperations(ILogger<FileOperations> logger)
     {
