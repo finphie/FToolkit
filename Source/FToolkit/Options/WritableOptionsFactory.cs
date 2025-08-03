@@ -33,7 +33,7 @@ public sealed class WritableOptionsFactory
     /// <param name="jsonTypeInfo">JSONシリアル化のメタデータ</param>
     /// <returns><see cref="WritableOptions{T}"/>クラスのインスタンスを返します。</returns>
     public WritableOptions<T> Create<T>(FilePath filePath, JsonTypeInfo<T> jsonTypeInfo)
-        where T : class
+        where T : class, IEquatable<T>
     {
         var logger = _provider.GetRequiredService<ILogger<WritableOptions<T>>>();
         var configuration = _provider.GetRequiredService<IConfiguration>();

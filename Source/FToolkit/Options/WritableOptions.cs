@@ -14,7 +14,7 @@ namespace FToolkit.Options;
 /// </summary>
 /// <typeparam name="T">オプションの種類</typeparam>
 public sealed partial class WritableOptions<T> : IWritableOptions<T>
-    where T : class
+    where T : class, IEquatable<T>
 {
     readonly ILogger<WritableOptions<T>> _logger;
     readonly IOptionsMonitor<T> _options;
@@ -59,7 +59,7 @@ public sealed partial class WritableOptions<T> : IWritableOptions<T>
 
         var value = applyChanges(_options.CurrentValue);
 
-        if (value == _options.CurrentValue)
+        if (EqualityComparer<T>.Default.Equals(value, _options.CurrentValue))
         {
             LogNoChangesApplied();
             return;
