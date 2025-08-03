@@ -1,4 +1,5 @@
-﻿using System.Text.Json.Serialization.Metadata;
+﻿using System.Diagnostics.CodeAnalysis;
+using System.Text.Json.Serialization.Metadata;
 using FToolkit.IO;
 using FToolkit.Objects;
 using Microsoft.Extensions.Configuration;
@@ -32,7 +33,7 @@ public sealed class WritableOptionsFactory
     /// <param name="filePath">ファイルパス</param>
     /// <param name="jsonTypeInfo">JSONシリアル化のメタデータ</param>
     /// <returns><see cref="WritableOptions{T}"/>クラスのインスタンスを返します。</returns>
-    public WritableOptions<T> Create<T>(FilePath filePath, JsonTypeInfo<T> jsonTypeInfo)
+    public WritableOptions<T> Create<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] T>(FilePath filePath, JsonTypeInfo<T> jsonTypeInfo)
         where T : class, IEquatable<T>
     {
         var logger = _provider.GetRequiredService<ILogger<WritableOptions<T>>>();
