@@ -13,11 +13,10 @@ namespace FToolkit.Options;
 /// オプション値を更新するクラスです。
 /// </summary>
 /// <typeparam name="T">オプションの種類</typeparam>
-public sealed partial class WritableOptions<T> : IWritableOptions<T>
+public sealed partial class WritableOptions<T> : ReloadableOptions<T>, IWritableOptions<T>
     where T : class, IEquatable<T>
 {
     readonly ILogger<WritableOptions<T>> _logger;
-    readonly IOptionsMonitor<T> _options;
     readonly IFileOperations _fileOperations;
     readonly FileConfigurationProvider[] _fileProviders;
 
@@ -34,15 +33,14 @@ public sealed partial class WritableOptions<T> : IWritableOptions<T>
     /// <param name="filePath">出力先ファイルパス</param>
     /// <param name="jsonTypeInfo">JSONシリアル化のメタデータ</param>
     public WritableOptions(ILogger<WritableOptions<T>> logger, IConfiguration configuration, IOptionsMonitor<T> options, IFileOperations fileOperations, FilePath filePath, JsonTypeInfo<T> jsonTypeInfo)
+        : base(options)
     {
         ArgumentNullException.ThrowIfNull(logger);
         ArgumentNullException.ThrowIfNull(configuration);
-        ArgumentNullException.ThrowIfNull(options);
         ArgumentNullException.ThrowIfNull(fileOperations);
         ArgumentNullException.ThrowIfNull(jsonTypeInfo);
 
         _logger = logger;
-        _options = options;
         _fileOperations = fileOperations;
 
         var configurationRoot = (IConfigurationRoot)configuration;
@@ -57,9 +55,10 @@ public sealed partial class WritableOptions<T> : IWritableOptions<T>
     {
         ArgumentNullException.ThrowIfNull(applyChanges);
 
-        var value = applyChanges(_options.CurrentValue);
+        var oldValue = Value;
+        var newValue = applyChanges(oldValue);
 
-        if (EqualityComparer<T>.Default.Equals(value, _options.CurrentValue))
+        if (EqualityComparer<T>.Default.Equals(newValue, oldValue))
         {
             LogNoChangesApplied();
             return;
@@ -70,7 +69,7 @@ public sealed partial class WritableOptions<T> : IWritableOptions<T>
 
         await using (writer.ConfigureAwait(false))
         {
-            JsonSerializer.Serialize(writer, value, _jsonTypeInfo);
+            JsonSerializer.Serialize(writer, newValue, _jsonTypeInfo);
         }
 
         await WritableOptionsLock.ReadWriteLock.WaitAsync(cancellationToken).ConfigureAwait(false);

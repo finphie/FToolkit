@@ -4,7 +4,7 @@
 /// オプション値を更新するインターフェイスです。
 /// </summary>
 /// <typeparam name="T">オプションの種類</typeparam>
-public interface IWritableOptions<T>
+public interface IWritableOptions<T> : IReloadableOptions<T>
     where T : class
 {
     /// <summary>
