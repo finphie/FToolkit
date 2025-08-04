@@ -3,12 +3,12 @@
 namespace FToolkit.IO;
 
 /// <summary>
-/// 指定された内容で一時ファイルを保存する処理に関する定義です。
+/// 指定した内容で一時ファイルを保存する処理に関する定義です。
 /// </summary>
 public interface ITempFileSaver
 {
     /// <summary>
-    /// 指定されたディレクトリ内にファイルを保存します。
+    /// 指定したディレクトリ内にファイルを保存します。
     /// </summary>
     /// <param name="parentDirectoryName">ファイルを保存するディレクトリ名</param>
     /// <param name="fileName">ファイル名</param>
@@ -18,7 +18,7 @@ public interface ITempFileSaver
     ValueTask<FilePath> ExecuteAsync(DirectoryName parentDirectoryName, FileName fileName, ReadOnlyMemory<byte> bytes, CancellationToken cancellationToken = default);
 
     /// <summary>
-    /// 指定されたディレクトリ内にファイルをUTF-8文字列として保存します。
+    /// 指定したディレクトリ内にファイルをUTF-8文字列として保存します。
     /// </summary>
     /// <param name="parentDirectoryName">ファイルを保存するディレクトリ名</param>
     /// <param name="fileName">ファイル名</param>

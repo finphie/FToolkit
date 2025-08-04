@@ -6,7 +6,7 @@
 public interface ISystemOperations
 {
     /// <summary>
-    /// 指定されたURLを開きます。
+    /// 指定したURLを開きます。
     /// </summary>
     /// <param name="url">URL</param>
     /// <exception cref="ArgumentNullException"><paramref name="url"/>がnullです。</exception>
@@ -14,7 +14,7 @@ public interface ISystemOperations
     void OpenInWebBrowser(string url);
 
     /// <summary>
-    /// 指定されたURLを開きます。
+    /// 指定したURLを開きます。
     /// </summary>
     /// <param name="url">URL</param>
     /// <exception cref="ArgumentNullException"><paramref name="url"/>がnullです。</exception>
