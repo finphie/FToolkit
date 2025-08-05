@@ -8,17 +8,17 @@ namespace FToolkit.Subscribers;
 /// 設定変更要求を受信し、オプション値を更新するクラスです。
 /// </summary>
 /// <typeparam name="T">アプリケーション設定の型</typeparam>
-public sealed class UpdateApplicationsSettingsBaseSubscriber<T> : IDisposable
+public sealed class UpdateApplicationsSettingsSubscriber<T> : IDisposable
     where T : ApplicationSettingsBase
 {
     readonly IDisposable _disposable;
 
     /// <summary>
-    /// <see cref="UpdateApplicationsSettingsBaseSubscriber{T}"/>クラスの新しいインスタンスを初期化します。
+    /// <see cref="UpdateApplicationsSettingsSubscriber{T}"/>クラスの新しいインスタンスを初期化します。
     /// </summary>
     /// <param name="themeSubscriber">アプリケーションテーマ変更イベントを受信するオブジェクト</param>
     /// <param name="writableOptions">オプション値を更新するオブジェクト</param>
-    public UpdateApplicationsSettingsBaseSubscriber(IMessageSubscriber<ApplicationTheme> themeSubscriber, IWritableOptions<T> writableOptions)
+    public UpdateApplicationsSettingsSubscriber(IMessageSubscriber<ApplicationTheme> themeSubscriber, IWritableOptions<T> writableOptions)
     {
         ArgumentNullException.ThrowIfNull(themeSubscriber);
         ArgumentNullException.ThrowIfNull(writableOptions);
