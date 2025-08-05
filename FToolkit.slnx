@@ -4,11 +4,13 @@
     <Project Path="Source/FToolkit.Abstractions/FToolkit.Abstractions.csproj" />
     <Project Path="Source/FToolkit.Objects/FToolkit.Objects.csproj" />
     <Project Path="Source/FToolkit.Repositories.Abstractions/FToolkit.Repositories.Abstractions.csproj" />
+    <Project Path="Source/FToolkit.Utilities/FToolkit.Utilities.csproj" />
+    <Project Path="Source/FToolkit.ViewModels/FToolkit.ViewModels.csproj" />
     <Project Path="Source/FToolkit.Views.Wpf/FToolkit.Views.Wpf.csproj" />
-    <Project Path="Source/FToolkit.Views/FToolkit.Views.csproj" />
     <Project Path="Source/FToolkit/FToolkit.csproj" />
   </Folder>
   <Folder Name="/Tests/">
     <Project Path="Tests/FToolkit.Tests/FToolkit.Tests.csproj" />
+    <Project Path="Tests/FToolkit.Utilities.Tests/FToolkit.Utilities.Tests.csproj" />
   </Folder>
 </Solution>
