@@ -1,3 +1,18 @@
+[*.cs]
+
+# インスタンス化されていない内部クラスを使用しません
+# https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1812
+# 理由: Microsoft.Extensions.DependencyInjectionなどで、型をジェネリックとして使用すると誤検知するため。
+# https://github.com/dotnet/roslyn-analyzers/issues/6561
+dotnet_diagnostic.CA1812.severity = none
+
+[*{Helpers,Extensions,Factory}.cs]
+
+# インスタンス化されていない内部クラスを使用しません
+# https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1812
+# 理由: 有効化したいクラスのため。
+dotnet_diagnostic.CA1812.severity = warning
+
 # C#ベンチマークファイル（プロジェクト全体）
 [*.Benchmarks/**.cs]
 
@@ -108,12 +123,3 @@ dotnet_diagnostic.SA1132.severity = none
 # https://github.com/DotNetAnalyzers/StyleCopAnalyzers/blob/master/documentation/SA1402.md
 # 理由: 1ファイルに収めたい場合がある。
 dotnet_diagnostic.SA1402.severity = none
-
-[Program.cs]
-
-## StyleCop.Analyzers ##
-
-# The file name of a C# code file does not match the first type declared in the file.
-# https://github.com/DotNetAnalyzers/StyleCopAnalyzers/blob/master/documentation/SA1649.md
-# 理由: トップレベルステートメントでは、ファイル名と型名が異なる場合がある。
-dotnet_diagnostic.SA1649.severity = none
