@@ -15,7 +15,7 @@ public sealed partial class FileOperations : IFileOperations
     /// <summary>
     /// <see cref="FileOperations"/>クラスの新しいインスタンスを初期化します。
     /// </summary>
-    /// <param name="logger">ロガー</param>
+    /// <param name="logger">ログを記録するオブジェクト</param>
     /// <exception cref="ArgumentNullException"><paramref name="logger"/>がnullです。</exception>
     public FileOperations(ILogger<FileOperations> logger)
     {
@@ -31,59 +31,37 @@ public sealed partial class FileOperations : IFileOperations
     }
 
     /// <inheritdoc/>
-    public void Create(FilePath filePath, ReadOnlySpan<byte> bytes)
+    public ValueTask CreateAsync(FilePath filePath, ReadOnlyMemory<byte> bytes, CancellationToken cancellationToken = default)
     {
         LogCreating(filePath);
-
-        try
-        {
-            Write(filePath, bytes, FileMode.CreateNew);
-        }
-        catch (Exception ex)
-        {
-            LogCouldNotCreateFile(filePath, ex);
-            throw;
-        }
+        return WriteAsync(filePath, FileMode.CreateNew, bytes, cancellationToken);
     }
 
     /// <inheritdoc/>
-    public void Create(FilePath filePath, ReadOnlySpan<char> chars)
+    public async ValueTask CreateAsync(FilePath filePath, ReadOnlyMemory<char> chars, CancellationToken cancellationToken = default)
     {
         var byteCount = Encoding.UTF8.GetMaxByteCount(chars.Length);
-        using var buffer = SpanOwner<byte>.Allocate(byteCount);
+        using var buffer = MemoryOwner<byte>.Allocate(byteCount);
 
-        var destination = buffer.Span;
-        var writtenCount = Encoding.UTF8.GetBytes(chars, destination);
-
-        Create(filePath, destination[..writtenCount]);
+        var writtenCount = Encoding.UTF8.GetBytes(chars.Span, buffer.Span);
+        await CreateAsync(filePath, buffer.Memory[..writtenCount], cancellationToken).ConfigureAwait(false);
     }
 
     /// <inheritdoc/>
-    public void Save(FilePath filePath, ReadOnlySpan<byte> bytes)
+    public ValueTask SaveAsync(FilePath filePath, ReadOnlyMemory<byte> bytes, CancellationToken cancellationToken = default)
     {
         LogSaving(filePath);
-
-        try
-        {
-            Write(filePath, bytes, FileMode.Create);
-        }
-        catch (Exception ex)
-        {
-            LogCouldNotSaveFile(filePath, ex);
-            throw;
-        }
+        return WriteAsync(filePath, FileMode.Create, bytes, cancellationToken);
     }
 
     /// <inheritdoc/>
-    public void Save(FilePath filePath, ReadOnlySpan<char> chars)
+    public async ValueTask SaveAsync(FilePath filePath, ReadOnlyMemory<char> chars, CancellationToken cancellationToken = default)
     {
         var byteCount = Encoding.UTF8.GetMaxByteCount(chars.Length);
-        using var buffer = SpanOwner<byte>.Allocate(byteCount);
+        using var buffer = MemoryOwner<byte>.Allocate(byteCount);
 
-        var destination = buffer.Span;
-        var writtenCount = Encoding.UTF8.GetBytes(chars, destination);
-
-        Save(filePath, destination[..writtenCount]);
+        var writtenCount = Encoding.UTF8.GetBytes(chars.Span, buffer.Span);
+        await SaveAsync(filePath, buffer.Memory[..writtenCount], cancellationToken).ConfigureAwait(false);
     }
 
     /// <inheritdoc/>
@@ -107,10 +85,19 @@ public sealed partial class FileOperations : IFileOperations
         }
     }
 
-    static void Write(FilePath filePath, ReadOnlySpan<byte> bytes, FileMode mode)
+    async ValueTask WriteAsync(FilePath filePath, FileMode mode, ReadOnlyMemory<byte> bytes, CancellationToken cancellationToken)
     {
         using var handle = File.OpenHandle(filePath.AsPrimitive(), mode, FileAccess.Write);
-        RandomAccess.Write(handle, bytes, 0);
+
+        try
+        {
+            await RandomAccess.WriteAsync(handle, bytes, 0, cancellationToken).ConfigureAwait(false);
+        }
+        catch (Exception ex)
+        {
+            LogCouldNotWriteFile(filePath, ex);
+            throw;
+        }
     }
 
     [LoggerMessage(Level = LogLevel.Information, Message = "Checking if file exists: {filePath}")]
@@ -125,11 +112,8 @@ public sealed partial class FileOperations : IFileOperations
     [LoggerMessage(Level = LogLevel.Information, Message = "Deleting file: {filePath}")]
     partial void LogDeleting(FilePath filePath);
 
-    [LoggerMessage(Level = LogLevel.Warning, Message = "Could not create file: {filePath}")]
-    partial void LogCouldNotCreateFile(FilePath filePath, Exception ex);
-
-    [LoggerMessage(Level = LogLevel.Warning, Message = "Could not save file: {filePath}")]
-    partial void LogCouldNotSaveFile(FilePath filePath, Exception ex);
+    [LoggerMessage(Level = LogLevel.Warning, Message = "Could not write to file: {filePath}")]
+    partial void LogCouldNotWriteFile(FilePath filePath, Exception ex);
 
     [LoggerMessage(Level = LogLevel.Warning, Message = "Could not delete file: {filePath}")]
     partial void LogCouldNotDeleteFile(FilePath filePath, Exception ex);

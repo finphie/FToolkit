@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>net10.0;net9.0</TargetFrameworks>
+    <TargetFramework>net10.0</TargetFramework>
     <IsPackable>true</IsPackable>
   </PropertyGroup>
 
@@ -12,13 +12,17 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="CommunityToolkit.Diagnostics" />
     <PackageReference Include="CommunityToolkit.HighPerformance" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.FileExtensions" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.AutoActivation" />
     <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" />
+    <PackageReference Include="Microsoft.Extensions.Options" />
+    <PackageReference Include="ZeroMessenger" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\FToolkit.Abstractions\FToolkit.Abstractions.csproj" />
+    <ProjectReference Include="..\FToolkit.Utilities\FToolkit.Utilities.csproj" />
   </ItemGroup>
 
 </Project>

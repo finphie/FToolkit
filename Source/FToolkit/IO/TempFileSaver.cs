@@ -7,6 +7,8 @@ namespace FToolkit.IO;
 /// </summary>
 public sealed class TempFileSaver : ITempFileSaver
 {
+    static readonly SemaphoreSlim ReadWriteLock = new(1);
+
     readonly IFileOperations _fileOperations;
     readonly IDirectoryOperations _directoryOperations;
 
@@ -25,22 +27,44 @@ public sealed class TempFileSaver : ITempFileSaver
     }
 
     /// <inheritdoc/>
-    public void Execute(DirectoryName parentDirectoryName, FileName fileName, ReadOnlySpan<byte> bytes, out FilePath outputFilePath)
+    public async ValueTask<FilePath> ExecuteAsync(DirectoryName parentDirectoryName, FileName fileName, ReadOnlyMemory<byte> bytes, CancellationToken cancellationToken = default)
     {
         var tempDirectoryPath = Path.Join(Path.GetTempDirectoryPath(), parentDirectoryName);
-        _directoryOperations.Create(tempDirectoryPath);
+        var outputFilePath = Path.Join(tempDirectoryPath, fileName);
 
-        outputFilePath = Path.Join(tempDirectoryPath, fileName);
-        _fileOperations.Save(outputFilePath, bytes);
+        await ReadWriteLock.WaitAsync(cancellationToken).ConfigureAwait(false);
+
+        try
+        {
+            _directoryOperations.Create(tempDirectoryPath);
+            await _fileOperations.SaveAsync(outputFilePath, bytes, cancellationToken).ConfigureAwait(false);
+        }
+        finally
+        {
+            ReadWriteLock.Release();
+        }
+
+        return outputFilePath;
     }
 
     /// <inheritdoc/>
-    public void Execute(DirectoryName parentDirectoryName, FileName fileName, ReadOnlySpan<char> chars, out FilePath outputFilePath)
+    public async ValueTask<FilePath> ExecuteAsync(DirectoryName parentDirectoryName, FileName fileName, ReadOnlyMemory<char> chars, CancellationToken cancellationToken = default)
     {
         var tempDirectoryPath = Path.Join(Path.GetTempDirectoryPath(), parentDirectoryName);
-        _directoryOperations.Create(tempDirectoryPath);
+        var outputFilePath = Path.Join(tempDirectoryPath, fileName);
 
-        outputFilePath = Path.Join(tempDirectoryPath, fileName);
-        _fileOperations.Save(outputFilePath, chars);
+        await ReadWriteLock.WaitAsync(cancellationToken).ConfigureAwait(false);
+
+        try
+        {
+            _directoryOperations.Create(tempDirectoryPath);
+            await _fileOperations.SaveAsync(outputFilePath, chars, cancellationToken).ConfigureAwait(false);
+        }
+        finally
+        {
+            ReadWriteLock.Release();
+        }
+
+        return outputFilePath;
     }
 }

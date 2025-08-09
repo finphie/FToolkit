@@ -13,7 +13,7 @@ public sealed partial class DirectoryOperations : IDirectoryOperations
     /// <summary>
     /// <see cref="DirectoryOperations"/>クラスの新しいインスタンスを初期化します。
     /// </summary>
-    /// <param name="logger">ロガー</param>
+    /// <param name="logger">ログを記録するオブジェクト</param>
     /// <exception cref="ArgumentNullException"><paramref name="logger"/>がnullです。</exception>
     public DirectoryOperations(ILogger<DirectoryOperations> logger)
     {

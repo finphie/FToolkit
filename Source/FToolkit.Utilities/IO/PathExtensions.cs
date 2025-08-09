@@ -84,7 +84,7 @@ public static class PathExtensions
             => new(GetTempFilePathInternal(TempExtension));
 
         /// <summary>
-        /// 指定された拡張子の一時ファイルパスを取得します。
+        /// 指定した拡張子の一時ファイルパスを取得します。
         /// </summary>
         /// <param name="extension">拡張子</param>
         /// <returns>指定された拡張子の一時ファイルパスを返します。</returns>
@@ -99,7 +99,7 @@ public static class PathExtensions
         }
 
         /// <summary>
-        /// 指定されたディレクトリを親とする、指定された拡張子の一時ファイルを取得します。
+        /// 指定したディレクトリを親とする、指定した拡張子の一時ファイルを取得します。
         /// </summary>
         /// <param name="parentDirectoryPath">親ディレクトリのパス</param>
         /// <param name="extension">拡張子</param>
