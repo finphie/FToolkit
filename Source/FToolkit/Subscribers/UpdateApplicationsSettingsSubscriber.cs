@@ -8,7 +8,7 @@ namespace FToolkit.Subscribers;
 /// 設定変更要求を受信し、オプション値を更新するクラスです。
 /// </summary>
 /// <typeparam name="T">アプリケーション設定の型</typeparam>
-public sealed class UpdateApplicationsSettingsSubscriber<T> : IDisposable
+sealed class UpdateApplicationsSettingsSubscriber<T> : IDisposable
     where T : ApplicationSettingsBase
 {
     readonly IDisposable _disposable;

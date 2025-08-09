@@ -7,7 +7,7 @@ namespace FToolkit.Views;
 /// <summary>
 /// 指定したViewModelに関連付けられたViewを取得するクラスです。
 /// </summary>
-public sealed partial class ViewLocator : IViewLocator
+sealed partial class ViewLocator : IViewLocator
 {
     readonly ILogger<ViewLocator> _logger;
     readonly IServiceProvider _provider;

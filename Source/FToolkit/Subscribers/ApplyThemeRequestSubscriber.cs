@@ -7,7 +7,7 @@ namespace FToolkit.Subscribers;
 /// <summary>
 /// アプリケーションテーマ変更要求を受信し、テーマを適用するクラスです。
 /// </summary>
-public sealed class ApplyThemeRequestSubscriber : IDisposable
+sealed class ApplyThemeRequestSubscriber : IDisposable
 {
     readonly IDisposable _disposable;
 

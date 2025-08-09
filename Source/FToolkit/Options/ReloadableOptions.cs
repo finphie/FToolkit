@@ -6,7 +6,7 @@ namespace FToolkit.Options;
 /// 再読み込み可能なオプション値を取得するクラスです。
 /// </summary>
 /// <typeparam name="T">オプション値の種類</typeparam>
-public class ReloadableOptions<T> : IReloadableOptions<T>
+class ReloadableOptions<T> : IReloadableOptions<T>
     where T : class, IEquatable<T>
 {
     readonly IOptionsMonitor<T> _options;

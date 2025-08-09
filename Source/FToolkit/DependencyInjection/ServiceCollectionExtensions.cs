@@ -62,7 +62,7 @@ public static class ServiceCollectionExtensions
         where T : ApplicationSettingsBase, IEquatable<T>
     {
         services.AddSingleton<WritableOptionsFactory>();
-        services.AddSingleton<IWritableOptions<T>, WritableOptions<T>>(x =>
+        services.AddSingleton(x =>
         {
             var factory = x.GetRequiredService<WritableOptionsFactory>();
             return factory.Create(ApplicationSettingsFilePath, jsonTypeInfo);

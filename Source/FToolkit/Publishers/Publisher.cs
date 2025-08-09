@@ -6,7 +6,7 @@ namespace FToolkit.Publishers;
 /// <summary>
 /// パブリッシャーのクラスです。
 /// </summary>
-public sealed class Publisher : IPublisher
+sealed class Publisher : IPublisher
 {
     readonly IServiceProvider _provider;
 

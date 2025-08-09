@@ -13,7 +13,7 @@ namespace FToolkit.Options;
 /// オプション値を更新するクラスです。
 /// </summary>
 /// <typeparam name="T">オプションの種類</typeparam>
-public sealed partial class WritableOptions<T> : ReloadableOptions<T>, IWritableOptions<T>
+sealed partial class WritableOptions<T> : ReloadableOptions<T>, IWritableOptions<T>
     where T : class, IEquatable<T>
 {
     readonly ILogger<WritableOptions<T>> _logger;

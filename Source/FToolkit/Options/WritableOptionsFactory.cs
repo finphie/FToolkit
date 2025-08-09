@@ -33,7 +33,7 @@ public sealed class WritableOptionsFactory
     /// <param name="filePath">ファイルパス</param>
     /// <param name="jsonTypeInfo">JSONシリアル化のメタデータ</param>
     /// <returns><see cref="WritableOptions{T}"/>クラスのインスタンスを返します。</returns>
-    public WritableOptions<T> Create<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] T>(FilePath filePath, JsonTypeInfo<T> jsonTypeInfo)
+    public IWritableOptions<T> Create<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] T>(FilePath filePath, JsonTypeInfo<T> jsonTypeInfo)
         where T : class, IEquatable<T>
     {
         var logger = _provider.GetRequiredService<ILogger<WritableOptions<T>>>();
@@ -41,6 +41,6 @@ public sealed class WritableOptionsFactory
         var options = _provider.GetRequiredService<IOptionsMonitor<T>>();
         var fileOperations = _provider.GetRequiredService<IFileOperations>();
 
-        return new(logger, configuration, options, fileOperations, filePath, jsonTypeInfo);
+        return new WritableOptions<T>(logger, configuration, options, fileOperations, filePath, jsonTypeInfo);
     }
 }
