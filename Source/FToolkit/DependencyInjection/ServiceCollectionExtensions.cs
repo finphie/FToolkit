@@ -52,11 +52,29 @@ public static class ServiceCollectionExtensions
     /// <param name="services">追加する対象の<see cref="IServiceCollection"/></param>
     public static void AddViewAndViewModel<[DynamicallyAccessedMembers(PublicConstructors)] TView, [DynamicallyAccessedMembers(PublicConstructors)] TViewModel>(this IServiceCollection services)
         where TView : class, IViewFor<TViewModel>
-        where TViewModel : class, IViewModel
+        where TViewModel : class, ITransientViewModel
     {
         services.AddTransient<IViewFor<TViewModel>, TView>();
-        services.AddTransient<TViewModel>();
+        services.AddViewModel<TViewModel>();
     }
+
+    /// <summary>
+    /// ViewModelを<see cref="IServiceCollection"/>に追加します。
+    /// </summary>
+    /// <typeparam name="TViewModel">ViewModel</typeparam>
+    /// <param name="services">追加する対象の<see cref="IServiceCollection"/></param>
+    public static void AddViewModel<[DynamicallyAccessedMembers(PublicConstructors)] TViewModel>(this IServiceCollection services)
+        where TViewModel : class, ITransientViewModel
+        => services.AddTransient<TViewModel>();
+
+    /// <summary>
+    /// MainViewModelを<see cref="IServiceCollection"/>に追加します。
+    /// </summary>
+    /// <typeparam name="TViewModel">ViewModel</typeparam>
+    /// <param name="services">追加する対象の<see cref="IServiceCollection"/></param>
+    public static void AddMainViewModel<[DynamicallyAccessedMembers(PublicConstructors)] TViewModel>(this IServiceCollection services)
+        where TViewModel : class, IMainViewModel
+        => services.AddSingleton<TViewModel>();
 
     static void AddWritableOptions<[DynamicallyAccessedMembers(PublicParameterlessConstructor)] T>(this IServiceCollection services, JsonTypeInfo<T> jsonTypeInfo)
         where T : ApplicationSettingsBase, IEquatable<T>

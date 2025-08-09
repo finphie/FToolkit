@@ -79,9 +79,19 @@ public sealed partial class WpfWindowService : IWindowService
     {
         var view = _viewLocator.GetView<T>();
 
-        return view is Window window
-            ? window
-            : throw new InvalidOperationException($"Could not retrieve a Window for ViewModel '{typeof(T).Name}'.");
+        if (view is not Window window)
+        {
+            throw new InvalidOperationException($"Could not retrieve a Window for ViewModel '{typeof(T).Name}'.");
+        }
+
+        // ViewModelはDIコンテナによって管理されているが、明示的に破棄する必要がある
+        window.Unloaded += static (sender, _) =>
+        {
+            var view = (IViewFor<T>)sender;
+            (view.ViewModel as IDisposable)?.Dispose();
+        };
+
+        return window;
     }
 
     [LoggerMessage(Level = LogLevel.Information, Message = "Window will be shown.")]

@@ -7,7 +7,7 @@ namespace FToolkit.ViewModels;
 /// <summary>
 /// メインViewのViewModel基底クラスです。
 /// </summary>
-public abstract class MainViewModelBase : ObservableObject, IViewModel
+public abstract class MainViewModelBase : ObservableObject, IMainViewModel
 {
     readonly ISettingsManagerBase<ApplicationSettingsBase> _settingsManager;
 

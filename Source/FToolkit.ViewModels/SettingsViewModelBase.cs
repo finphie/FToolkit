@@ -14,7 +14,7 @@ namespace FToolkit.ViewModels;
 /// 設定ViewのViewModel基底クラスです。
 /// </summary>
 [SuppressMessage("Naming", "CA1708:識別子は、大文字と小文字の区別以外にも相違していなければなりません", Justification = "CommunityToolkit.Mvvmの仕様")]
-public abstract partial class SettingsViewModelBase : ObservableObject, IViewModel, IDisposable
+public abstract partial class SettingsViewModelBase : ObservableObject, ITransientViewModel, IDisposable
 {
     readonly IStringLocalizer<SettingsViewModelBase> _localizer;
     readonly ISettingsManagerBase<ApplicationSettingsBase> _settingsManager;
