@@ -8,7 +8,7 @@ namespace FToolkit.Managers;
 /// 設定マネージャーの基底クラスです。
 /// </summary>
 /// <typeparam name="T">アプリケーション設定の型</typeparam>
-public class SettingsManagerBase<T> : ISettingsManagerBase<T>
+public abstract class SettingsManagerBase<T> : ISettingsManagerBase<T>
     where T : ApplicationSettingsBase
 {
     readonly IReloadableOptions<T> _options;
@@ -19,7 +19,7 @@ public class SettingsManagerBase<T> : ISettingsManagerBase<T>
     /// </summary>
     /// <param name="options">オプション値の取得を行うオブジェクト</param>
     /// <param name="publisher">イベントを送信するオブジェクト</param>
-    public SettingsManagerBase(IReloadableOptions<T> options, IPublisher publisher)
+    protected SettingsManagerBase(IReloadableOptions<T> options, IPublisher publisher)
     {
         ArgumentNullException.ThrowIfNull(options);
         ArgumentNullException.ThrowIfNull(publisher);
