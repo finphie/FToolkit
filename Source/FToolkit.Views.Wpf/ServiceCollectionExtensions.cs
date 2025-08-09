@@ -12,5 +12,8 @@ public static class ServiceCollectionExtensions
     /// </summary>
     /// <param name="services">追加する対象の<see cref="IServiceCollection"/></param>
     public static void AddWpf(this IServiceCollection services)
-        => services.AddSingleton<IWindowService, WpfWindowService>();
+    {
+        services.AddSingleton<IWindowService, WpfWindowService>();
+        services.AddSingleton<IApplicationThemeOperations, ApplicationThemeOperations>();
+    }
 }
