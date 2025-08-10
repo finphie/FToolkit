@@ -1,45 +1,32 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
-using FToolkit.Managers;
-using FToolkit.Objects;
-
-namespace FToolkit.ViewModels;
+﻿namespace FToolkit.ViewModels;
 
 /// <summary>
 /// メインViewのViewModel基底クラスです。
 /// </summary>
-public abstract class MainViewModelBase : ObservableObject, IMainViewModel
+public abstract class MainViewModelBase : ViewModelBase, IMainViewModel
 {
-    readonly ISettingsManagerBase<ApplicationSettingsBase> _settingsManager;
-
     /// <summary>
     /// <see cref="MainViewModelBase"/>クラスの新しいインスタンスを初期化します。
     /// </summary>
-    /// <param name="settingsManager">設定マネージャーのオブジェクト</param>
-    /// <param name="applicationInfo">アプリケーション情報のオブジェクト</param>
-    protected MainViewModelBase(ISettingsManagerBase<ApplicationSettingsBase> settingsManager, ApplicationInfoBase applicationInfo)
+    protected MainViewModelBase()
     {
-        ArgumentNullException.ThrowIfNull(settingsManager);
-        ArgumentNullException.ThrowIfNull(applicationInfo);
-
-        _settingsManager = settingsManager;
-
-        ApplicationTitle = applicationInfo.Title;
-        ApplicationAuthor = applicationInfo.Author;
+        ApplicationTitle = ApplicationInfo.Title;
+        ApplicationAuthor = ApplicationInfo.Author;
     }
 
     /// <summary>
     /// アプリケーションタイトル
     /// </summary>
-    public string ApplicationTitle { get; }
+    public required string ApplicationTitle { get; init; }
 
     /// <summary>
     /// 作者名
     /// </summary>
-    public string ApplicationAuthor { get; }
+    public required string ApplicationAuthor { get; init; }
 
     /// <summary>
     /// 初期化処理を行います。
     /// </summary>
     protected virtual void Initialize()
-        => _settingsManager.NotifyAll();
+        => SettingsManager.NotifyAll();
 }
