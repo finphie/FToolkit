@@ -20,7 +20,7 @@ public interface ISettingsManagerBase<out T>
     void NotifyAll();
 
     /// <summary>
-    /// アプリケーションテーマを通知します。
+    /// アプリケーションテーマの変更を通知します。
     /// </summary>
     /// <param name="theme">アプリケーションテーマ</param>
     void Notify(ApplicationTheme theme);
