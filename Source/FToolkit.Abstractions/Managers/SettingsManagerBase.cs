@@ -12,7 +12,6 @@ public abstract class SettingsManagerBase<T> : ISettingsManagerBase<T>
     where T : ApplicationSettingsBase
 {
     readonly IReloadableOptions<T> _options;
-    readonly IPublisher _publisher;
 
     /// <summary>
     /// <see cref="SettingsManagerBase{T}"/>クラスの新しいインスタンスを初期化します。
@@ -25,17 +24,22 @@ public abstract class SettingsManagerBase<T> : ISettingsManagerBase<T>
         ArgumentNullException.ThrowIfNull(publisher);
 
         _options = options;
-        _publisher = publisher;
+        Publisher = publisher;
     }
 
     /// <inheritdoc/>
     public T Value => _options.Value;
 
+    /// <summary>
+    /// パブリッシャーを取得します。
+    /// </summary>
+    protected IPublisher Publisher { get; }
+
     /// <inheritdoc/>
     public virtual void NotifyAll()
-        => Notify(_options.Value.Theme);
+        => Notify(Value.Theme);
 
     /// <inheritdoc/>
     public void Notify(ApplicationTheme theme)
-        => _publisher.Publish(theme);
+        => Publisher.Publish(theme);
 }
