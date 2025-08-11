@@ -23,25 +23,40 @@ public static class ServiceCollectionExtensions
     /// <summary>
     /// <see cref="FToolkit"/>に関連するオブジェクトを<see cref="IServiceCollection"/>に追加します。
     /// </summary>
-    /// <typeparam name="TSettings">アプリケーション設定の型</typeparam>
+    /// <typeparam name="TApplicationInfo">アプリケーション情報の型</typeparam>
+    /// <param name="services">追加する対象の<see cref="IServiceCollection"/></param>
+    public static void AddFToolkit<[DynamicallyAccessedMembers(PublicConstructors)] TApplicationInfo>(this IServiceCollection services)
+        where TApplicationInfo : ApplicationInfoBase
+    {
+        services.AddSingleton<TApplicationInfo>();
+        services.AddSingleton<ApplicationInfoBase>(static x => x.GetRequiredService<TApplicationInfo>());
+
+        services.AddSingleton<IViewLocator, ViewLocator>();
+        services.AddSingleton<IPublisher, Publisher>();
+
+        services.AddSingleton<IFileOperations, FileOperations>();
+        services.AddSingleton<IDirectoryOperations, DirectoryOperations>();
+    }
+
+    /// <summary>
+    /// 設定関連のオブジェクトを<see cref="IServiceCollection"/>に追加します。
+    /// </summary>
+    /// <typeparam name="TApplicationSettings">アプリケーション設定の型</typeparam>
     /// <typeparam name="TSettingsManager">設定マネージャーインターフェイスの型</typeparam>
     /// <typeparam name="TImplementationSettingsManager">設定マネージャーの型</typeparam>
     /// <param name="services">追加する対象の<see cref="IServiceCollection"/></param>
     /// <param name="settingsJsonTypeInfo">設定に関するJSONシリアル化のメタデータ</param>
-    public static void AddFToolkit<[DynamicallyAccessedMembers(PublicParameterlessConstructor)] TSettings, TSettingsManager, [DynamicallyAccessedMembers(PublicConstructors)] TImplementationSettingsManager>(this IServiceCollection services, JsonTypeInfo<TSettings> settingsJsonTypeInfo)
-        where TSettings : ApplicationSettingsBase, IEquatable<TSettings>
-        where TSettingsManager : class, ISettingsManagerBase<TSettings>
+    public static void AddFToolkitSettings<[DynamicallyAccessedMembers(PublicParameterlessConstructor)] TApplicationSettings, TSettingsManager, [DynamicallyAccessedMembers(PublicConstructors)] TImplementationSettingsManager>(this IServiceCollection services, JsonTypeInfo<TApplicationSettings> settingsJsonTypeInfo)
+        where TApplicationSettings : ApplicationSettingsBase, IEquatable<TApplicationSettings>
+        where TSettingsManager : class, ISettingsManagerBase<TApplicationSettings>
         where TImplementationSettingsManager : class, TSettingsManager
     {
-        services.AddSingleton<IReloadableOptions<TSettings>, ReloadableOptions<TSettings>>();
+        services.AddSingleton<IReloadableOptions<TApplicationSettings>, ReloadableOptions<TApplicationSettings>>();
         services.AddWritableOptions(settingsJsonTypeInfo);
         services.AddSingleton<TSettingsManager, TImplementationSettingsManager>();
+        services.AddSingleton<ISettingsManagerBase<ApplicationSettingsBase>>(static x => x.GetRequiredService<TSettingsManager>());
 
-        services.AddSingleton<IPublisher, Publisher>();
-        services.AddView<TSettings>();
-
-        services.AddSingleton<IFileOperations, FileOperations>();
-        services.AddSingleton<IDirectoryOperations, DirectoryOperations>();
+        services.AddSubscribers<TApplicationSettings>();
     }
 
     /// <summary>
@@ -87,12 +102,10 @@ public static class ServiceCollectionExtensions
         });
     }
 
-    static void AddView<T>(this IServiceCollection services)
-        where T : ApplicationSettingsBase
+    static void AddSubscribers<TApplicationSettings>(this IServiceCollection services)
+        where TApplicationSettings : ApplicationSettingsBase
     {
-        services.AddSingleton<IViewLocator, ViewLocator>();
-
+        services.AddActivatedSingleton<UpdateApplicationsSettingsSubscriber<TApplicationSettings>>();
         services.AddActivatedSingleton<ApplyThemeRequestSubscriber>();
-        services.AddActivatedSingleton<UpdateApplicationsSettingsSubscriber<T>>();
     }
 }
