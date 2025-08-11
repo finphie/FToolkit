@@ -1,6 +1,5 @@
 ﻿using System.Text.Json;
 using System.Text.Json.Serialization.Metadata;
-using CommunityToolkit.HighPerformance.Buffers;
 using FToolkit.IO;
 using FToolkit.Objects;
 using Microsoft.Extensions.Configuration;
@@ -14,7 +13,7 @@ namespace FToolkit.Options;
 /// </summary>
 /// <typeparam name="T">オプションの種類</typeparam>
 sealed partial class WritableOptions<T> : ReloadableOptions<T>, IWritableOptions<T>
-    where T : class, IEquatable<T>
+    where T : class
 {
     readonly ILogger<WritableOptions<T>> _logger;
     readonly IFileOperations _fileOperations;
@@ -57,26 +56,13 @@ sealed partial class WritableOptions<T> : ReloadableOptions<T>, IWritableOptions
 
         var oldValue = Value;
         var newValue = applyChanges(oldValue);
-
-        if (EqualityComparer<T>.Default.Equals(newValue, oldValue))
-        {
-            LogNoChangesApplied();
-            return;
-        }
-
-        using var bufferWriter = new ArrayPoolBufferWriter<byte>();
-        var writer = new Utf8JsonWriter(bufferWriter);
-
-        await using (writer.ConfigureAwait(false))
-        {
-            JsonSerializer.Serialize(writer, newValue, _jsonTypeInfo);
-        }
+        var bytes = JsonSerializer.SerializeToUtf8Bytes(newValue, _jsonTypeInfo);
 
         await WritableOptionsLock.ReadWriteLock.WaitAsync(cancellationToken).ConfigureAwait(false);
 
         try
         {
-            await _fileOperations.SaveAsync(_filePath, bufferWriter.WrittenMemory, cancellationToken).ConfigureAwait(false);
+            await _fileOperations.SaveAsync(_filePath, bytes, cancellationToken).ConfigureAwait(false);
 
             foreach (var fileProvider in _fileProviders)
             {
@@ -89,9 +75,6 @@ sealed partial class WritableOptions<T> : ReloadableOptions<T>, IWritableOptions
             WritableOptionsLock.ReadWriteLock.Release();
         }
     }
-
-    [LoggerMessage(Level = LogLevel.Debug, Message = "No changes were applied to the options.")]
-    partial void LogNoChangesApplied();
 
     [LoggerMessage(Level = LogLevel.Debug, Message = "Reloading configuration provider: {filePath}")]
     partial void LogReloadingConfigurationProvider(string? filePath);

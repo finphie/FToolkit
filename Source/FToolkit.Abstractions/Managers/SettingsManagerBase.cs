@@ -41,5 +41,11 @@ public abstract class SettingsManagerBase<T> : ISettingsManagerBase<T>
 
     /// <inheritdoc/>
     public void Notify(ApplicationTheme theme)
-        => Publisher.Publish(theme);
+    {
+        Publisher.Publish(theme);
+        Notify(Value with { Theme = theme });
+    }
+
+    void Notify(T settings)
+        => Publisher.Publish(settings);
 }

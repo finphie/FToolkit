@@ -7,7 +7,7 @@ namespace FToolkit.Options;
 /// </summary>
 /// <typeparam name="T">オプション値の種類</typeparam>
 class ReloadableOptions<T> : IReloadableOptions<T>
-    where T : class, IEquatable<T>
+    where T : class
 {
     readonly IOptionsMonitor<T> _options;
 

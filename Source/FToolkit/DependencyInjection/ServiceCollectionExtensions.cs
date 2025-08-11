@@ -47,7 +47,7 @@ public static class ServiceCollectionExtensions
     /// <param name="services">追加する対象の<see cref="IServiceCollection"/></param>
     /// <param name="settingsJsonTypeInfo">設定に関するJSONシリアル化のメタデータ</param>
     public static void AddFToolkitSettings<[DynamicallyAccessedMembers(PublicParameterlessConstructor)] TApplicationSettings, TSettingsManager, [DynamicallyAccessedMembers(PublicConstructors)] TImplementationSettingsManager>(this IServiceCollection services, JsonTypeInfo<TApplicationSettings> settingsJsonTypeInfo)
-        where TApplicationSettings : ApplicationSettingsBase, IEquatable<TApplicationSettings>
+        where TApplicationSettings : ApplicationSettingsBase
         where TSettingsManager : class, ISettingsManagerBase<TApplicationSettings>
         where TImplementationSettingsManager : class, TSettingsManager
     {
@@ -92,7 +92,7 @@ public static class ServiceCollectionExtensions
         => services.AddSingleton<TViewModel>();
 
     static void AddWritableOptions<[DynamicallyAccessedMembers(PublicParameterlessConstructor)] T>(this IServiceCollection services, JsonTypeInfo<T> jsonTypeInfo)
-        where T : ApplicationSettingsBase, IEquatable<T>
+        where T : ApplicationSettingsBase
     {
         services.AddSingleton<WritableOptionsFactory>();
         services.AddSingleton(x =>

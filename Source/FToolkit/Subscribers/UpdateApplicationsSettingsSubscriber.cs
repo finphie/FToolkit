@@ -16,15 +16,15 @@ sealed class UpdateApplicationsSettingsSubscriber<T> : IDisposable
     /// <summary>
     /// <see cref="UpdateApplicationsSettingsSubscriber{T}"/>クラスの新しいインスタンスを初期化します。
     /// </summary>
-    /// <param name="themeSubscriber">アプリケーションテーマ変更イベントを受信するオブジェクト</param>
+    /// <param name="subscriber">アプリケーション設定の変更イベントを受信するオブジェクト</param>
     /// <param name="writableOptions">オプション値を更新するオブジェクト</param>
-    public UpdateApplicationsSettingsSubscriber(IMessageSubscriber<ApplicationTheme> themeSubscriber, IWritableOptions<T> writableOptions)
+    public UpdateApplicationsSettingsSubscriber(IMessageSubscriber<T> subscriber, IWritableOptions<T> writableOptions)
     {
-        ArgumentNullException.ThrowIfNull(themeSubscriber);
+        ArgumentNullException.ThrowIfNull(subscriber);
         ArgumentNullException.ThrowIfNull(writableOptions);
 
-        _disposable = themeSubscriber.SubscribeAwait(
-            (theme, cancellationToken) => writableOptions.UpdateAsync(x => x with { Theme = theme }, cancellationToken),
+        _disposable = subscriber.SubscribeAwait(
+            (settings, cancellationToken) => writableOptions.UpdateAsync(x => settings, cancellationToken),
             AsyncSubscribeStrategy.Switch);
     }
 
