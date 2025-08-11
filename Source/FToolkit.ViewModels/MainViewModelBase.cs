@@ -24,9 +24,10 @@ public abstract class MainViewModelBase : ViewModelBase, IMainViewModel
     /// </summary>
     public required string ApplicationAuthor { get; init; }
 
-    /// <summary>
-    /// 初期化処理を行います。
-    /// </summary>
-    protected virtual void Initialize()
-        => SettingsManager.NotifyAll();
+    /// <inheritdoc/>
+    protected override void Initialize()
+    {
+        base.Initialize();
+        SettingsManager.NotifyAll();
+    }
 }

@@ -46,6 +46,10 @@ public abstract class SettingsManagerBase<T> : ISettingsManagerBase<T>
         Notify(Value with { Theme = theme });
     }
 
-    void Notify(T settings)
+    /// <summary>
+    /// アプリケーション設定の変更を通知します。
+    /// </summary>
+    /// <param name="settings">アプリケーション設定</param>
+    protected void Notify(T settings)
         => Publisher.Publish(settings);
 }

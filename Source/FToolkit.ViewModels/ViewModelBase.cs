@@ -28,4 +28,11 @@ public abstract class ViewModelBase : ObservableObject
     /// アプリケーション情報を取得します。
     /// </summary>
     protected virtual ApplicationInfoBase ApplicationInfo { get; }
+
+    /// <summary>
+    /// 初期化処理を行います。
+    /// </summary>
+    protected virtual void Initialize()
+    {
+    }
 }
