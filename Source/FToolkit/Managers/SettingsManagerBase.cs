@@ -7,18 +7,18 @@ namespace FToolkit.Managers;
 /// <summary>
 /// 設定マネージャーの基底クラスです。
 /// </summary>
-/// <typeparam name="T">アプリケーション設定の型</typeparam>
-public abstract class SettingsManagerBase<T> : ISettingsManagerBase<T>
-    where T : ApplicationSettingsBase
+/// <typeparam name="TSettings">アプリケーション設定の型</typeparam>
+public abstract class SettingsManagerBase<TSettings> : ISettingsManagerBase<TSettings>
+    where TSettings : ISettings
 {
-    readonly IReloadableOptions<T> _options;
+    readonly IReloadableOptions<TSettings> _options;
 
     /// <summary>
-    /// <see cref="SettingsManagerBase{T}"/>クラスの新しいインスタンスを初期化します。
+    /// <see cref="SettingsManagerBase{TSettings}"/>クラスの新しいインスタンスを初期化します。
     /// </summary>
     /// <param name="options">オプション値の取得を行うオブジェクト</param>
     /// <param name="publisher">イベントを送信するオブジェクト</param>
-    protected SettingsManagerBase(IReloadableOptions<T> options, IPublisher publisher)
+    protected SettingsManagerBase(IReloadableOptions<TSettings> options, IPublisher publisher)
     {
         ArgumentNullException.ThrowIfNull(options);
         ArgumentNullException.ThrowIfNull(publisher);
@@ -28,7 +28,7 @@ public abstract class SettingsManagerBase<T> : ISettingsManagerBase<T>
     }
 
     /// <inheritdoc/>
-    public T Value => _options.Value;
+    public TSettings Value => _options.Value;
 
     /// <summary>
     /// パブリッシャーを取得します。
@@ -36,20 +36,12 @@ public abstract class SettingsManagerBase<T> : ISettingsManagerBase<T>
     protected IPublisher Publisher { get; }
 
     /// <inheritdoc/>
-    public virtual void NotifyAll()
-        => Notify(Value.Theme);
-
-    /// <inheritdoc/>
-    public void Notify(ApplicationTheme theme)
-    {
-        Publisher.Publish(theme);
-        Notify(Value with { Theme = theme });
-    }
+    public abstract void NotifyAll();
 
     /// <summary>
     /// アプリケーション設定の変更を通知します。
     /// </summary>
     /// <param name="settings">アプリケーション設定</param>
-    protected void Notify(T settings)
+    protected void Notify(TSettings settings)
         => Publisher.Publish(settings);
 }
