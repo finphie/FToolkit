@@ -1,6 +1,5 @@
 ﻿using FToolkit.Options;
 using FToolkit.Publishers;
-using FToolkit.ViewModels;
 
 namespace FToolkit;
 
@@ -9,4 +8,5 @@ namespace FToolkit;
 /// </summary>
 /// <typeparam name="TSelf">自身の型</typeparam>
 /// <typeparam name="TSettings">設定の型</typeparam>
-public interface ISettingsManagerConstructible<out TSelf, in TSettings> : IConstructible<TSelf, IReloadableOptions<TSettings>, IPublisher, IViewModel>;
+/// <typeparam name="TArgument">設定マネージャーに渡す引数の型</typeparam>
+public interface ISettingsManagerConstructible<out TSelf, in TSettings, in TArgument> : IConstructible<TSelf, IReloadableOptions<TSettings>, IPublisher, TArgument>;

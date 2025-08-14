@@ -1,4 +1,5 @@
 ﻿using FToolkit.Objects;
+using FToolkit.ViewModels;
 
 namespace FToolkit.Managers;
 
@@ -27,6 +28,6 @@ public interface IApplicationSettingsManagerBase<out TSettings> : ISettingsManag
 /// </summary>
 /// <typeparam name="TSettings">設定の型</typeparam>
 /// <typeparam name="TSelf">自身の型</typeparam>
-public interface IApplicationSettingsManagerBase<TSettings, out TSelf> : IApplicationSettingsManagerBase<TSettings>, ISettingsManagerConstructible<TSelf, TSettings>
+public interface IApplicationSettingsManagerBase<TSettings, out TSelf> : IApplicationSettingsManagerBase<TSettings>, ISettingsManagerBase<TSettings, TSelf, IViewModel>
     where TSettings : ApplicationSettingsBase
     where TSelf : IApplicationSettingsManagerBase<TSettings, TSelf>;
