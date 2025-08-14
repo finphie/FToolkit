@@ -1,11 +1,12 @@
 ﻿using System.Windows;
 using FToolkit.ViewModels;
 using Microsoft.Extensions.Logging;
+using WindowState = FToolkit.Objects.WindowState;
 
 namespace FToolkit.Views.Wpf;
 
 /// <summary>
-/// ViewModelに関連付けられたWindowを表示するクラスです。
+/// ViewModelに関連付けられたWindow関連操作を行うクラスです。
 /// </summary>
 public sealed partial class WpfWindowService : IWindowService
 {
@@ -41,6 +42,8 @@ public sealed partial class WpfWindowService : IWindowService
         where TOwnerViewModel : class, IViewModel
         where TViewModel : class, IViewModel
     {
+        ArgumentNullException.ThrowIfNull(ownerViewModel);
+
         LogShowWindow();
 
         var ownerWindow = Application.Current.Windows.FindWindowByViewModel(ownerViewModel);
@@ -65,6 +68,8 @@ public sealed partial class WpfWindowService : IWindowService
         where TOwnerViewModel : class, IViewModel
         where TViewModel : class, IViewModel
     {
+        ArgumentNullException.ThrowIfNull(ownerViewModel);
+
         LogShowDialogWindow();
 
         var ownerWindow = Application.Current.Windows.FindWindowByViewModel(ownerViewModel);
@@ -72,6 +77,18 @@ public sealed partial class WpfWindowService : IWindowService
 
         window.Owner = ownerWindow;
         window.ShowDialog();
+    }
+
+    /// <inheritdoc/>
+    public void ChangeWindowState<TViewModel>(TViewModel viewModel, WindowState windowState)
+        where TViewModel : class, IViewModel
+    {
+        ArgumentNullException.ThrowIfNull(viewModel);
+
+        LogChangeWindowState(windowState);
+
+        var window = Application.Current.Windows.FindWindowByViewModel(viewModel);
+        window.WindowState = windowState.ToWpfWindowState();
     }
 
     Window GetWindow<T>()
@@ -94,9 +111,12 @@ public sealed partial class WpfWindowService : IWindowService
         return window;
     }
 
-    [LoggerMessage(Level = LogLevel.Information, Message = "Window will be shown.")]
+    [LoggerMessage(Level = LogLevel.Debug, Message = "Window will be shown.")]
     partial void LogShowWindow();
 
-    [LoggerMessage(Level = LogLevel.Information, Message = "Dialog Window will be shown.")]
+    [LoggerMessage(Level = LogLevel.Debug, Message = "Dialog Window will be shown.")]
     partial void LogShowDialogWindow();
+
+    [LoggerMessage(Level = LogLevel.Debug, Message = "Window state will be changed to {windowState}.")]
+    partial void LogChangeWindowState(WindowState windowState);
 }

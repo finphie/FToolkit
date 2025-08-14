@@ -1,9 +1,10 @@
-﻿using FToolkit.ViewModels;
+﻿using FToolkit.Objects;
+using FToolkit.ViewModels;
 
 namespace FToolkit.Views;
 
 /// <summary>
-/// ViewModelに関連付けられたWindowを表示するインターフェイスです。
+/// ViewModelに関連付けられたWindow関連操作を行うインターフェイスです。
 /// </summary>
 public interface IWindowService
 {
@@ -43,5 +44,14 @@ public interface IWindowService
     /// <exception cref="InvalidOperationException">Windowの表示に失敗しました。</exception>
     void ShowDialog<TOwnerViewModel, TViewModel>(TOwnerViewModel ownerViewModel)
         where TOwnerViewModel : class, IViewModel
+        where TViewModel : class, IViewModel;
+
+    /// <summary>
+    /// 指定したViewModelに関連付けられたWindowの状態を変更します。
+    /// </summary>
+    /// <typeparam name="TViewModel">Windowの状態を変更するWindowに関連付けられたViewModelの型</typeparam>
+    /// <param name="viewModel">Windowの状態を変更するWindowに関連付けられたViewModel</param>
+    /// <param name="windowState">Windowの状態</param>
+    void ChangeWindowState<TViewModel>(TViewModel viewModel, WindowState windowState)
         where TViewModel : class, IViewModel;
 }
