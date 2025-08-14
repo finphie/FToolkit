@@ -1,4 +1,5 @@
-﻿using FToolkit.Objects;
+﻿using FToolkit.Commands;
+using FToolkit.Objects;
 using FToolkit.Options;
 using FToolkit.Publishers;
 
@@ -36,7 +37,7 @@ public abstract class SettingsManagerBase<TSettings> : ISettingsManagerBase<TSet
     protected IPublisher Publisher { get; }
 
     /// <inheritdoc/>
-    public abstract void NotifyAll();
+    public abstract void NotifyAll(UpdateAllSettingsCommand command);
 
     /// <summary>
     /// アプリケーション設定の変更を通知します。

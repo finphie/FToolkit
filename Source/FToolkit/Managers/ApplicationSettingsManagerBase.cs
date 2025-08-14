@@ -3,7 +3,6 @@ using FToolkit.Commands;
 using FToolkit.Objects;
 using FToolkit.Options;
 using FToolkit.Publishers;
-using FToolkit.ViewModels;
 
 namespace FToolkit.Managers;
 
@@ -11,27 +10,16 @@ namespace FToolkit.Managers;
 /// アプリケーション設定マネージャーの基底クラスです。
 /// </summary>
 /// <typeparam name="TApplicationSettings">アプリケーション設定の型</typeparam>
-public abstract class ApplicationSettingsManagerBase<TApplicationSettings> : SettingsManagerBase<TApplicationSettings>, IApplicationSettingsManagerBase<TApplicationSettings>
+/// <param name="options">再読み込み可能なオプション値を取得するオブジェクト</param>
+/// <param name="publisher">イベントを送信するパブリッシャー</param>
+public abstract class ApplicationSettingsManagerBase<TApplicationSettings>(IReloadableOptions<TApplicationSettings> options, IPublisher publisher) : SettingsManagerBase<TApplicationSettings>(options, publisher), IApplicationSettingsManagerBase<TApplicationSettings>
     where TApplicationSettings : ApplicationSettingsBase
 {
-    readonly IMainViewModel _mainViewModel;
-
-    /// <summary>
-    /// <see cref="ApplicationSettingsManagerBase{TApplicationSettings}"/>クラスの新しいインスタンスを初期化します。
-    /// </summary>
-    /// <param name="options">再読み込み可能なオプション値を取得するオブジェクト</param>
-    /// <param name="publisher">イベントを送信するパブリッシャー</param>
-    /// <param name="mainViewModel">メインViewModel</param>
-    protected ApplicationSettingsManagerBase(IReloadableOptions<TApplicationSettings> options, IPublisher publisher, IMainViewModel mainViewModel)
-        : base(options, publisher)
-    {
-        ArgumentNullException.ThrowIfNull(mainViewModel);
-        _mainViewModel = mainViewModel;
-    }
-
     /// <inheritdoc/>
-    public override void NotifyAll()
+    public override void NotifyAll(UpdateAllSettingsCommand command)
     {
+        ArgumentNullException.ThrowIfNull(command);
+
         Notify(Value.Theme);
 
         if (Value.Window is null)
@@ -39,7 +27,7 @@ public abstract class ApplicationSettingsManagerBase<TApplicationSettings> : Set
             return;
         }
 
-        Notify(Value.Window.State);
+        Notify(new ChangeWindowStateCommand(command.ViewModel, Value.Window.State));
     }
 
     /// <inheritdoc/>
@@ -50,18 +38,19 @@ public abstract class ApplicationSettingsManagerBase<TApplicationSettings> : Set
     }
 
     /// <inheritdoc/>
-    public void Notify(WindowState windowState)
+    public void Notify(ChangeWindowStateCommand command)
     {
+        ArgumentNullException.ThrowIfNull(command);
+
         if (Value.Window is null)
         {
             ThrowHelper.ThrowInvalidOperationException("Window settings are not initialized.");
         }
 
-        var message = new ChangeWindowStateCommand(_mainViewModel, windowState);
-        Publisher.Publish(message);
+        Publisher.Publish(command);
 
         var newSettings = Value with { };
-        newSettings.Window.State = windowState;
+        newSettings.Window.State = command.State;
         Notify(newSettings);
     }
 }
