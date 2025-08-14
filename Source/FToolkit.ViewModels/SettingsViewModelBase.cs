@@ -2,6 +2,7 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.DependencyInjection;
 using CommunityToolkit.Mvvm.Input;
+using FToolkit.Commands;
 using FToolkit.Objects;
 using FToolkit.ViewModels.Objects;
 using Microsoft.Extensions.Localization;
@@ -95,7 +96,7 @@ public abstract partial class SettingsViewModelBase : ViewModelBase, ITransientV
     }
 
     partial void OnSelectedThemeChanged(ApplicationThemeView value)
-        => SettingsManager.Notify(value.Type);
+        => SettingsManager.Notify(new ChangeApplicationThemeCommand(value.Type));
 
     [RelayCommand]
     void ChangeApplicationTheme(ApplicationThemeView theme)
