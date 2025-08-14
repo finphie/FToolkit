@@ -13,8 +13,8 @@ public interface IApplicationSettingsManagerBase<out TSettings> : ISettingsManag
     /// <summary>
     /// アプリケーションテーマの変更を通知します。
     /// </summary>
-    /// <param name="theme">アプリケーションテーマ</param>
-    void Notify(ApplicationTheme theme);
+    /// <param name="command">コマンド</param>
+    void Notify(ChangeApplicationThemeCommand command);
 
     /// <summary>
     /// Windowの状態変更を通知します。

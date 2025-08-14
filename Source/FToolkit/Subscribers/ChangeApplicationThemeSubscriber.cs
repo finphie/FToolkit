@@ -1,5 +1,4 @@
 ﻿using FToolkit.Commands;
-using FToolkit.Objects;
 using FToolkit.Views;
 using ZeroMessenger;
 
@@ -17,12 +16,12 @@ sealed class ChangeApplicationThemeSubscriber : IDisposable
     /// </summary>
     /// <param name="subscriber">アプリケーションテーマ変更イベントを受信するためのオブジェクト</param>
     /// <param name="themeOperations">アプリケーションテーマの操作を行うオブジェクト</param>
-    public ChangeApplicationThemeSubscriber(IMessageSubscriber<ApplicationTheme> subscriber, IApplicationThemeOperations themeOperations)
+    public ChangeApplicationThemeSubscriber(IMessageSubscriber<ChangeApplicationThemeCommand> subscriber, IApplicationThemeOperations themeOperations)
     {
         ArgumentNullException.ThrowIfNull(subscriber);
         ArgumentNullException.ThrowIfNull(themeOperations);
 
-        _disposable = subscriber.Subscribe(themeOperations.Change);
+        _disposable = subscriber.Subscribe(x => themeOperations.Change(x.ApplicationTheme));
     }
 
     /// <inheritdoc/>

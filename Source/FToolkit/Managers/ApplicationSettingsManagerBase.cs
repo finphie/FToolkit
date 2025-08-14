@@ -20,7 +20,7 @@ public abstract class ApplicationSettingsManagerBase<TApplicationSettings>(IRelo
     {
         ArgumentNullException.ThrowIfNull(command);
 
-        Notify(Value.Theme);
+        Notify(new ChangeApplicationThemeCommand(Value.Theme));
 
         if (Value.Window is null)
         {
@@ -31,10 +31,12 @@ public abstract class ApplicationSettingsManagerBase<TApplicationSettings>(IRelo
     }
 
     /// <inheritdoc/>
-    public void Notify(ApplicationTheme theme)
+    public void Notify(ChangeApplicationThemeCommand command)
     {
-        Publisher.Publish(theme);
-        Notify(Value with { Theme = theme });
+        ArgumentNullException.ThrowIfNull(command);
+
+        Publisher.Publish(command);
+        Notify(Value with { Theme = command.ApplicationTheme });
     }
 
     /// <inheritdoc/>
