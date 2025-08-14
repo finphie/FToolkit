@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Options;
+﻿using FToolkit.Objects;
+using Microsoft.Extensions.Options;
 
 namespace FToolkit.Options;
 
@@ -7,7 +8,7 @@ namespace FToolkit.Options;
 /// </summary>
 /// <typeparam name="T">オプション値の種類</typeparam>
 class ReloadableOptions<T> : IReloadableOptions<T>
-    where T : class
+    where T : ISettings
 {
     readonly IOptionsMonitor<T> _options;
 

@@ -1,11 +1,13 @@
-﻿namespace FToolkit.Options;
+﻿using FToolkit.Objects;
+
+namespace FToolkit.Options;
 
 /// <summary>
 /// オプション値を更新するインターフェイスです。
 /// </summary>
 /// <typeparam name="T">オプションの種類</typeparam>
 public interface IWritableOptions<T> : IReloadableOptions<T>
-    where T : class
+    where T : ISettings
 {
     /// <summary>
     /// オプション値に変更を適用します。

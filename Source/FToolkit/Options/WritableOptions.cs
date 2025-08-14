@@ -13,7 +13,7 @@ namespace FToolkit.Options;
 /// </summary>
 /// <typeparam name="T">オプションの種類</typeparam>
 sealed partial class WritableOptions<T> : ReloadableOptions<T>, IWritableOptions<T>
-    where T : class
+    where T : ISettings
 {
     readonly ILogger<WritableOptions<T>> _logger;
     readonly IFileOperations _fileOperations;
