@@ -9,7 +9,7 @@ namespace FToolkit.Subscribers;
 /// </summary>
 /// <typeparam name="T">アプリケーション設定の型</typeparam>
 sealed class UpdateApplicationsSettingsSubscriber<T> : IDisposable
-    where T : ApplicationSettingsBase
+    where T : ISettings
 {
     readonly IDisposable _disposable;
 
