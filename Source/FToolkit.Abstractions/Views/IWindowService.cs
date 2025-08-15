@@ -1,5 +1,6 @@
 ﻿using FToolkit.Objects;
 using FToolkit.ViewModels;
+using R3;
 
 namespace FToolkit.Views;
 
@@ -53,5 +54,14 @@ public interface IWindowService
     /// <param name="viewModel">Windowの状態を変更するWindowに関連付けられたViewModel</param>
     /// <param name="windowState">Windowの状態</param>
     void ChangeWindowState<TViewModel>(TViewModel viewModel, WindowState windowState)
+        where TViewModel : class, IViewModel;
+
+    /// <summary>
+    /// 指定したViewModelに関連付けられたWindowの状態変更を監視します。
+    /// </summary>
+    /// <typeparam name="TViewModel">状態変更を監視するWindowに関連付けられたViewModelの型</typeparam>
+    /// <param name="viewModel">状態変更を監視するWindowに関連付けられたViewModel</param>
+    /// <returns>Windowの状態変更を通知するObservableを返します。</returns>
+    Observable<WindowState> ObserveWindowStateChanged<TViewModel>(TViewModel viewModel)
         where TViewModel : class, IViewModel;
 }

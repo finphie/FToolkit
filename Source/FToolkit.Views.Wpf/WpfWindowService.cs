@@ -1,6 +1,7 @@
 ﻿using System.Windows;
 using FToolkit.ViewModels;
 using Microsoft.Extensions.Logging;
+using R3;
 using WindowState = FToolkit.Objects.WindowState;
 
 namespace FToolkit.Views.Wpf;
@@ -89,6 +90,17 @@ public sealed partial class WpfWindowService : IWindowService
 
         var window = Application.Current.Windows.FindWindowByViewModel(viewModel);
         window.WindowState = windowState.ToWpfWindowState();
+    }
+
+    /// <inheritdoc/>
+    public Observable<WindowState> ObserveWindowStateChanged<TViewModel>(TViewModel viewModel)
+        where TViewModel : class, IViewModel
+    {
+        ArgumentNullException.ThrowIfNull(viewModel);
+
+        var window = Application.Current.Windows.FindWindowByViewModel(viewModel);
+        return window.WindowStateChangedAsObservable()
+            .Select(static x => x.ToWindowState());
     }
 
     Window GetWindow<T>()
