@@ -1,5 +1,6 @@
 ﻿using System.Windows;
 using FToolkit.Objects;
+using FToolkit.Views.Wpf.Extensions;
 using Microsoft.Extensions.Logging;
 
 namespace FToolkit.Views.Wpf;

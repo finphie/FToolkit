@@ -5,7 +5,7 @@ using FToolkit.ViewModels;
 using WindowState = FToolkit.Objects.WindowState;
 using WpfWindowState = System.Windows.WindowState;
 
-namespace FToolkit.Views.Wpf;
+namespace FToolkit.Views.Wpf.Extensions;
 
 /// <summary>
 /// WPF関連の拡張メソッドクラスです。
@@ -36,9 +36,9 @@ static class WpfExtensions
     /// <returns><see cref="ThemeMode"/>の値を、対応するアプリケーションテーマで返します。</returns>
     public static ApplicationTheme ToApplicationTheme(this ThemeMode theme)
     {
-        return (theme == ThemeMode.Light) ? ApplicationTheme.Light
-            : (theme == ThemeMode.Dark) ? ApplicationTheme.Dark
-            : (theme == ThemeMode.System) ? ApplicationTheme.System
+        return theme == ThemeMode.Light ? ApplicationTheme.Light
+            : theme == ThemeMode.Dark ? ApplicationTheme.Dark
+            : theme == ThemeMode.System ? ApplicationTheme.System
             : throw new UnreachableException();
     }
 

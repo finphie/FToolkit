@@ -1,5 +1,6 @@
 ﻿using System.Windows;
 using FToolkit.ViewModels;
+using FToolkit.Views.Wpf.Extensions;
 using Microsoft.Extensions.Logging;
 using R3;
 using WindowState = FToolkit.Objects.WindowState;
