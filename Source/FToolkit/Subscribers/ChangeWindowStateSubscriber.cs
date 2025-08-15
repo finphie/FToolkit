@@ -5,7 +5,7 @@ using ZeroMessenger;
 namespace FToolkit.Subscribers;
 
 /// <summary>
-/// Windowの状態変更コマンドを受信し、Windowの状態を変更するクラスです。
+/// Windowの状態変更コマンドを受信して、Windowの状態を変更するクラスです。
 /// </summary>
 sealed class ChangeWindowStateSubscriber : IDisposable
 {

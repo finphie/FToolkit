@@ -5,7 +5,7 @@ using ZeroMessenger;
 namespace FToolkit.Subscribers;
 
 /// <summary>
-/// アプリケーションテーマ変更コマンドを受信し、テーマを変更するクラスです。
+/// アプリケーションテーマ変更コマンドを受信して、テーマを変更するクラスです。
 /// </summary>
 sealed class ChangeApplicationThemeSubscriber : IDisposable
 {

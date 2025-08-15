@@ -5,7 +5,7 @@ using ZeroMessenger;
 namespace FToolkit.Subscribers;
 
 /// <summary>
-/// 設定変更要求を受信し、オプション値を更新するクラスです。
+/// 設定変更要求を受信して、オプション値を更新するクラスです。
 /// </summary>
 /// <typeparam name="T">アプリケーション設定の型</typeparam>
 sealed class UpdateApplicationsSettingsSubscriber<T> : IDisposable
