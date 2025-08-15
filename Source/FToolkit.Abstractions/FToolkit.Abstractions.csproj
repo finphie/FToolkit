@@ -12,6 +12,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="R3" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\FToolkit.Objects\FToolkit.Objects.csproj" />
   </ItemGroup>
 
