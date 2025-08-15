@@ -6,14 +6,9 @@
 public sealed record WindowSettings
 {
     /// <summary>
-    /// 幅
+    /// サイズ
     /// </summary>
-    public int Width { get; set; } = 1200;
-
-    /// <summary>
-    /// 高さ
-    /// </summary>
-    public int Height { get; set; } = 600;
+    public WindowSize Size { get; set; } = new(1200, 600);
 
     /// <summary>
     /// X座標

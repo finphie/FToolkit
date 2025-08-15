@@ -50,8 +50,8 @@ public interface IWindowService
     /// <summary>
     /// 指定したViewModelに関連付けられたWindowの状態を変更します。
     /// </summary>
-    /// <typeparam name="TViewModel">Windowの状態を変更するWindowに関連付けられたViewModelの型</typeparam>
-    /// <param name="viewModel">Windowの状態を変更するWindowに関連付けられたViewModel</param>
+    /// <typeparam name="TViewModel">状態を変更するWindowに関連付けられたViewModelの型</typeparam>
+    /// <param name="viewModel">状態を変更するWindowに関連付けられたViewModel</param>
     /// <param name="windowState">Windowの状態</param>
     void ChangeWindowState<TViewModel>(TViewModel viewModel, WindowState windowState)
         where TViewModel : class, IViewModel;
@@ -63,5 +63,14 @@ public interface IWindowService
     /// <param name="viewModel">状態変更を監視するWindowに関連付けられたViewModel</param>
     /// <returns>Windowの状態変更を通知するObservableを返します。</returns>
     Observable<WindowState> ObserveWindowStateChanged<TViewModel>(TViewModel viewModel)
+        where TViewModel : class, IViewModel;
+
+    /// <summary>
+    /// 指定したViewModelに関連付けられたWindowのサイズを変更します。
+    /// </summary>
+    /// <typeparam name="TViewModel">サイズを変更するWindowに関連付けられたViewModelの型</typeparam>
+    /// <param name="viewModel">サイズを変更するWindowに関連付けられたViewModel</param>
+    /// <param name="windowSize">Windowのサイズ</param>
+    void ChangeWindowSize<TViewModel>(TViewModel viewModel, WindowSize windowSize)
         where TViewModel : class, IViewModel;
 }

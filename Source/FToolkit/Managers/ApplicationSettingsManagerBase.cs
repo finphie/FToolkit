@@ -1,4 +1,5 @@
-﻿using CommunityToolkit.Diagnostics;
+﻿using System.Diagnostics.CodeAnalysis;
+using CommunityToolkit.Diagnostics;
 using FToolkit.Commands;
 using FToolkit.Objects;
 using FToolkit.Options;
@@ -22,12 +23,13 @@ public abstract class ApplicationSettingsManagerBase<TApplicationSettings>(IRelo
 
         Notify(new ChangeApplicationThemeCommand(Value.Theme));
 
-        if (Value.Window is null)
+        if (Value.Window is not { } windowSettings)
         {
             return;
         }
 
-        Notify(new ChangeWindowStateCommand(command.ViewModel, Value.Window.State));
+        Notify(new ChangeWindowStateCommand(command.ViewModel, windowSettings.State));
+        Notify(new ChangeWindowSizeCommand(command.ViewModel, windowSettings.Size));
     }
 
     /// <inheritdoc/>
@@ -43,16 +45,35 @@ public abstract class ApplicationSettingsManagerBase<TApplicationSettings>(IRelo
     public void Notify(ChangeWindowStateCommand command)
     {
         ArgumentNullException.ThrowIfNull(command);
-
-        if (Value.Window is null)
-        {
-            ThrowHelper.ThrowInvalidOperationException("Window settings are not initialized.");
-        }
+        ThrowIfWindowSettingsNotInitialized(Value.Window);
 
         Publisher.Publish(command);
 
         var newSettings = Value with { };
         newSettings.Window.State = command.State;
         Notify(newSettings);
+    }
+
+    /// <inheritdoc/>
+    public void Notify(ChangeWindowSizeCommand command)
+    {
+        ArgumentNullException.ThrowIfNull(command);
+        ThrowIfWindowSettingsNotInitialized(Value.Window);
+
+        Publisher.Publish(command);
+
+        var newSettings = Value with { };
+        newSettings.Window.Size = command.Size;
+        Notify(newSettings);
+    }
+
+    static void ThrowIfWindowSettingsNotInitialized([NotNull] WindowSettings? windowSettings)
+    {
+        if (windowSettings is not null)
+        {
+            return;
+        }
+
+        ThrowHelper.ThrowInvalidOperationException("Window settings are not initialized.");
     }
 }

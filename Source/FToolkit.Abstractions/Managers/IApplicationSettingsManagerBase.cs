@@ -21,4 +21,10 @@ public interface IApplicationSettingsManagerBase<out TSettings> : ISettingsManag
     /// </summary>
     /// <param name="command">コマンド</param>
     void Notify(ChangeWindowStateCommand command);
+
+    /// <summary>
+    /// Windowサイズ変更を通知します。
+    /// </summary>
+    /// <param name="command">コマンド</param>
+    void Notify(ChangeWindowSizeCommand command);
 }

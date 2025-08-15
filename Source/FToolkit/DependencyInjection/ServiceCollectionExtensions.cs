@@ -129,5 +129,6 @@ public static class ServiceCollectionExtensions
     {
         services.AddActivatedSingleton<ChangeApplicationThemeSubscriber>();
         services.AddActivatedSingleton<ChangeWindowStateSubscriber>();
+        services.AddActivatedSingleton<ChangeWindowSizeSubscriber>();
     }
 }

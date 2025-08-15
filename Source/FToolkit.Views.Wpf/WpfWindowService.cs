@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using FToolkit.Objects;
 using FToolkit.ViewModels;
 using FToolkit.Views.Wpf.Extensions;
 using Microsoft.Extensions.Logging;
@@ -102,6 +103,18 @@ public sealed partial class WpfWindowService : IWindowService
         var window = Application.Current.Windows.FindWindowByViewModel(viewModel);
         return window.WindowStateChangedAsObservable()
             .Select(static x => x.ToWindowState());
+    }
+
+    /// <inheritdoc/>
+    public void ChangeWindowSize<TViewModel>(TViewModel viewModel, WindowSize windowSize)
+        where TViewModel : class, IViewModel
+    {
+        ArgumentNullException.ThrowIfNull(viewModel);
+        ArgumentNullException.ThrowIfNull(windowSize);
+
+        var window = Application.Current.Windows.FindWindowByViewModel(viewModel);
+        window.Width = windowSize.Width;
+        window.Height = windowSize.Height;
     }
 
     Window GetWindow<T>()
