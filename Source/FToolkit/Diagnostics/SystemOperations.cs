@@ -1,5 +1,4 @@
 ﻿using System.Diagnostics;
-using System.Diagnostics.CodeAnalysis;
 using Microsoft.Extensions.Logging;
 
 namespace FToolkit.Diagnostics;
@@ -23,7 +22,6 @@ public sealed partial class SystemOperations : ISystemOperations
     }
 
     /// <inheritdoc/>
-    [SuppressMessage("IDisposableAnalyzers.Correctness", "IDISP004:Don't ignore created IDisposable", Justification = "URL")]
     public void OpenInWebBrowser(string url)
     {
         ArgumentException.ThrowIfNullOrEmpty(url);
