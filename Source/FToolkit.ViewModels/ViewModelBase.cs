@@ -2,6 +2,7 @@
 using CommunityToolkit.Mvvm.DependencyInjection;
 using FToolkit.Managers;
 using FToolkit.Objects;
+using FToolkit.Views;
 
 namespace FToolkit.ViewModels;
 
@@ -17,6 +18,7 @@ public abstract class ViewModelBase : ObservableObject, IViewModel
     {
         ApplicationInfo = Ioc.Default.GetRequiredService<ApplicationInfoBase>();
         SettingsManager = Ioc.Default.GetRequiredService<IApplicationSettingsManagerBase<ApplicationSettingsBase>>();
+        WindowService = Ioc.Default.GetService<IWindowService>()!;
     }
 
     /// <summary>
@@ -28,6 +30,11 @@ public abstract class ViewModelBase : ObservableObject, IViewModel
     /// 設定マネージャーを取得します。
     /// </summary>
     protected virtual IApplicationSettingsManagerBase<ApplicationSettingsBase> SettingsManager { get; }
+
+    /// <summary>
+    /// Window関連の操作を行うオブジェクトを取得します。
+    /// </summary>
+    protected IWindowService WindowService { get; }
 
     /// <summary>
     /// 初期化処理を行います。
