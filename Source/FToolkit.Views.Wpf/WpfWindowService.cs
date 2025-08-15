@@ -112,9 +112,23 @@ public sealed partial class WpfWindowService : IWindowService
         ArgumentNullException.ThrowIfNull(viewModel);
         ArgumentNullException.ThrowIfNull(windowSize);
 
+        Application.Current.Dispatcher.Invoke(() =>
+        {
+            var window = Application.Current.Windows.FindWindowByViewModel(viewModel);
+            window.Width = windowSize.Width;
+            window.Height = windowSize.Height;
+        });
+    }
+
+    /// <inheritdoc/>
+    public Observable<WindowSize> ObserveWindowSizeChanged<TViewModel>(TViewModel viewModel)
+        where TViewModel : class, IViewModel
+    {
+        ArgumentNullException.ThrowIfNull(viewModel);
+
         var window = Application.Current.Windows.FindWindowByViewModel(viewModel);
-        window.Width = windowSize.Width;
-        window.Height = windowSize.Height;
+        return window.WindowSizeChangedAsObservable()
+            .Select(static x => new WindowSize((int)x.NewSize.Width, (int)x.NewSize.Height));
     }
 
     Window GetWindow<T>()

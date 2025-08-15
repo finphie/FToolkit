@@ -73,4 +73,13 @@ public interface IWindowService
     /// <param name="windowSize">Windowのサイズ</param>
     void ChangeWindowSize<TViewModel>(TViewModel viewModel, WindowSize windowSize)
         where TViewModel : class, IViewModel;
+
+    /// <summary>
+    /// 指定したViewModelに関連付けられたWindowのサイズ変更を監視します。
+    /// </summary>
+    /// <typeparam name="TViewModel">サイズ変更を監視するWindowに関連付けられたViewModelの型</typeparam>
+    /// <param name="viewModel">サイズ変更を監視するWindowに関連付けられたViewModel</param>
+    /// <returns>Windowのサイズ変更を通知するObservableを返します。</returns>
+    Observable<WindowSize> ObserveWindowSizeChanged<TViewModel>(TViewModel viewModel)
+        where TViewModel : class, IViewModel;
 }
