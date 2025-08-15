@@ -51,6 +51,7 @@ MIT
 - [Microsoft.Extensions.Logging.Abstractions](https://github.com/dotnet/runtime)
 - [Microsoft.Extensions.Options](https://github.com/dotnet/runtime)
 - [ObservableCollections](https://github.com/Cysharp/ObservableCollections)
+- [R3](https://github.com/Cysharp/R3)
 - [UnitGenerator](https://github.com/Cysharp/UnitGenerator)
 - [ZeroMessenger](https://github.com/AnnulusGames/ZeroMessenger)
 
