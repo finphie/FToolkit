@@ -90,8 +90,11 @@ public sealed partial class WpfWindowService : IWindowService
 
         LogChangeWindowState(windowState);
 
-        var window = Application.Current.Windows.FindWindowByViewModel(viewModel);
-        window.WindowState = windowState.ToWpfWindowState();
+        Application.Current.Dispatcher.Invoke(() =>
+        {
+            var window = Application.Current.Windows.FindWindowByViewModel(viewModel);
+            window.WindowState = windowState.ToWpfWindowState();
+        });
     }
 
     /// <inheritdoc/>
@@ -111,6 +114,8 @@ public sealed partial class WpfWindowService : IWindowService
     {
         ArgumentNullException.ThrowIfNull(viewModel);
         ArgumentNullException.ThrowIfNull(windowSize);
+
+        LogChangeWindowSize(windowSize);
 
         Application.Current.Dispatcher.Invoke(() =>
         {
@@ -159,4 +164,7 @@ public sealed partial class WpfWindowService : IWindowService
 
     [LoggerMessage(Level = LogLevel.Debug, Message = "Window state will be changed to {windowState}.")]
     partial void LogChangeWindowState(WindowState windowState);
+
+    [LoggerMessage(Level = LogLevel.Debug, Message = "Window size will be changed to {windowSize}.")]
+    partial void LogChangeWindowSize(WindowSize windowSize);
 }

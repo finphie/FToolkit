@@ -29,7 +29,6 @@ public abstract class ApplicationSettingsManagerBase<TApplicationSettings>(IRelo
         }
 
         Notify(new ChangeWindowStateCommand(command.ViewModel, windowSettings.State));
-        Notify(new ChangeWindowSizeCommand(command.ViewModel, windowSettings.Size));
     }
 
     /// <inheritdoc/>
