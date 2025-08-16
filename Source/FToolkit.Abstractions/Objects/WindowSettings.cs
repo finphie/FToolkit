@@ -11,16 +11,6 @@ public sealed record WindowSettings
     public WindowSize Size { get; set; } = new(1200, 600);
 
     /// <summary>
-    /// X座標
-    /// </summary>
-    public int Left { get; set; } = -1;
-
-    /// <summary>
-    /// Y座標
-    /// </summary>
-    public int Top { get; set; } = -1;
-
-    /// <summary>
     /// 状態
     /// </summary>
     public WindowState State { get; set; } = WindowState.Normal;
