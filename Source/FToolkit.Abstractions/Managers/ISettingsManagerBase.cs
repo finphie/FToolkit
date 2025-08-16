@@ -19,5 +19,6 @@ public interface ISettingsManagerBase<out TSettings>
     /// すべての設定値を通知します。
     /// </summary>
     /// <param name="command">コマンド</param>
+    /// <exception cref="ArgumentNullException"><paramref name="command"/>が<see langword="null"/>です。</exception>
     void NotifyAll(UpdateAllSettingsCommand command);
 }

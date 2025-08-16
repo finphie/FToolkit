@@ -14,7 +14,7 @@ public sealed partial class SystemOperations : ISystemOperations
     /// <see cref="SystemOperations"/>クラスの新しいインスタンスを初期化します。
     /// </summary>
     /// <param name="logger">ログを記録するオブジェクト</param>
-    /// <exception cref="ArgumentNullException"><paramref name="logger"/>がnullです。</exception>
+    /// <exception cref="ArgumentNullException"><paramref name="logger"/>が<see langword="null"/>です。</exception>
     public SystemOperations(ILogger<SystemOperations> logger)
     {
         ArgumentNullException.ThrowIfNull(logger);

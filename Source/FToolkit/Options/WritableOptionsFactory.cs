@@ -20,6 +20,7 @@ public sealed class WritableOptionsFactory
     /// <see cref="WritableOptionsFactory"/>クラスの新しいインスタンスを初期化します。
     /// </summary>
     /// <param name="provider">依存関係解決に使用するサービスプロバイダー</param>
+    /// <exception cref="ArgumentNullException"><paramref name="provider"/>が<see langword="null"/>です。</exception>
     public WritableOptionsFactory(IServiceProvider provider)
     {
         ArgumentNullException.ThrowIfNull(provider);

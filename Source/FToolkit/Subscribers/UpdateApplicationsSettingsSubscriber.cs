@@ -18,6 +18,7 @@ sealed class UpdateApplicationsSettingsSubscriber<T> : IDisposable
     /// </summary>
     /// <param name="subscriber">アプリケーション設定の変更イベントを受信するオブジェクト</param>
     /// <param name="writableOptions">オプション値を更新するオブジェクト</param>
+    /// <exception cref="ArgumentNullException"><paramref name="subscriber"/>、<paramref name="writableOptions"/>が<see langword="null"/>です。</exception>
     public UpdateApplicationsSettingsSubscriber(IMessageSubscriber<T> subscriber, IWritableOptions<T> writableOptions)
     {
         ArgumentNullException.ThrowIfNull(subscriber);

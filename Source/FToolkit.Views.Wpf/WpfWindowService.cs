@@ -21,6 +21,7 @@ public sealed partial class WpfWindowService : IWindowService
     /// </summary>
     /// <param name="logger">ログを記録するオブジェクト</param>
     /// <param name="viewLocator">ViewModelに対応するViewを取得するオブジェクト</param>
+    /// <exception cref="ArgumentNullException"><paramref name="logger"/>、<paramref name="viewLocator"/>が<see langword="null"/>です。</exception>
     public WpfWindowService(ILogger<WpfWindowService> logger, IViewLocator viewLocator)
     {
         ArgumentNullException.ThrowIfNull(logger);

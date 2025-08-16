@@ -31,11 +31,13 @@ sealed partial class WritableOptions<T> : ReloadableOptions<T>, IWritableOptions
     /// <param name="fileOperations">ファイル操作を行うオブジェクト</param>
     /// <param name="filePath">出力先ファイルパス</param>
     /// <param name="jsonTypeInfo">JSONシリアル化のメタデータ</param>
+    /// <exception cref="ArgumentNullException"><paramref name="logger"/>、<paramref name="configuration"/>、<paramref name="options"/>、<paramref name="fileOperations"/>、<paramref name="jsonTypeInfo"/>が<see langword="null"/>です。</exception>
     public WritableOptions(ILogger<WritableOptions<T>> logger, IConfiguration configuration, IOptionsMonitor<T> options, IFileOperations fileOperations, FilePath filePath, JsonTypeInfo<T> jsonTypeInfo)
         : base(options)
     {
         ArgumentNullException.ThrowIfNull(logger);
         ArgumentNullException.ThrowIfNull(configuration);
+        ArgumentNullException.ThrowIfNull(options);
         ArgumentNullException.ThrowIfNull(fileOperations);
         ArgumentNullException.ThrowIfNull(jsonTypeInfo);
 

@@ -16,6 +16,7 @@ sealed class ChangeWindowStateSubscriber : IDisposable
     /// </summary>
     /// <param name="subscriber">Windowの状態変更コマンドを受信するためのオブジェクト</param>
     /// <param name="windowService">Window関連操作を行うオブジェクト</param>
+    /// <exception cref="ArgumentNullException"><paramref name="subscriber"/>、<paramref name="windowService"/>が<see langword="null"/>です。</exception>
     public ChangeWindowStateSubscriber(IMessageSubscriber<ChangeWindowStateCommand> subscriber, IWindowService windowService)
     {
         ArgumentNullException.ThrowIfNull(subscriber);

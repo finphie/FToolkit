@@ -15,5 +15,6 @@ public interface IWritableOptions<T> : IReloadableOptions<T>
     /// <param name="applyChanges">現在の値を受け取り、変更後の値を返すデリゲート</param>
     /// <param name="cancellationToken">キャンセル要求を行うためのトークン</param>
     /// <returns>このメソッドが完了すると、オブジェクトまたは値は返されません。</returns>
+    /// <exception cref="ArgumentNullException"><paramref name="applyChanges"/>が<see langword="null"/>です。</exception>
     ValueTask UpdateAsync(Func<T, T> applyChanges, CancellationToken cancellationToken = default);
 }

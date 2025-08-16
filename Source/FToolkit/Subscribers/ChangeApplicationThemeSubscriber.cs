@@ -16,6 +16,7 @@ sealed class ChangeApplicationThemeSubscriber : IDisposable
     /// </summary>
     /// <param name="subscriber">アプリケーションテーマ変更イベントを受信するためのオブジェクト</param>
     /// <param name="themeOperations">アプリケーションテーマの操作を行うオブジェクト</param>
+    /// <exception cref="ArgumentNullException"><paramref name="subscriber"/>、<paramref name="themeOperations"/>が<see langword="null"/>です。</exception>
     public ChangeApplicationThemeSubscriber(IMessageSubscriber<ChangeApplicationThemeCommand> subscriber, IApplicationThemeOperations themeOperations)
     {
         ArgumentNullException.ThrowIfNull(subscriber);

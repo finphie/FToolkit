@@ -23,6 +23,7 @@ public interface IWindowService
     /// <typeparam name="TOwnerViewModel">親となるWindowに関連付けられたViewModelの型</typeparam>
     /// <typeparam name="TViewModel">表示するWindowに関連付けられたViewModelの型</typeparam>
     /// <param name="ownerViewModel">親となるWindowに関連付けられたViewModel</param>
+    /// <exception cref="ArgumentNullException"><paramref name="ownerViewModel"/>が<see langword="null"/>です。</exception>
     /// <exception cref="InvalidOperationException">Windowの表示に失敗しました。</exception>
     void Show<TOwnerViewModel, TViewModel>(TOwnerViewModel ownerViewModel)
         where TOwnerViewModel : class, IViewModel
@@ -42,6 +43,7 @@ public interface IWindowService
     /// <typeparam name="TOwnerViewModel">親となるWindowに関連付けられたViewModelの型</typeparam>
     /// <typeparam name="TViewModel">表示するWindowに関連付けられたViewModelの型</typeparam>
     /// <param name="ownerViewModel">親となるWindowに関連付けられたViewModel</param>
+    /// <exception cref="ArgumentNullException"><paramref name="ownerViewModel"/>が<see langword="null"/>です。</exception>
     /// <exception cref="InvalidOperationException">Windowの表示に失敗しました。</exception>
     void ShowDialog<TOwnerViewModel, TViewModel>(TOwnerViewModel ownerViewModel)
         where TOwnerViewModel : class, IViewModel
@@ -53,6 +55,7 @@ public interface IWindowService
     /// <typeparam name="TViewModel">状態を変更するWindowに関連付けられたViewModelの型</typeparam>
     /// <param name="viewModel">状態を変更するWindowに関連付けられたViewModel</param>
     /// <param name="windowState">Windowの状態</param>
+    /// <exception cref="ArgumentNullException"><paramref name="viewModel"/>が<see langword="null"/>です。</exception>
     void ChangeWindowState<TViewModel>(TViewModel viewModel, WindowState windowState)
         where TViewModel : class, IViewModel;
 
@@ -62,6 +65,7 @@ public interface IWindowService
     /// <typeparam name="TViewModel">状態変更を監視するWindowに関連付けられたViewModelの型</typeparam>
     /// <param name="viewModel">状態変更を監視するWindowに関連付けられたViewModel</param>
     /// <returns>Windowの状態変更を通知するObservableを返します。</returns>
+    /// <exception cref="ArgumentNullException"><paramref name="viewModel"/>が<see langword="null"/>です。</exception>
     Observable<WindowState> ObserveWindowStateChanged<TViewModel>(TViewModel viewModel)
         where TViewModel : class, IViewModel;
 
@@ -71,6 +75,7 @@ public interface IWindowService
     /// <typeparam name="TViewModel">サイズを変更するWindowに関連付けられたViewModelの型</typeparam>
     /// <param name="viewModel">サイズを変更するWindowに関連付けられたViewModel</param>
     /// <param name="windowSize">Windowのサイズ</param>
+    /// <exception cref="ArgumentNullException"><paramref name="viewModel"/>が<see langword="null"/>です。</exception>
     void ChangeWindowSize<TViewModel>(TViewModel viewModel, WindowSize windowSize)
         where TViewModel : class, IViewModel;
 
@@ -80,6 +85,7 @@ public interface IWindowService
     /// <typeparam name="TViewModel">サイズ変更を監視するWindowに関連付けられたViewModelの型</typeparam>
     /// <param name="viewModel">サイズ変更を監視するWindowに関連付けられたViewModel</param>
     /// <returns>Windowのサイズ変更を通知するObservableを返します。</returns>
+    /// <exception cref="ArgumentNullException"><paramref name="viewModel"/>が<see langword="null"/>です。</exception>
     Observable<WindowSize> ObserveWindowSizeChanged<TViewModel>(TViewModel viewModel)
         where TViewModel : class, IViewModel;
 }

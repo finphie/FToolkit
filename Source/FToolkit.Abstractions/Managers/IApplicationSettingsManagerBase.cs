@@ -14,17 +14,20 @@ public interface IApplicationSettingsManagerBase<out TSettings> : ISettingsManag
     /// アプリケーションテーマの変更を通知します。
     /// </summary>
     /// <param name="command">コマンド</param>
+    /// <exception cref="ArgumentNullException"><paramref name="command"/>が<see langword="null"/>です。</exception>
     void Notify(ChangeApplicationThemeCommand command);
 
     /// <summary>
     /// Windowの状態変更を通知します。
     /// </summary>
     /// <param name="command">コマンド</param>
+    /// <exception cref="ArgumentNullException"><paramref name="command"/>が<see langword="null"/>です。</exception>
     void Notify(ChangeWindowStateCommand command);
 
     /// <summary>
     /// Windowサイズ変更を通知します。
     /// </summary>
     /// <param name="command">コマンド</param>
+    /// <exception cref="ArgumentNullException"><paramref name="command"/>が<see langword="null"/>です。</exception>
     void Notify(ChangeWindowSizeCommand command);
 }

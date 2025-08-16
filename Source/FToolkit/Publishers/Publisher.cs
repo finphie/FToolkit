@@ -14,6 +14,7 @@ sealed class Publisher : IPublisher
     /// <see cref="Publisher"/>クラスの新しいインスタンスを初期化します。
     /// </summary>
     /// <param name="provider">パブリッシャー取得に使用するサービスプロバイダー</param>
+    /// <exception cref="ArgumentNullException"><paramref name="provider"/>が<see langword="null"/>です。</exception>
     public Publisher(IServiceProvider provider)
     {
         ArgumentNullException.ThrowIfNull(provider);

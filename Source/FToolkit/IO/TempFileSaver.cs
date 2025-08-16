@@ -17,6 +17,7 @@ public sealed class TempFileSaver : ITempFileSaver
     /// </summary>
     /// <param name="fileOperations">ファイル操作を行うクラス</param>
     /// <param name="directoryOperations">ディレクトリ操作を行うクラス</param>
+    /// <exception cref="ArgumentNullException"><paramref name="fileOperations"/>、<paramref name="directoryOperations"/>が<see langword="null"/>です。</exception>
     public TempFileSaver(IFileOperations fileOperations, IDirectoryOperations directoryOperations)
     {
         ArgumentNullException.ThrowIfNull(fileOperations);

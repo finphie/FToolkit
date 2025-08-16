@@ -16,6 +16,7 @@ class ReloadableOptions<T> : IReloadableOptions<T>
     /// <see cref="ReloadableOptions{T}"/>クラスの新しいインスタンスを初期化します。
     /// </summary>
     /// <param name="options">オプション値の取得を行うオブジェクト</param>
+    /// <exception cref="ArgumentNullException"><paramref name="options"/>が<see langword="null"/>です。</exception>
     public ReloadableOptions(IOptionsMonitor<T> options)
     {
         ArgumentNullException.ThrowIfNull(options);

@@ -19,6 +19,7 @@ public abstract class SettingsManagerBase<TSettings> : ISettingsManagerBase<TSet
     /// </summary>
     /// <param name="options">オプション値の取得を行うオブジェクト</param>
     /// <param name="publisher">イベントを送信するオブジェクト</param>
+    /// <exception cref="ArgumentNullException"><paramref name="options"/>、<paramref name="publisher"/>が<see langword="null"/>です。</exception>
     protected SettingsManagerBase(IReloadableOptions<TSettings> options, IPublisher publisher)
     {
         ArgumentNullException.ThrowIfNull(options);

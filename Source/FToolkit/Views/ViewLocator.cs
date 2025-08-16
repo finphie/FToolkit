@@ -17,6 +17,7 @@ sealed partial class ViewLocator : IViewLocator
     /// </summary>
     /// <param name="logger">ログを記録するオブジェクト</param>
     /// <param name="provider">Viewの依存関係解決に使用するサービスプロバイダー</param>
+    /// <exception cref="ArgumentNullException"><paramref name="logger"/>、<paramref name="provider"/>が<see langword="null"/>です。</exception>
     public ViewLocator(ILogger<ViewLocator> logger, IServiceProvider provider)
     {
         ArgumentNullException.ThrowIfNull(logger);
