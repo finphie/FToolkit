@@ -1,5 +1,4 @@
-﻿using FToolkit.Commands;
-using R3;
+﻿using R3;
 
 namespace FToolkit.ViewModels;
 
@@ -61,9 +60,5 @@ public abstract class MainViewModelBase : ViewModelBase, IMainViewModel, IDispos
     {
         base.Initialize();
         SettingsManager.NotifyAll(new(this));
-
-        WindowService.ObserveWindowStateChanged(this)
-            .Subscribe(x => SettingsManager.Notify(new ChangeWindowStateCommand(this, x)))
-            .AddTo(ref _disposable);
     }
 }

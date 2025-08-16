@@ -125,9 +125,6 @@ public static class ServiceCollectionExtensions
         services.AddActivatedSingleton<UpdateApplicationsSettingsSubscriber<TSettings>>();
     }
 
-    static void AddSubscribers(this IServiceCollection services)
-    {
-        services.AddActivatedSingleton<ChangeApplicationThemeSubscriber>();
-        services.AddActivatedSingleton<ChangeWindowStateSubscriber>();
-    }
+    static void AddSubscribers(this IServiceCollection services) 
+        => services.AddActivatedSingleton<ChangeApplicationThemeSubscriber>();
 }

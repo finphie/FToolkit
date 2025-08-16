@@ -22,13 +22,6 @@ public abstract class ApplicationSettingsManagerBase<TApplicationSettings>(IRelo
         ArgumentNullException.ThrowIfNull(command);
 
         Notify(new ChangeApplicationThemeCommand(Value.Theme));
-
-        if (Value.Window is not { } windowSettings)
-        {
-            return;
-        }
-
-        Notify(new ChangeWindowStateCommand(command.ViewModel, windowSettings.State));
     }
 
     /// <inheritdoc/>
