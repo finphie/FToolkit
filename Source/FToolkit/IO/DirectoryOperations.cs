@@ -14,7 +14,7 @@ public sealed partial class DirectoryOperations : IDirectoryOperations
     /// <see cref="DirectoryOperations"/>クラスの新しいインスタンスを初期化します。
     /// </summary>
     /// <param name="logger">ログを記録するオブジェクト</param>
-    /// <exception cref="ArgumentNullException"><paramref name="logger"/>がnullです。</exception>
+    /// <exception cref="ArgumentNullException"><paramref name="logger"/>が<see langword="null"/>です。</exception>
     public DirectoryOperations(ILogger<DirectoryOperations> logger)
     {
         ArgumentNullException.ThrowIfNull(logger);
@@ -33,6 +33,7 @@ public sealed partial class DirectoryOperations : IDirectoryOperations
     {
         if (Exists(directoryPath))
         {
+            LogDirectoryAlreadyExists(directoryPath);
             return;
         }
 
@@ -51,6 +52,9 @@ public sealed partial class DirectoryOperations : IDirectoryOperations
 
     [LoggerMessage(Level = LogLevel.Information, Message = "Checking if file exists: {directoryPath}")]
     partial void LogCheckingExists(DirectoryPath directoryPath);
+
+    [LoggerMessage(Level = LogLevel.Debug, Message = "Directory already exists: {directoryPath}")]
+    partial void LogDirectoryAlreadyExists(DirectoryPath directoryPath);
 
     [LoggerMessage(Level = LogLevel.Information, Message = "Creating directory: {directoryPath}")]
     partial void LogCreating(DirectoryPath directoryPath);
