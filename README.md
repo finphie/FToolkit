@@ -53,6 +53,7 @@ MIT
 - [Microsoft.Extensions.Logging](https://github.com/dotnet/runtime)
 - [Microsoft.Extensions.Logging.Abstractions](https://github.com/dotnet/runtime)
 - [Microsoft.Extensions.Options](https://github.com/dotnet/runtime)
+- [Microsoft.Extensions.Telemetry.Abstractions](https://github.com/dotnet/extensions)
 - [ObservableCollections](https://github.com/Cysharp/ObservableCollections)
 - [OpenTelemetry.Exporter.OpenTelemetryProtocol](https://github.com/open-telemetry/opentelemetry-dotnet-contrib)
 - [OpenTelemetry.Extensions.Hosting](https://github.com/open-telemetry/opentelemetry-dotnet)
