@@ -15,17 +15,14 @@ public static class ServiceDefaultsExtensions
     /// <summary>
     /// サービスの既定構成を<see cref="IHostApplicationBuilder"/>に追加します。
     /// </summary>
-    /// <typeparam name="TBuilder"><see cref="IHostApplicationBuilder"/>を実装するビルダーの型</typeparam>
     /// <param name="builder"><see cref="IHostApplicationBuilder"/>を実装するビルダー</param>
-    public static void AddServiceDefaults<TBuilder>(this TBuilder builder)
-        where TBuilder : IHostApplicationBuilder
+    public static void AddServiceDefaults(this IHostApplicationBuilder builder)
     {
         builder.ConfigureOpenTelemetry();
         builder.Services.ConfigureHttpClientDefaults(static x => x.AddStandardResilienceHandler());
     }
 
-    static void ConfigureOpenTelemetry<TBuilder>(this TBuilder builder)
-        where TBuilder : IHostApplicationBuilder
+    static void ConfigureOpenTelemetry(this IHostApplicationBuilder builder)
     {
         builder.Logging.AddOpenTelemetry(static options =>
         {
@@ -43,8 +40,7 @@ public static class ServiceDefaultsExtensions
         builder.AddOpenTelemetryExporters();
     }
 
-    static void AddOpenTelemetryExporters<TBuilder>(this TBuilder builder)
-        where TBuilder : IHostApplicationBuilder
+    static void AddOpenTelemetryExporters(this IHostApplicationBuilder builder)
     {
         if (string.IsNullOrWhiteSpace(builder.Configuration["OTEL_EXPORTER_OTLP_ENDPOINT"]))
         {
