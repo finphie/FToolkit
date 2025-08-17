@@ -9,7 +9,7 @@ namespace FToolkit.Managers;
 /// 設定マネージャーの基底クラスです。
 /// </summary>
 /// <typeparam name="TSettings">アプリケーション設定の型</typeparam>
-public abstract class SettingsManagerBase<TSettings> : ISettingsManagerBase<TSettings>
+public abstract class SettingsManagerBase<TSettings> : ISettingsManagerBase
     where TSettings : ISettings
 {
     readonly IReloadableOptions<TSettings> _options;
@@ -29,8 +29,10 @@ public abstract class SettingsManagerBase<TSettings> : ISettingsManagerBase<TSet
         Publisher = publisher;
     }
 
-    /// <inheritdoc/>
-    public TSettings Value => _options.Value;
+    /// <summary>
+    /// 現在の設定値を取得します。
+    /// </summary>
+    protected TSettings Value => _options.Value;
 
     /// <summary>
     /// パブリッシャーを取得します。
