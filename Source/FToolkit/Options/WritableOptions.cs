@@ -56,6 +56,8 @@ sealed partial class WritableOptions<T> : ReloadableOptions<T>, IWritableOptions
     {
         ArgumentNullException.ThrowIfNull(applyChanges);
 
+        LogStartingUpdate();
+
         var oldValue = Value;
         var newValue = applyChanges(oldValue);
         var bytes = JsonSerializer.SerializeToUtf8Bytes(newValue, _jsonTypeInfo);
@@ -77,6 +79,9 @@ sealed partial class WritableOptions<T> : ReloadableOptions<T>, IWritableOptions
             WritableOptionsLock.ReadWriteLock.Release();
         }
     }
+
+    [LoggerMessage(Level = LogLevel.Information, Message = "Starting to update configuration settings.")]
+    partial void LogStartingUpdate();
 
     [LoggerMessage(Level = LogLevel.Debug, Message = "Reloading configuration provider: {filePath}")]
     partial void LogReloadingConfigurationProvider(string? filePath);

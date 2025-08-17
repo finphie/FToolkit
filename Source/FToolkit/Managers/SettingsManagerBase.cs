@@ -2,6 +2,7 @@
 using FToolkit.Objects;
 using FToolkit.Options;
 using FToolkit.Publishers;
+using Microsoft.Extensions.Logging;
 
 namespace FToolkit.Managers;
 
@@ -9,7 +10,7 @@ namespace FToolkit.Managers;
 /// 設定マネージャーの基底クラスです。
 /// </summary>
 /// <typeparam name="TSettings">アプリケーション設定の型</typeparam>
-public abstract class SettingsManagerBase<TSettings> : ISettingsManagerBase
+public abstract partial class SettingsManagerBase<TSettings> : ISettingsManagerBase
     where TSettings : ISettings
 {
     readonly IReloadableOptions<TSettings> _options;
@@ -17,17 +18,25 @@ public abstract class SettingsManagerBase<TSettings> : ISettingsManagerBase
     /// <summary>
     /// <see cref="SettingsManagerBase{TSettings}"/>クラスの新しいインスタンスを初期化します。
     /// </summary>
+    /// <param name="logger">ログを記録するオブジェクト</param>
     /// <param name="options">オプション値の取得を行うオブジェクト</param>
     /// <param name="publisher">イベントを送信するオブジェクト</param>
-    /// <exception cref="ArgumentNullException"><paramref name="options"/>、<paramref name="publisher"/>が<see langword="null"/>です。</exception>
-    protected SettingsManagerBase(IReloadableOptions<TSettings> options, IPublisher publisher)
+    /// <exception cref="ArgumentNullException"><paramref name="logger"/>、<paramref name="options"/>、<paramref name="publisher"/>が<see langword="null"/>です。</exception>
+    protected SettingsManagerBase(ILogger<SettingsManagerBase<TSettings>> logger, IReloadableOptions<TSettings> options, IPublisher publisher)
     {
+        ArgumentNullException.ThrowIfNull(logger);
         ArgumentNullException.ThrowIfNull(options);
         ArgumentNullException.ThrowIfNull(publisher);
 
+        Logger = logger;
         _options = options;
         Publisher = publisher;
     }
+
+    /// <summary>
+    /// ログを記録するオブジェクト
+    /// </summary>
+    protected ILogger<SettingsManagerBase<TSettings>> Logger { get; }
 
     /// <summary>
     /// 現在の設定値を取得します。
@@ -47,5 +56,11 @@ public abstract class SettingsManagerBase<TSettings> : ISettingsManagerBase
     /// </summary>
     /// <param name="settings">アプリケーション設定</param>
     protected void Notify(TSettings settings)
-        => Publisher.Publish(settings);
+    {
+        LogNotifyingSettingsUpdate();
+        Publisher.Publish(settings);
+    }
+
+    [LoggerMessage(Level = LogLevel.Information, Message = "Notifying settings update.")]
+    partial void LogNotifyingSettingsUpdate();
 }

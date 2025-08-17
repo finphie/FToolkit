@@ -6,6 +6,7 @@ using FToolkit.Objects;
 using FToolkit.Options;
 using FToolkit.Publishers;
 using FToolkit.ViewModels;
+using Microsoft.Extensions.Logging;
 
 namespace FToolkit.Managers;
 
@@ -13,9 +14,11 @@ namespace FToolkit.Managers;
 /// アプリケーション設定マネージャーの基底クラスです。
 /// </summary>
 /// <typeparam name="TApplicationSettings">アプリケーション設定の型</typeparam>
+/// <param name="logger">ログを記録するオブジェクト</param>
 /// <param name="options">再読み込み可能なオプション値を取得するオブジェクト</param>
 /// <param name="publisher">イベントを送信するオブジェクト</param>
-public abstract class ApplicationSettingsManagerBase<TApplicationSettings>(IReloadableOptions<TApplicationSettings> options, IPublisher publisher) : SettingsManagerBase<TApplicationSettings>(options, publisher), IApplicationSettingsManagerBase
+public abstract partial class ApplicationSettingsManagerBase<TApplicationSettings>(ILogger<ApplicationSettingsManagerBase<TApplicationSettings>> logger, IReloadableOptions<TApplicationSettings> options, IPublisher publisher)
+    : SettingsManagerBase<TApplicationSettings>(logger, options, publisher), IApplicationSettingsManagerBase
     where TApplicationSettings : ApplicationSettingsBase
 {
     /// <inheritdoc/>
@@ -58,6 +61,8 @@ public abstract class ApplicationSettingsManagerBase<TApplicationSettings>(IRelo
     {
         ArgumentNullException.ThrowIfNull(command);
 
+        LogNotifyingApplicationThemeChangeCommand();
+
         Publisher.Publish(command);
         Notify(Value with { Theme = command.ApplicationTheme.ToFToolkitSettings() });
     }
@@ -66,6 +71,8 @@ public abstract class ApplicationSettingsManagerBase<TApplicationSettings>(IRelo
     public virtual void Notify(ChangeWindowStateCommand command)
     {
         ArgumentNullException.ThrowIfNull(command);
+
+        LogNotifyingWindowStateChangeCommand();
 
         if (command.ViewModel is not IMainViewModel)
         {
@@ -84,6 +91,8 @@ public abstract class ApplicationSettingsManagerBase<TApplicationSettings>(IRelo
     public virtual void Notify(ChangeWindowSizeCommand command)
     {
         ArgumentNullException.ThrowIfNull(command);
+
+        LogNotifyingWindowSizeChangeCommand();
 
         if (command.ViewModel is not IMainViewModel)
         {
@@ -107,4 +116,13 @@ public abstract class ApplicationSettingsManagerBase<TApplicationSettings>(IRelo
 
         ThrowHelper.ThrowInvalidOperationException("MainWindow settings are not initialized.");
     }
+
+    [LoggerMessage(Level = LogLevel.Information, Message = "Notifying application theme change command.")]
+    partial void LogNotifyingApplicationThemeChangeCommand();
+
+    [LoggerMessage(Level = LogLevel.Information, Message = "Notifying window state change command.")]
+    partial void LogNotifyingWindowStateChangeCommand();
+
+    [LoggerMessage(Level = LogLevel.Information, Message = "Notifying window size change command.")]
+    partial void LogNotifyingWindowSizeChangeCommand();
 }
