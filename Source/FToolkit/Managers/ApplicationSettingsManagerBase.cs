@@ -14,7 +14,7 @@ namespace FToolkit.Managers;
 /// </summary>
 /// <typeparam name="TApplicationSettings">アプリケーション設定の型</typeparam>
 /// <param name="options">再読み込み可能なオプション値を取得するオブジェクト</param>
-/// <param name="publisher">イベントを送信するパブリッシャー</param>
+/// <param name="publisher">イベントを送信するオブジェクト</param>
 public abstract class ApplicationSettingsManagerBase<TApplicationSettings>(IReloadableOptions<TApplicationSettings> options, IPublisher publisher) : SettingsManagerBase<TApplicationSettings>(options, publisher), IApplicationSettingsManagerBase
     where TApplicationSettings : ApplicationSettingsBase
 {
