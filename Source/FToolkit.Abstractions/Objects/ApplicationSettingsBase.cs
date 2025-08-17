@@ -16,5 +16,5 @@ public abstract record ApplicationSettingsBase : ISettings
     /// Window設定
     /// </summary>
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-    public virtual WindowSettings? Window { get; set; }
+    public virtual WindowSettings? MainWindow { get; set; }
 }
