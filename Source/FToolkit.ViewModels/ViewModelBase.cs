@@ -17,7 +17,7 @@ public abstract class ViewModelBase : ObservableObject, IViewModel
     protected ViewModelBase()
     {
         ApplicationInfo = Ioc.Default.GetRequiredService<ApplicationInfoBase>();
-        SettingsManager = Ioc.Default.GetRequiredService<IApplicationSettingsManagerBase<ApplicationSettingsBase>>();
+        SettingsManager = Ioc.Default.GetRequiredService<IApplicationSettingsManagerBase>();
         WindowService = Ioc.Default.GetService<IWindowService>()!;
     }
 
@@ -29,7 +29,7 @@ public abstract class ViewModelBase : ObservableObject, IViewModel
     /// <summary>
     /// 設定マネージャーを取得します。
     /// </summary>
-    protected virtual IApplicationSettingsManagerBase<ApplicationSettingsBase> SettingsManager { get; }
+    protected virtual IApplicationSettingsManagerBase SettingsManager { get; }
 
     /// <summary>
     /// Window関連の操作を行うオブジェクトを取得します。

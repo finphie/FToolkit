@@ -37,7 +37,7 @@ public static class ServiceCollectionExtensions
         services.AddSingleton<ApplicationInfoBase>(static x => x.GetRequiredService<TApplicationInfo>());
 
         services.AddOptions(applicationSettingsJsonTypeInfo);
-        services.AddSingleton<IApplicationSettingsManagerBase<ApplicationSettingsBase>, TApplicationSettingsManager>();
+        services.AddSingleton<IApplicationSettingsManagerBase, TApplicationSettingsManager>();
         services.AddActivatedSingleton<UpdateApplicationsSettingsSubscriber<TApplicationSettings>>();
 
         services.AddSingleton<IViewLocator, ViewLocator>();
@@ -119,9 +119,9 @@ public static class ServiceCollectionExtensions
 
     static void AddSettingsManager<TSettings, [DynamicallyAccessedMembers(PublicConstructors)] TSettingsManager>(this IServiceCollection services)
         where TSettings : ISettings
-        where TSettingsManager : class, ISettingsManagerBase<TSettings>
+        where TSettingsManager : class, ISettingsManagerBase
     {
-        services.AddSingleton<ISettingsManagerBase<TSettings>, TSettingsManager>();
+        services.AddSingleton<ISettingsManagerBase, TSettingsManager>();
         services.AddActivatedSingleton<UpdateApplicationsSettingsSubscriber<TSettings>>();
     }
 

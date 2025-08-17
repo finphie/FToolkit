@@ -38,7 +38,7 @@ public abstract partial class SettingsViewModelBase : ViewModelBase, ITransientV
             new(_localizer["Dark"], ApplicationTheme.Dark)
         ];
         ApplicationThemesView = _applicationThemes.ToNotifyCollectionChangedSlim(SynchronizationContextCollectionEventDispatcher.Current);
-        SelectedTheme = _applicationThemes.Single(x => x.Type == SettingsManager.Value.Theme);
+        SelectedTheme = _applicationThemes.Single(x => x.Type == SettingsManager.ApplicationTheme);
     }
 
     /// <summary>

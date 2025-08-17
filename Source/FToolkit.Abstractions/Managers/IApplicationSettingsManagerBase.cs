@@ -6,10 +6,13 @@ namespace FToolkit.Managers;
 /// <summary>
 /// アプリケーション設定マネージャーの基本インターフェイスです。
 /// </summary>
-/// <typeparam name="TSettings">設定の型</typeparam>
-public interface IApplicationSettingsManagerBase<out TSettings> : ISettingsManagerBase<TSettings>
-    where TSettings : ApplicationSettingsBase
+public interface IApplicationSettingsManagerBase : ISettingsManagerBase
 {
+    /// <summary>
+    /// アプリケーションテーマを取得します。
+    /// </summary>
+    ApplicationTheme ApplicationTheme { get; }
+
     /// <summary>
     /// アプリケーションテーマの変更を通知します。
     /// </summary>
