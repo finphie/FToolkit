@@ -1,27 +1,17 @@
-﻿using FToolkit.Objects;
+﻿using FToolkit.Commands;
 
 namespace FToolkit.Managers;
 
 /// <summary>
 /// 設定マネージャーの基本インターフェイスです。
 /// </summary>
-/// <typeparam name="T">設定値の型</typeparam>
-public interface ISettingsManagerBase<out T>
-    where T : class
+public interface ISettingsManagerBase
 {
-    /// <summary>
-    /// 現在の設定値を取得します。
-    /// </summary>
-    T Value { get; }
-
     /// <summary>
     /// すべての設定値を通知します。
     /// </summary>
-    void NotifyAll();
-
-    /// <summary>
-    /// アプリケーションテーマを通知します。
-    /// </summary>
-    /// <param name="theme">アプリケーションテーマ</param>
-    void Notify(ApplicationTheme theme);
+    /// <param name="command">コマンド</param>
+    /// <exception cref="ArgumentNullException"><paramref name="command"/>が<see langword="null"/>です。</exception>
+    /// <exception cref="InvalidOperationException">設定値が不正です。</exception>
+    void NotifyAll(UpdateAllSettingsCommand command);
 }

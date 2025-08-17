@@ -1,5 +1,6 @@
 ﻿using System.Windows;
 using FToolkit.Objects;
+using FToolkit.Views.Wpf.Extensions;
 using Microsoft.Extensions.Logging;
 
 namespace FToolkit.Views.Wpf;
@@ -15,6 +16,7 @@ public sealed partial class ApplicationThemeOperations : IApplicationThemeOperat
     /// <see cref="ApplicationThemeOperations"/>クラスの新しいインスタンスを初期化します。
     /// </summary>
     /// <param name="logger">ログを記録するオブジェクト</param>
+    /// <exception cref="ArgumentNullException"><paramref name="logger"/>が<see langword="null"/>です。</exception>
     public ApplicationThemeOperations(ILogger<ApplicationThemeOperations> logger)
     {
         ArgumentNullException.ThrowIfNull(logger);

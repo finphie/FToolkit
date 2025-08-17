@@ -20,6 +20,7 @@ public sealed class WritableOptionsFactory
     /// <see cref="WritableOptionsFactory"/>クラスの新しいインスタンスを初期化します。
     /// </summary>
     /// <param name="provider">依存関係解決に使用するサービスプロバイダー</param>
+    /// <exception cref="ArgumentNullException"><paramref name="provider"/>が<see langword="null"/>です。</exception>
     public WritableOptionsFactory(IServiceProvider provider)
     {
         ArgumentNullException.ThrowIfNull(provider);
@@ -34,7 +35,7 @@ public sealed class WritableOptionsFactory
     /// <param name="jsonTypeInfo">JSONシリアル化のメタデータ</param>
     /// <returns><see cref="WritableOptions{T}"/>クラスのインスタンスを返します。</returns>
     public IWritableOptions<T> Create<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] T>(FilePath filePath, JsonTypeInfo<T> jsonTypeInfo)
-        where T : class, IEquatable<T>
+        where T : ISettings
     {
         var logger = _provider.GetRequiredService<ILogger<WritableOptions<T>>>();
         var configuration = _provider.GetRequiredService<IConfiguration>();

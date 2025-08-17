@@ -5,7 +5,6 @@
 /// </summary>
 /// <typeparam name="T">オプションの種類</typeparam>
 public interface IReloadableOptions<out T>
-    where T : class
 {
     /// <summary>
     /// 現在のオプション値を取得します。

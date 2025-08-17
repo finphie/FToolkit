@@ -1,5 +1,4 @@
 ﻿using System.Diagnostics;
-using System.Diagnostics.CodeAnalysis;
 using Microsoft.Extensions.Logging;
 
 namespace FToolkit.Diagnostics;
@@ -15,7 +14,7 @@ public sealed partial class SystemOperations : ISystemOperations
     /// <see cref="SystemOperations"/>クラスの新しいインスタンスを初期化します。
     /// </summary>
     /// <param name="logger">ログを記録するオブジェクト</param>
-    /// <exception cref="ArgumentNullException"><paramref name="logger"/>がnullです。</exception>
+    /// <exception cref="ArgumentNullException"><paramref name="logger"/>が<see langword="null"/>です。</exception>
     public SystemOperations(ILogger<SystemOperations> logger)
     {
         ArgumentNullException.ThrowIfNull(logger);
@@ -23,7 +22,6 @@ public sealed partial class SystemOperations : ISystemOperations
     }
 
     /// <inheritdoc/>
-    [SuppressMessage("IDisposableAnalyzers.Correctness", "IDISP004:Don't ignore created IDisposable", Justification = "URL")]
     public void OpenInWebBrowser(string url)
     {
         ArgumentException.ThrowIfNullOrEmpty(url);

@@ -15,6 +15,7 @@
     <PackageReference Include="CommunityToolkit.Mvvm" />
     <PackageReference Include="Microsoft.Extensions.Localization.Abstractions" />
     <PackageReference Include="ObservableCollections" />
+    <PackageReference Include="R3" />
   </ItemGroup>
 
   <ItemGroup>

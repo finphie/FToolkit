@@ -1,6 +1,5 @@
 ﻿using System.Text.Json;
 using System.Text.Json.Serialization.Metadata;
-using CommunityToolkit.HighPerformance.Buffers;
 using FToolkit.IO;
 using FToolkit.Objects;
 using Microsoft.Extensions.Configuration;
@@ -14,7 +13,7 @@ namespace FToolkit.Options;
 /// </summary>
 /// <typeparam name="T">オプションの種類</typeparam>
 sealed partial class WritableOptions<T> : ReloadableOptions<T>, IWritableOptions<T>
-    where T : class, IEquatable<T>
+    where T : ISettings
 {
     readonly ILogger<WritableOptions<T>> _logger;
     readonly IFileOperations _fileOperations;
@@ -32,11 +31,13 @@ sealed partial class WritableOptions<T> : ReloadableOptions<T>, IWritableOptions
     /// <param name="fileOperations">ファイル操作を行うオブジェクト</param>
     /// <param name="filePath">出力先ファイルパス</param>
     /// <param name="jsonTypeInfo">JSONシリアル化のメタデータ</param>
+    /// <exception cref="ArgumentNullException"><paramref name="logger"/>、<paramref name="configuration"/>、<paramref name="options"/>、<paramref name="fileOperations"/>、<paramref name="jsonTypeInfo"/>が<see langword="null"/>です。</exception>
     public WritableOptions(ILogger<WritableOptions<T>> logger, IConfiguration configuration, IOptionsMonitor<T> options, IFileOperations fileOperations, FilePath filePath, JsonTypeInfo<T> jsonTypeInfo)
         : base(options)
     {
         ArgumentNullException.ThrowIfNull(logger);
         ArgumentNullException.ThrowIfNull(configuration);
+        ArgumentNullException.ThrowIfNull(options);
         ArgumentNullException.ThrowIfNull(fileOperations);
         ArgumentNullException.ThrowIfNull(jsonTypeInfo);
 
@@ -55,28 +56,17 @@ sealed partial class WritableOptions<T> : ReloadableOptions<T>, IWritableOptions
     {
         ArgumentNullException.ThrowIfNull(applyChanges);
 
+        LogStartingUpdate();
+
         var oldValue = Value;
         var newValue = applyChanges(oldValue);
-
-        if (EqualityComparer<T>.Default.Equals(newValue, oldValue))
-        {
-            LogNoChangesApplied();
-            return;
-        }
-
-        using var bufferWriter = new ArrayPoolBufferWriter<byte>();
-        var writer = new Utf8JsonWriter(bufferWriter);
-
-        await using (writer.ConfigureAwait(false))
-        {
-            JsonSerializer.Serialize(writer, newValue, _jsonTypeInfo);
-        }
+        var bytes = JsonSerializer.SerializeToUtf8Bytes(newValue, _jsonTypeInfo);
 
         await WritableOptionsLock.ReadWriteLock.WaitAsync(cancellationToken).ConfigureAwait(false);
 
         try
         {
-            await _fileOperations.SaveAsync(_filePath, bufferWriter.WrittenMemory, cancellationToken).ConfigureAwait(false);
+            await _fileOperations.SaveAsync(_filePath, bytes, cancellationToken).ConfigureAwait(false);
 
             foreach (var fileProvider in _fileProviders)
             {
@@ -90,8 +80,8 @@ sealed partial class WritableOptions<T> : ReloadableOptions<T>, IWritableOptions
         }
     }
 
-    [LoggerMessage(Level = LogLevel.Debug, Message = "No changes were applied to the options.")]
-    partial void LogNoChangesApplied();
+    [LoggerMessage(Level = LogLevel.Information, Message = "Starting to update configuration settings.")]
+    partial void LogStartingUpdate();
 
     [LoggerMessage(Level = LogLevel.Debug, Message = "Reloading configuration provider: {filePath}")]
     partial void LogReloadingConfigurationProvider(string? filePath);

@@ -1,0 +1,20 @@
+﻿using System.Text.Json.Serialization;
+
+namespace FToolkit.Objects;
+
+/// <summary>
+/// アプリケーション設定を表す基底クラスです。
+/// </summary>
+public abstract record ApplicationSettingsBase : ISettings
+{
+    /// <summary>
+    /// アプリケーションテーマ
+    /// </summary>
+    public ApplicationThemeSettings Theme { get; set; } = ApplicationThemeSettings.System;
+
+    /// <summary>
+    /// Window設定
+    /// </summary>
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+    public virtual WindowSettings? MainWindow { get; set; }
+}

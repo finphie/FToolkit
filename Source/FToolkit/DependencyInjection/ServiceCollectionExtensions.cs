@@ -14,34 +14,59 @@ using static System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes;
 namespace FToolkit.DependencyInjection;
 
 /// <summary>
-/// FToolkitに関連するクラスを<see cref="IServiceCollection"/>に追加する拡張メソッドです。
+/// <see cref="IServiceCollection"/>を実装したオブジェクトに対する拡張メソッドです。
 /// </summary>
 public static class ServiceCollectionExtensions
 {
-    static readonly FilePath ApplicationSettingsFilePath = new("appsettings.json");
-
     /// <summary>
     /// <see cref="FToolkit"/>に関連するオブジェクトを<see cref="IServiceCollection"/>に追加します。
     /// </summary>
-    /// <typeparam name="TSettings">アプリケーション設定の型</typeparam>
-    /// <typeparam name="TSettingsManager">設定マネージャーインターフェイスの型</typeparam>
-    /// <typeparam name="TImplementationSettingsManager">設定マネージャーの型</typeparam>
+    /// <typeparam name="TApplicationInfo">アプリケーション情報の型</typeparam>
+    /// <typeparam name="TApplicationSettings">アプリケーション設定の型</typeparam>
+    /// <typeparam name="TApplicationSettingsManager">アプリケーション設定マネージャーの型</typeparam>
     /// <param name="services">追加する対象の<see cref="IServiceCollection"/></param>
-    /// <param name="settingsJsonTypeInfo">設定に関するJSONシリアル化のメタデータ</param>
-    public static void AddFToolkit<[DynamicallyAccessedMembers(PublicParameterlessConstructor)] TSettings, TSettingsManager, [DynamicallyAccessedMembers(PublicConstructors)] TImplementationSettingsManager>(this IServiceCollection services, JsonTypeInfo<TSettings> settingsJsonTypeInfo)
-        where TSettings : ApplicationSettingsBase, IEquatable<TSettings>
-        where TSettingsManager : class, ISettingsManagerBase<TSettings>
-        where TImplementationSettingsManager : class, TSettingsManager
+    /// <param name="applicationSettingsJsonTypeInfo">アプリケーション設定に関するJSONシリアル化のメタデータ</param>
+    /// <exception cref="ArgumentNullException"><paramref name="applicationSettingsJsonTypeInfo"/>が<see langword="null"/>です。</exception>
+    public static void AddFToolkit<[DynamicallyAccessedMembers(PublicConstructors)] TApplicationInfo, [DynamicallyAccessedMembers(PublicParameterlessConstructor)] TApplicationSettings, [DynamicallyAccessedMembers(PublicConstructors)] TApplicationSettingsManager>(this IServiceCollection services, JsonTypeInfo<TApplicationSettings> applicationSettingsJsonTypeInfo)
+        where TApplicationInfo : ApplicationInfoBase
+        where TApplicationSettings : ApplicationSettingsBase
+        where TApplicationSettingsManager : ApplicationSettingsManagerBase<TApplicationSettings>
     {
-        services.AddSingleton<IReloadableOptions<TSettings>, ReloadableOptions<TSettings>>();
-        services.AddWritableOptions(settingsJsonTypeInfo);
-        services.AddSingleton<TSettingsManager, TImplementationSettingsManager>();
+        ArgumentNullException.ThrowIfNull(applicationSettingsJsonTypeInfo);
 
+        services.AddSingleton<TApplicationInfo>();
+        services.AddSingleton<ApplicationInfoBase>(static x => x.GetRequiredService<TApplicationInfo>());
+
+        services.AddOptions(Constants.ApplicationSettingsFilePath, applicationSettingsJsonTypeInfo);
+        services.AddSingleton<IApplicationSettingsManagerBase, TApplicationSettingsManager>();
+        services.AddActivatedSingleton<UpdateApplicationsSettingsSubscriber<TApplicationSettings>>();
+
+        services.AddSingleton<IViewLocator, ViewLocator>();
         services.AddSingleton<IPublisher, Publisher>();
-        services.AddView<TSettings>();
 
         services.AddSingleton<IFileOperations, FileOperations>();
         services.AddSingleton<IDirectoryOperations, DirectoryOperations>();
+
+        services.AddSubscribers();
+    }
+
+    /// <summary>
+    /// 設定関連のオブジェクトを<see cref="IServiceCollection"/>に追加します。
+    /// </summary>
+    /// <typeparam name="TSettings">設定の型</typeparam>
+    /// <typeparam name="TSettingsManager">設定マネージャーの型</typeparam>
+    /// <param name="services">追加する対象の<see cref="IServiceCollection"/></param>
+    /// <param name="settingsFilePath">設定ファイルのパス</param>
+    /// <param name="settingsJsonTypeInfo">設定に関するJSONシリアル化のメタデータ</param>
+    /// <exception cref="ArgumentNullException"><paramref name="settingsJsonTypeInfo"/>が<see langword="null"/>です。</exception>
+    public static void AddSettings<[DynamicallyAccessedMembers(PublicParameterlessConstructor)] TSettings, [DynamicallyAccessedMembers(PublicConstructors)] TSettingsManager>(this IServiceCollection services, FilePath settingsFilePath, JsonTypeInfo<TSettings> settingsJsonTypeInfo)
+        where TSettings : ISettings
+        where TSettingsManager : SettingsManagerBase<TSettings>
+    {
+        ArgumentNullException.ThrowIfNull(settingsJsonTypeInfo);
+
+        services.AddOptions(settingsFilePath, settingsJsonTypeInfo);
+        services.AddSettingsManager<TSettings, TSettingsManager>();
     }
 
     /// <summary>
@@ -74,25 +99,37 @@ public static class ServiceCollectionExtensions
     /// <param name="services">追加する対象の<see cref="IServiceCollection"/></param>
     public static void AddMainViewModel<[DynamicallyAccessedMembers(PublicConstructors)] TViewModel>(this IServiceCollection services)
         where TViewModel : class, IMainViewModel
-        => services.AddSingleton<TViewModel>();
+    {
+        services.AddSingleton<TViewModel>();
+        services.AddSingleton<IMainViewModel>(static x => x.GetRequiredService<TViewModel>());
+    }
 
-    static void AddWritableOptions<[DynamicallyAccessedMembers(PublicParameterlessConstructor)] T>(this IServiceCollection services, JsonTypeInfo<T> jsonTypeInfo)
-        where T : ApplicationSettingsBase, IEquatable<T>
+    static void AddOptions<[DynamicallyAccessedMembers(PublicParameterlessConstructor)] TSettings>(this IServiceCollection services, FilePath settingsFilePath, JsonTypeInfo<TSettings> jsonTypeInfo)
+        where TSettings : ISettings
+    {
+        services.AddSingleton<IReloadableOptions<TSettings>, ReloadableOptions<TSettings>>();
+        services.AddWritableOptions(settingsFilePath, jsonTypeInfo);
+    }
+
+    static void AddWritableOptions<[DynamicallyAccessedMembers(PublicParameterlessConstructor)] TSettings>(this IServiceCollection services, FilePath settingsFilePath, JsonTypeInfo<TSettings> jsonTypeInfo)
+        where TSettings : ISettings
     {
         services.AddSingleton<WritableOptionsFactory>();
         services.AddSingleton(x =>
         {
             var factory = x.GetRequiredService<WritableOptionsFactory>();
-            return factory.Create(ApplicationSettingsFilePath, jsonTypeInfo);
+            return factory.Create(settingsFilePath, jsonTypeInfo);
         });
     }
 
-    static void AddView<T>(this IServiceCollection services)
-        where T : ApplicationSettingsBase
+    static void AddSettingsManager<TSettings, [DynamicallyAccessedMembers(PublicConstructors)] TSettingsManager>(this IServiceCollection services)
+        where TSettings : ISettings
+        where TSettingsManager : class, ISettingsManagerBase
     {
-        services.AddSingleton<IViewLocator, ViewLocator>();
-
-        services.AddActivatedSingleton<ApplyThemeRequestSubscriber>();
-        services.AddActivatedSingleton<UpdateApplicationsSettingsSubscriber<T>>();
+        services.AddSingleton<ISettingsManagerBase, TSettingsManager>();
+        services.AddActivatedSingleton<UpdateApplicationsSettingsSubscriber<TSettings>>();
     }
+
+    static void AddSubscribers(this IServiceCollection services)
+        => services.AddActivatedSingleton<ChangeApplicationThemeSubscriber>();
 }

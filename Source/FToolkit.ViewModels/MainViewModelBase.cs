@@ -1,45 +1,64 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
-using FToolkit.Managers;
-using FToolkit.Objects;
+﻿using R3;
 
 namespace FToolkit.ViewModels;
 
 /// <summary>
 /// メインViewのViewModel基底クラスです。
 /// </summary>
-public abstract class MainViewModelBase : ObservableObject, IMainViewModel
+public abstract class MainViewModelBase : ViewModelBase, IMainViewModel, IDisposable
 {
-    readonly ISettingsManagerBase<ApplicationSettingsBase> _settingsManager;
+    DisposableBag _disposable;
+    bool _disposedValue;
 
     /// <summary>
     /// <see cref="MainViewModelBase"/>クラスの新しいインスタンスを初期化します。
     /// </summary>
-    /// <param name="settingsManager">設定マネージャーのオブジェクト</param>
-    /// <param name="applicationInfo">アプリケーション情報のオブジェクト</param>
-    protected MainViewModelBase(ISettingsManagerBase<ApplicationSettingsBase> settingsManager, ApplicationInfoBase applicationInfo)
+    protected MainViewModelBase()
     {
-        ArgumentNullException.ThrowIfNull(settingsManager);
-        ArgumentNullException.ThrowIfNull(applicationInfo);
-
-        _settingsManager = settingsManager;
-
-        ApplicationTitle = applicationInfo.Title;
-        ApplicationAuthor = applicationInfo.Author;
+        ApplicationTitle = ApplicationInfo.Title;
+        ApplicationAuthor = ApplicationInfo.Author;
     }
 
     /// <summary>
     /// アプリケーションタイトル
     /// </summary>
-    public string ApplicationTitle { get; }
+    public string ApplicationTitle { get; init; }
 
     /// <summary>
     /// 作者名
     /// </summary>
-    public string ApplicationAuthor { get; }
+    public string ApplicationAuthor { get; init; }
+
+    /// <inheritdoc/>
+    public void Dispose()
+    {
+        Dispose(true);
+        GC.SuppressFinalize(this);
+    }
 
     /// <summary>
-    /// 初期化処理を行います。
+    /// リソースを解放します。
     /// </summary>
-    protected virtual void Initialize()
-        => _settingsManager.NotifyAll();
+    /// <param name="disposing"><see langword="true"/>の場合はマネージドリソースを解放します。 </param>
+    protected virtual void Dispose(bool disposing)
+    {
+        if (_disposedValue)
+        {
+            return;
+        }
+
+        if (disposing)
+        {
+            _disposable.Dispose();
+        }
+
+        _disposedValue = true;
+    }
+
+    /// <inheritdoc/>
+    protected override void Initialize()
+    {
+        base.Initialize();
+        SettingsManager.NotifyAll(new(this));
+    }
 }

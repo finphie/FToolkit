@@ -1,8 +1,8 @@
-﻿using System.Diagnostics.CodeAnalysis;
-using System.Reflection;
+﻿using System.Reflection;
 using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.DependencyInjection;
 using CommunityToolkit.Mvvm.Input;
-using FToolkit.Managers;
+using FToolkit.Commands;
 using FToolkit.Objects;
 using FToolkit.ViewModels.Objects;
 using Microsoft.Extensions.Localization;
@@ -13,11 +13,9 @@ namespace FToolkit.ViewModels;
 /// <summary>
 /// 設定ViewのViewModel基底クラスです。
 /// </summary>
-[SuppressMessage("Naming", "CA1708:識別子は、大文字と小文字の区別以外にも相違していなければなりません", Justification = "CommunityToolkit.Mvvmの仕様")]
-public abstract partial class SettingsViewModelBase : ObservableObject, ITransientViewModel, IDisposable
+public abstract partial class SettingsViewModelBase : ViewModelBase, ITransientViewModel, IDisposable
 {
     readonly IStringLocalizer<SettingsViewModelBase> _localizer;
-    readonly ISettingsManagerBase<ApplicationSettingsBase> _settingsManager;
 
     readonly ObservableList<ApplicationThemeView> _applicationThemes;
 
@@ -26,15 +24,9 @@ public abstract partial class SettingsViewModelBase : ObservableObject, ITransie
     /// <summary>
     /// <see cref="SettingsViewModelBase"/>クラスの新しいインスタンスを初期化します。
     /// </summary>
-    /// <param name="localizer">ローカライズを行うオブジェクト</param>
-    /// <param name="settingsManager">設定マネージャーのオブジェクト</param>
-    protected SettingsViewModelBase(IStringLocalizer<SettingsViewModelBase> localizer, ISettingsManagerBase<ApplicationSettingsBase> settingsManager)
+    protected SettingsViewModelBase()
     {
-        ArgumentNullException.ThrowIfNull(localizer);
-        ArgumentNullException.ThrowIfNull(settingsManager);
-
-        _localizer = localizer;
-        _settingsManager = settingsManager;
+        _localizer = Ioc.Default.GetRequiredService<IStringLocalizer<SettingsViewModelBase>>();
 
         ApplicationThemeHeader = _localizer["App theme"];
         ApplicationThemeDescription = _localizer["Select which app theme to display"];
@@ -46,7 +38,7 @@ public abstract partial class SettingsViewModelBase : ObservableObject, ITransie
             new(_localizer["Dark"], ApplicationTheme.Dark)
         ];
         ApplicationThemesView = _applicationThemes.ToNotifyCollectionChangedSlim(SynchronizationContextCollectionEventDispatcher.Current);
-        SelectedTheme = _applicationThemes.Single(x => x.Type == _settingsManager.Value.Theme);
+        SelectedTheme = _applicationThemes.Single(x => x.Type == SettingsManager.ApplicationTheme);
     }
 
     /// <summary>
@@ -104,7 +96,7 @@ public abstract partial class SettingsViewModelBase : ObservableObject, ITransie
     }
 
     partial void OnSelectedThemeChanged(ApplicationThemeView value)
-        => _settingsManager.Notify(value.Type);
+        => SettingsManager.Notify(new ChangeApplicationThemeCommand(value.Type));
 
     [RelayCommand]
     void ChangeApplicationTheme(ApplicationThemeView theme)

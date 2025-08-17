@@ -1,11 +1,13 @@
-﻿namespace FToolkit.Options;
+﻿using FToolkit.Objects;
+
+namespace FToolkit.Options;
 
 /// <summary>
 /// オプション値を更新するインターフェイスです。
 /// </summary>
 /// <typeparam name="T">オプションの種類</typeparam>
 public interface IWritableOptions<T> : IReloadableOptions<T>
-    where T : class
+    where T : ISettings
 {
     /// <summary>
     /// オプション値に変更を適用します。
@@ -13,5 +15,6 @@ public interface IWritableOptions<T> : IReloadableOptions<T>
     /// <param name="applyChanges">現在の値を受け取り、変更後の値を返すデリゲート</param>
     /// <param name="cancellationToken">キャンセル要求を行うためのトークン</param>
     /// <returns>このメソッドが完了すると、オブジェクトまたは値は返されません。</returns>
+    /// <exception cref="ArgumentNullException"><paramref name="applyChanges"/>が<see langword="null"/>です。</exception>
     ValueTask UpdateAsync(Func<T, T> applyChanges, CancellationToken cancellationToken = default);
 }

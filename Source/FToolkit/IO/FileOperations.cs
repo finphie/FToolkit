@@ -16,7 +16,7 @@ public sealed partial class FileOperations : IFileOperations
     /// <see cref="FileOperations"/>クラスの新しいインスタンスを初期化します。
     /// </summary>
     /// <param name="logger">ログを記録するオブジェクト</param>
-    /// <exception cref="ArgumentNullException"><paramref name="logger"/>がnullです。</exception>
+    /// <exception cref="ArgumentNullException"><paramref name="logger"/>が<see langword="null"/>です。</exception>
     public FileOperations(ILogger<FileOperations> logger)
     {
         ArgumentNullException.ThrowIfNull(logger);
@@ -93,7 +93,7 @@ public sealed partial class FileOperations : IFileOperations
         {
             await RandomAccess.WriteAsync(handle, bytes, 0, cancellationToken).ConfigureAwait(false);
         }
-        catch (Exception ex)
+        catch (Exception ex) when (ex is not OperationCanceledException)
         {
             LogCouldNotWriteFile(filePath, ex);
             throw;

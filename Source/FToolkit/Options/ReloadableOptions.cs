@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Options;
+﻿using FToolkit.Objects;
+using Microsoft.Extensions.Options;
 
 namespace FToolkit.Options;
 
@@ -7,7 +8,7 @@ namespace FToolkit.Options;
 /// </summary>
 /// <typeparam name="T">オプション値の種類</typeparam>
 class ReloadableOptions<T> : IReloadableOptions<T>
-    where T : class, IEquatable<T>
+    where T : ISettings
 {
     readonly IOptionsMonitor<T> _options;
 
@@ -15,6 +16,7 @@ class ReloadableOptions<T> : IReloadableOptions<T>
     /// <see cref="ReloadableOptions{T}"/>クラスの新しいインスタンスを初期化します。
     /// </summary>
     /// <param name="options">オプション値の取得を行うオブジェクト</param>
+    /// <exception cref="ArgumentNullException"><paramref name="options"/>が<see langword="null"/>です。</exception>
     public ReloadableOptions(IOptionsMonitor<T> options)
     {
         ArgumentNullException.ThrowIfNull(options);
