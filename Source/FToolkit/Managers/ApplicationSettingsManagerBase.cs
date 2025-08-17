@@ -82,7 +82,6 @@ public abstract partial class ApplicationSettingsManagerBase<TApplicationSetting
         ThrowIfMainWindowSettingsNotInitialized(Value.MainWindow);
         Publisher.Publish(command);
 
-        var newSettings = Value with { };
         var newMainWindow = Value.MainWindow with { State = command.State.ToFToolkitSettings() };
         var newSettings = Value with { MainWindow = newMainWindow };
         Notify(newSettings);
@@ -103,7 +102,6 @@ public abstract partial class ApplicationSettingsManagerBase<TApplicationSetting
         ThrowIfMainWindowSettingsNotInitialized(Value.MainWindow);
         Publisher.Publish(command);
 
-        var newSettings = Value with { };
         var newMainWindow = Value.MainWindow with { Size = command.Size.ToFToolkitSettings() };
         var newSettings = Value with { MainWindow = newMainWindow };
         Notify(newSettings);
