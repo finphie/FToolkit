@@ -83,7 +83,8 @@ public abstract partial class ApplicationSettingsManagerBase<TApplicationSetting
         Publisher.Publish(command);
 
         var newSettings = Value with { };
-        newSettings.MainWindow.State = command.State.ToFToolkitSettings();
+        var newMainWindow = Value.MainWindow with { State = command.State.ToFToolkitSettings() };
+        var newSettings = Value with { MainWindow = newMainWindow };
         Notify(newSettings);
     }
 
