@@ -14,7 +14,7 @@ using static System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes;
 namespace FToolkit.DependencyInjection;
 
 /// <summary>
-/// <see cref="IServiceCollection"/>に関連するクラスを<see cref="IServiceCollection"/>に追加する拡張メソッドです。
+/// <see cref="IServiceCollection"/>を実装したオブジェクトに対する拡張メソッドです。
 /// </summary>
 public static class ServiceCollectionExtensions
 {
