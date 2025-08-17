@@ -23,7 +23,7 @@ public interface IApplicationSettingsManagerBase : ISettingsManagerBase
     /// メインWindowのサイズを取得します。
     /// </summary>
     /// <exception cref="InvalidOperationException">設定値が不正です。</exception>
-    WindowSize MainWindowSize { get; }
+    WindowSize? MainWindowSize { get; }
 
     /// <summary>
     /// アプリケーションテーマの変更を通知します。
