@@ -45,9 +45,12 @@ MIT
 - [CommunityToolkit.HighPerformance](https://github.com/CommunityToolkit/dotnet)
 - [CommunityToolkit.Mvvm](https://github.com/CommunityToolkit/dotnet)
 - [Microsoft.Extensions.Configuration.FileExtensions](https://github.com/dotnet/runtime)
+- [Microsoft.Extensions.Configuration.Json](https://github.com/dotnet/runtime)
 - [Microsoft.Extensions.DependencyInjection.AutoActivation](https://github.com/dotnet/extensions)
 - [Microsoft.Extensions.Http.Resilience](https://github.com/dotnet/extensions)
+- [Microsoft.Extensions.Localization](https://github.com/dotnet/aspnetcore)
 - [Microsoft.Extensions.Localization.Abstractions](https://github.com/dotnet/aspnetcore)
+- [Microsoft.Extensions.Logging](https://github.com/dotnet/runtime)
 - [Microsoft.Extensions.Logging.Abstractions](https://github.com/dotnet/runtime)
 - [Microsoft.Extensions.Options](https://github.com/dotnet/runtime)
 - [ObservableCollections](https://github.com/Cysharp/ObservableCollections)
@@ -58,7 +61,7 @@ MIT
 - [R3](https://github.com/Cysharp/R3)
 - [Riok.Mapperly](https://github.com/riok/mapperly)
 - [UnitGenerator](https://github.com/Cysharp/UnitGenerator)
-- [ZeroMessenger](https://github.com/AnnulusGames/ZeroMessenger)
+- [ZeroMessenger.DependencyInjection](https://github.com/AnnulusGames/ZeroMessenger)
 
 ### テスト
 

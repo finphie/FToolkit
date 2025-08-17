@@ -9,17 +9,16 @@ using FToolkit.Subscribers;
 using FToolkit.ViewModels;
 using FToolkit.Views;
 using Microsoft.Extensions.DependencyInjection;
+using ZeroMessenger.DependencyInjection;
 using static System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes;
 
 namespace FToolkit.DependencyInjection;
 
 /// <summary>
-/// FToolkitに関連するクラスを<see cref="IServiceCollection"/>に追加する拡張メソッドです。
+/// <see cref="IServiceCollection"/>に関連するクラスを<see cref="IServiceCollection"/>に追加する拡張メソッドです。
 /// </summary>
 public static class ServiceCollectionExtensions
 {
-    static readonly FilePath ApplicationSettingsFilePath = new("appsettings.json");
-
     /// <summary>
     /// <see cref="FToolkit"/>に関連するオブジェクトを<see cref="IServiceCollection"/>に追加します。
     /// </summary>
@@ -28,7 +27,7 @@ public static class ServiceCollectionExtensions
     /// <typeparam name="TApplicationSettingsManager">アプリケーション設定マネージャーの型</typeparam>
     /// <param name="services">追加する対象の<see cref="IServiceCollection"/></param>
     /// <param name="applicationSettingsJsonTypeInfo">アプリケーション設定に関するJSONシリアル化のメタデータ</param>
-    /// <exception cref="ArgumentNullException"><paramref name="applicationSettingsJsonTypeInfo"/>がnullです。</exception>
+    /// <exception cref="ArgumentNullException"><paramref name="applicationSettingsJsonTypeInfo"/>が<see langword="null"/>です。</exception>
     public static void AddFToolkit<[DynamicallyAccessedMembers(PublicConstructors)] TApplicationInfo, [DynamicallyAccessedMembers(PublicParameterlessConstructor)] TApplicationSettings, [DynamicallyAccessedMembers(PublicConstructors)] TApplicationSettingsManager>(this IServiceCollection services, JsonTypeInfo<TApplicationSettings> applicationSettingsJsonTypeInfo)
         where TApplicationInfo : ApplicationInfoBase
         where TApplicationSettings : ApplicationSettingsBase
@@ -39,7 +38,7 @@ public static class ServiceCollectionExtensions
         services.AddSingleton<TApplicationInfo>();
         services.AddSingleton<ApplicationInfoBase>(static x => x.GetRequiredService<TApplicationInfo>());
 
-        services.AddOptions(ApplicationSettingsFilePath, applicationSettingsJsonTypeInfo);
+        services.AddOptions(Constants.ApplicationSettingsFilePath, applicationSettingsJsonTypeInfo);
         services.AddSingleton<IApplicationSettingsManagerBase, TApplicationSettingsManager>();
         services.AddActivatedSingleton<UpdateApplicationsSettingsSubscriber<TApplicationSettings>>();
 
@@ -50,6 +49,8 @@ public static class ServiceCollectionExtensions
         services.AddSingleton<IDirectoryOperations, DirectoryOperations>();
 
         services.AddSubscribers();
+
+        services.AddLibrary();
     }
 
     /// <summary>
@@ -60,7 +61,7 @@ public static class ServiceCollectionExtensions
     /// <param name="services">追加する対象の<see cref="IServiceCollection"/></param>
     /// <param name="settingsFilePath">設定ファイルのパス</param>
     /// <param name="settingsJsonTypeInfo">設定に関するJSONシリアル化のメタデータ</param>
-    /// <exception cref="ArgumentNullException"><paramref name="settingsJsonTypeInfo"/>がnullです。</exception>
+    /// <exception cref="ArgumentNullException"><paramref name="settingsJsonTypeInfo"/>が<see langword="null"/>です。</exception>
     public static void AddSettings<[DynamicallyAccessedMembers(PublicParameterlessConstructor)] TSettings, [DynamicallyAccessedMembers(PublicConstructors)] TSettingsManager>(this IServiceCollection services, FilePath settingsFilePath, JsonTypeInfo<TSettings> settingsJsonTypeInfo)
         where TSettings : ISettings
         where TSettingsManager : SettingsManagerBase<TSettings>
@@ -134,4 +135,11 @@ public static class ServiceCollectionExtensions
 
     static void AddSubscribers(this IServiceCollection services)
         => services.AddActivatedSingleton<ChangeApplicationThemeSubscriber>();
+
+    static void AddLibrary(this IServiceCollection services)
+    {
+        services.AddLogging();
+        services.AddLocalization(x => x.ResourcesPath = "Resources");
+        services.AddZeroMessenger();
+    }
 }
