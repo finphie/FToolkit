@@ -45,7 +45,6 @@ MIT
 - [CommunityToolkit.HighPerformance](https://github.com/CommunityToolkit/dotnet)
 - [CommunityToolkit.Mvvm](https://github.com/CommunityToolkit/dotnet)
 - [Microsoft.Extensions.Configuration.FileExtensions](https://github.com/dotnet/runtime)
-- [Microsoft.Extensions.DependencyInjection.Abstractions](https://github.com/dotnet/runtime)
 - [Microsoft.Extensions.DependencyInjection.AutoActivation](https://github.com/dotnet/extensions)
 - [Microsoft.Extensions.Localization.Abstractions](https://github.com/dotnet/aspnetcore)
 - [Microsoft.Extensions.Logging.Abstractions](https://github.com/dotnet/runtime)
