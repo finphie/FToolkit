@@ -5,6 +5,7 @@ using FToolkit.Mappers;
 using FToolkit.Objects;
 using FToolkit.Options;
 using FToolkit.Publishers;
+using FToolkit.ViewModels;
 
 namespace FToolkit.Managers;
 
@@ -19,6 +20,30 @@ public abstract class ApplicationSettingsManagerBase<TApplicationSettings>(IRelo
 {
     /// <inheritdoc/>
     public ApplicationTheme ApplicationTheme => Value.Theme.ToFToolkitObject();
+
+    /// <inheritdoc/>
+    public WindowState MainWindowState
+    {
+        get
+        {
+            var mainWindow = Value.MainWindow;
+
+            ThrowIfMainWindowSettingsNotInitialized(mainWindow);
+            return mainWindow.State.ToFToolkitObject();
+        }
+    }
+
+    /// <inheritdoc/>
+    public WindowSize? MainWindowSize
+    {
+        get
+        {
+            var mainWindow = Value.MainWindow;
+
+            ThrowIfMainWindowSettingsNotInitialized(mainWindow);
+            return mainWindow.Size?.ToFToolkitObject();
+        }
+    }
 
     /// <inheritdoc/>
     public override void NotifyAll(UpdateAllSettingsCommand command)
@@ -38,38 +63,48 @@ public abstract class ApplicationSettingsManagerBase<TApplicationSettings>(IRelo
     }
 
     /// <inheritdoc/>
-    public void Notify(ChangeWindowStateCommand command)
+    public virtual void Notify(ChangeWindowStateCommand command)
     {
         ArgumentNullException.ThrowIfNull(command);
-        ThrowIfWindowSettingsNotInitialized(Value.MainWindow);
 
+        if (command.ViewModel is not IMainViewModel)
+        {
+            return;
+        }
+
+        ThrowIfMainWindowSettingsNotInitialized(Value.MainWindow);
         Publisher.Publish(command);
 
         var newSettings = Value with { };
-        newSettings.Window.State = command.State;
+        newSettings.MainWindow.State = command.State.ToFToolkitSettings();
         Notify(newSettings);
     }
 
     /// <inheritdoc/>
-    public void Notify(ChangeWindowSizeCommand command)
+    public virtual void Notify(ChangeWindowSizeCommand command)
     {
         ArgumentNullException.ThrowIfNull(command);
-        ThrowIfWindowSettingsNotInitialized(Value.Window);
 
+        if (command.ViewModel is not IMainViewModel)
+        {
+            return;
+        }
+
+        ThrowIfMainWindowSettingsNotInitialized(Value.MainWindow);
         Publisher.Publish(command);
 
         var newSettings = Value with { };
-        newSettings.Window.Size = command.Size;
+        newSettings.MainWindow.Size = command.Size.ToFToolkitSettings();
         Notify(newSettings);
     }
 
-    static void ThrowIfWindowSettingsNotInitialized([NotNull] WindowSettings? windowSettings)
+    static void ThrowIfMainWindowSettingsNotInitialized([NotNull] WindowSettings? windowSettings)
     {
         if (windowSettings is not null)
         {
             return;
         }
 
-        ThrowHelper.ThrowInvalidOperationException("Window settings are not initialized.");
+        ThrowHelper.ThrowInvalidOperationException("MainWindow settings are not initialized.");
     }
 }

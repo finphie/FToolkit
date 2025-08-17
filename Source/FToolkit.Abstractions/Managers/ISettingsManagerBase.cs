@@ -12,5 +12,6 @@ public interface ISettingsManagerBase
     /// </summary>
     /// <param name="command">コマンド</param>
     /// <exception cref="ArgumentNullException"><paramref name="command"/>が<see langword="null"/>です。</exception>
+    /// <exception cref="InvalidOperationException">設定値が不正です。</exception>
     void NotifyAll(UpdateAllSettingsCommand command);
 }
