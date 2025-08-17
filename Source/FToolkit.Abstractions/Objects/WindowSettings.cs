@@ -1,4 +1,6 @@
-﻿namespace FToolkit.Objects;
+﻿using System.Text.Json.Serialization;
+
+namespace FToolkit.Objects;
 
 /// <summary>
 /// Window設定を表すクラスです。
@@ -8,12 +10,13 @@ public sealed record WindowSettings
     /// <summary>
     /// サイズ
     /// </summary>
-    public WindowSize Size { get; set; } = new(1200, 600);
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+    public WindowSizeSettings? Size { get; set; }
 
     /// <summary>
     /// 状態
     /// </summary>
-    public WindowState State { get; set; } = WindowState.Normal;
+    public WindowStateSettings State { get; set; } = WindowStateSettings.Normal;
 
     /// <summary>
     /// 最前面にするかどうか

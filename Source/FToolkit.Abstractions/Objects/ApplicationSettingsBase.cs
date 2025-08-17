@@ -10,7 +10,7 @@ public abstract record ApplicationSettingsBase : ISettings
     /// <summary>
     /// アプリケーションテーマ
     /// </summary>
-    public ApplicationTheme Theme { get; set; } = ApplicationTheme.System;
+    public ApplicationThemeSettings Theme { get; set; } = ApplicationThemeSettings.System;
 
     /// <summary>
     /// Window設定
