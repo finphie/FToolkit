@@ -48,9 +48,7 @@ MIT
 - [Microsoft.Extensions.Configuration.Json](https://github.com/dotnet/runtime)
 - [Microsoft.Extensions.DependencyInjection.AutoActivation](https://github.com/dotnet/extensions)
 - [Microsoft.Extensions.Http.Resilience](https://github.com/dotnet/extensions)
-- [Microsoft.Extensions.Localization](https://github.com/dotnet/aspnetcore)
 - [Microsoft.Extensions.Localization.Abstractions](https://github.com/dotnet/aspnetcore)
-- [Microsoft.Extensions.Logging](https://github.com/dotnet/runtime)
 - [Microsoft.Extensions.Logging.Abstractions](https://github.com/dotnet/runtime)
 - [Microsoft.Extensions.Options](https://github.com/dotnet/runtime)
 - [Microsoft.Extensions.Telemetry.Abstractions](https://github.com/dotnet/extensions)
@@ -62,7 +60,7 @@ MIT
 - [R3](https://github.com/Cysharp/R3)
 - [Riok.Mapperly](https://github.com/riok/mapperly)
 - [UnitGenerator](https://github.com/Cysharp/UnitGenerator)
-- [ZeroMessenger.DependencyInjection](https://github.com/AnnulusGames/ZeroMessenger)
+- [ZeroMessenger](https://github.com/AnnulusGames/ZeroMessenger)
 
 ### テスト
 

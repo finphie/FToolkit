@@ -9,7 +9,6 @@ using FToolkit.Subscribers;
 using FToolkit.ViewModels;
 using FToolkit.Views;
 using Microsoft.Extensions.DependencyInjection;
-using ZeroMessenger.DependencyInjection;
 using static System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes;
 
 namespace FToolkit.DependencyInjection;
@@ -49,8 +48,6 @@ public static class ServiceCollectionExtensions
         services.AddSingleton<IDirectoryOperations, DirectoryOperations>();
 
         services.AddSubscribers();
-
-        services.AddLibrary();
     }
 
     /// <summary>
@@ -135,11 +132,4 @@ public static class ServiceCollectionExtensions
 
     static void AddSubscribers(this IServiceCollection services)
         => services.AddActivatedSingleton<ChangeApplicationThemeSubscriber>();
-
-    static void AddLibrary(this IServiceCollection services)
-    {
-        services.AddLogging();
-        services.AddLocalization(x => x.ResourcesPath = "Resources");
-        services.AddZeroMessenger();
-    }
 }
