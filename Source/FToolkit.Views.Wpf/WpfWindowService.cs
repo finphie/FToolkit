@@ -121,8 +121,8 @@ public sealed partial class WpfWindowService : IWindowService
         Application.Current.Dispatcher.Invoke(() =>
         {
             var window = Application.Current.Windows.FindWindowByViewModel(viewModel);
-            window.Width = windowSize.Width;
-            window.Height = windowSize.Height;
+            window.Width = windowSize.Width.AsPrimitive();
+            window.Height = windowSize.Height.AsPrimitive();
         });
     }
 
@@ -134,7 +134,7 @@ public sealed partial class WpfWindowService : IWindowService
 
         var window = Application.Current.Windows.FindWindowByViewModel(viewModel);
         return window.WindowSizeChangedAsObservable()
-            .Select(static x => new WindowSize((int)x.NewSize.Width, (int)x.NewSize.Height));
+            .Select(static x => new WindowSize(new(x.NewSize.Width), new(x.NewSize.Height)));
     }
 
     Window GetWindow<T>()
