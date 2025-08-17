@@ -52,6 +52,7 @@ MIT
 - [Microsoft.Extensions.Options](https://github.com/dotnet/runtime)
 - [ObservableCollections](https://github.com/Cysharp/ObservableCollections)
 - [R3](https://github.com/Cysharp/R3)
+- [Riok.Mapperly](https://github.com/riok/mapperly)
 - [UnitGenerator](https://github.com/Cysharp/UnitGenerator)
 - [ZeroMessenger](https://github.com/AnnulusGames/ZeroMessenger)
 
