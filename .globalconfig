@@ -53,6 +53,7 @@ dotnet_style_prefer_foreach_explicit_cast_in_source = when_strongly_typed
 dotnet_style_prefer_inferred_anonymous_type_member_names = true
 dotnet_style_prefer_inferred_tuple_names = true
 dotnet_style_prefer_is_null_check_over_reference_equality_method = true
+dotnet_style_prefer_non_hidden_explicit_cast_in_source = true
 dotnet_style_prefer_simplified_boolean_expressions = true
 dotnet_style_prefer_simplified_interpolation = true
 
@@ -389,6 +390,7 @@ dotnet_diagnostic.CA1716.severity = none
 # https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca2000
 # 理由: 例外パスでもDisposeを呼び出す必要がある。
 dotnet_code_quality.CA2000.dispose_analysis_kind = AllPaths
+dotnet_code_quality.CA2000.excluded_type_names_with_derived_types = T:System.Net.Http.HttpClient|T:System.Net.Http.HttpRequestMessage
 
 # タスクを直接待機しないでください
 # https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca2007
